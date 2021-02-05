@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="1.3 指数信号与正弦信号1.3.1 连续时间复指数信号与正弦信号连续时间复指数信号有如下形式：$$x(t)&#x3D;Ce^{at}$$ 实指数信号上式中的$C$和$a$都为实数的信号。 周期复指数信号和正弦信号第二种重要的信号为将上式$a$限制为纯虚数的信号（复指数信号）：$$x(t)&#x3D;e^{jw_0t}$$当基波周期$T_0 &#x3D; \left| \frac {2\pi} {w_0} \right|$时，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="信号与系统学习笔记——Chapter01 信号与系统">
+<meta property="og:url" content="http://example.com/2020/03/14/signalSystem-CH01/index.html">
+<meta property="og:site_name" content="Jialong&#39;s Blog">
+<meta property="og:description" content="1.3 指数信号与正弦信号1.3.1 连续时间复指数信号与正弦信号连续时间复指数信号有如下形式：$$x(t)&#x3D;Ce^{at}$$ 实指数信号上式中的$C$和$a$都为实数的信号。 周期复指数信号和正弦信号第二种重要的信号为将上式$a$限制为纯虚数的信号（复指数信号）：$$x(t)&#x3D;e^{jw_0t}$$当基波周期$T_0 &#x3D; \left| \frac {2\pi} {w_0} \right|$时，">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://blog.eternityqjl.top/increasingSineSignal.png">
+<meta property="og:image" content="http://blog.eternityqjl.top/discreteTimeSignal.JPG">
+<meta property="og:image" content="http://blog.eternityqjl.top/compare_discrete%26continus.JPG">
+<meta property="article:published_time" content="2020-03-14T05:59:44.000Z">
+<meta property="article:modified_time" content="2021-02-03T06:47:06.663Z">
+<meta property="article:author" content="Eternity">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://blog.eternityqjl.top/increasingSineSignal.png">
+
+<link rel="canonical" href="http://example.com/2020/03/14/signalSystem-CH01/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>信号与系统学习笔记——Chapter01 信号与系统 | Jialong's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Jialong's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Do things I love, and seek happiness.</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/03/14/signalSystem-CH01/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="http://blog.eternityqjl.top/avator_next.jpg">
+      <meta itemprop="name" content="Eternity">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jialong's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          信号与系统学习笔记——Chapter01 信号与系统
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-14 13:59:44" itemprop="dateCreated datePublished" datetime="2020-03-14T13:59:44+08:00">2020-03-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-02-03 14:47:06" itemprop="dateModified" datetime="2021-02-03T14:47:06+08:00">2021-02-03</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E4%BF%A1%E5%8F%B7%E4%B8%8E%E7%B3%BB%E7%BB%9F/" itemprop="url" rel="index"><span itemprop="name">信号与系统</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="1-3-指数信号与正弦信号"><a href="#1-3-指数信号与正弦信号" class="headerlink" title="1.3 指数信号与正弦信号"></a>1.3 指数信号与正弦信号</h2><h3 id="1-3-1-连续时间复指数信号与正弦信号"><a href="#1-3-1-连续时间复指数信号与正弦信号" class="headerlink" title="1.3.1 连续时间复指数信号与正弦信号"></a>1.3.1 连续时间复指数信号与正弦信号</h3><p>连续时间复指数信号有如下形式：<br>$$<br>x(t)=Ce^{at}<br>$$</p>
+<h4 id="实指数信号"><a href="#实指数信号" class="headerlink" title="实指数信号"></a>实指数信号</h4><p>上式中的$C$和$a$都为实数的信号。</p>
+<h4 id="周期复指数信号和正弦信号"><a href="#周期复指数信号和正弦信号" class="headerlink" title="周期复指数信号和正弦信号"></a>周期复指数信号和正弦信号</h4><p>第二种重要的信号为将上式$a$限制为纯虚数的信号（<strong>复指数信号</strong>）：<br>$$<br>x(t)=e^{jw_0t}<br>$$<br>当基波周期$T_0 = \left| \frac {2\pi} {w_0} \right|$时，该信号是周期信号。</p>
+<a id="more"></a>
+
+<p>与该信号相关的另一种信号是<strong>正弦信号</strong>：<br>$$<br>x(t)=A\cos(w_0t+\phi)<br>$$<br>利用<strong>欧拉公式</strong>，可以将复指数信号用与其相同几波周期的正弦信号来表示：<br>$$<br>e^{jw_0t}=\cos w_0t + j\sin w_0t<br>$$<br>$w_0$称为基波频率。</p>
+<p>上述复指数信号和正弦信号都是<strong>具有无限能量</strong>但<strong>有有限平均功率</strong>的信号。</p>
+<p>计算证明：<br>$$<br>E_{period}=\int_{o}^{T_0} \left| e^{jw_0t} \right|^2 \mathrm{d}t = \int_{o}^{T_0} 1 \cdot \mathrm{d}t = T_0  \<br>P_{period}= \frac {1}{T_0} E_{period}=1<br>$$</p>
+<h4 id="一般复指数信号"><a href="#一般复指数信号" class="headerlink" title="一般复指数信号"></a>一般复指数信号</h4><p>一复指数信号$Ce^{at}$，将复数$C$和$a$分别用指数式（极坐标）和代数式（笛卡尔坐标）表示：<br>$$<br>C = \left| C \right| e^{j \theta} \<br>a = r + j\omega_0<br>$$<br>代入得：<br>$$<br>\begin{align}<br>Ce^{at}<br>&amp; = \left| C \right| e^{j\theta} e^{(r+jw_0)t}  \<br>&amp; = \left| C \right| e^{rt} e^{j(w_0t+\theta)}  \<br>&amp; = \left| C \right| e^{rt} \cos(w_0t+\theta) + j\left| C \right| e^{rt} \sin(w_0t+\theta)<br>\end{align}<br>$$<br>若$r=0$，则复指数信号的实部和虚部都是<strong>正弦</strong>；若$r&gt;0$，则实部和虚部是一个<strong>呈指数增长</strong>的正弦信号；若$r&lt;0$，则二者都是一个<strong>呈指数衰减</strong>的正弦信号，该信号被称为阻尼正弦震荡。</p>
+<p><img src="http://blog.eternityqjl.top/increasingSineSignal.png"></p>
+<h3 id="1-3-2-离散时间复指数信号与正弦信号"><a href="#1-3-2-离散时间复指数信号与正弦信号" class="headerlink" title="1.3.2 离散时间复指数信号与正弦信号"></a>1.3.2 离散时间复指数信号与正弦信号</h3><p>一种重要的离散时间信号是<strong>复指数信号</strong>或<strong>序列</strong>，定义为：<br>$$<br>x[n]=C\alpha ^n<br>$$<br>其中的$C$和$\alpha$一般为复数，若另$\alpha = e^{\beta}$，则有另外一种表达方式：<br>$$<br>x[n]=C e^{\beta n}<br>$$<br>从形式上看第二个式子与前面的连续时间复指数信号更相似，但在离散时间的情况下，第一种更为方便使用。</p>
+<h4 id="实指数信号-1"><a href="#实指数信号-1" class="headerlink" title="实指数信号"></a>实指数信号</h4><p>$C$和$\alpha$都为实数，有以下特性：</p>
+<ul>
+<li>若$\left| \alpha \right| &gt; 1$，信号随n指数增长，若$\left| \alpha \right| &lt; 1$，信号随n指数衰减。</li>
+<li>$\left| \alpha \right|$为正值时，信号的所有值都为整数，$\left| \alpha \right|$为负值时，信号的符号在正负之间交替变化。</li>
+</ul>
+<h4 id="正弦信号"><a href="#正弦信号" class="headerlink" title="正弦信号"></a>正弦信号</h4><h4 id="一般复指数信号-1"><a href="#一般复指数信号-1" class="headerlink" title="一般复指数信号"></a>一般复指数信号</h4><h3 id="1-3-3-离散时间复指数序列的周期性质"><a href="#1-3-3-离散时间复指数序列的周期性质" class="headerlink" title="1.3.3 离散时间复指数序列的周期性质"></a>1.3.3 离散时间复指数序列的周期性质</h3><p>这里讨论的关于离散时间复指数序列的性质都是相对于连续时间信号的不同之处。</p>
+<h4 id="频率性质"><a href="#频率性质" class="headerlink" title="频率性质"></a>频率性质</h4><p>对于频率为$w_0+2\pi$的离散时间复指数信号：<br>$$<br>e^{j(w_0+2\pi)n} = e^{j2\pi n}+e^{jw_0 n} = e^{jw_0 n}<br>$$<br>上式表明，频率为$w_0+2\pi$的离散时间复指数信号与频率为$w_0$的信号完全相同。所以离散时间复指数信号的频率只需要在一个$2\pi$间隔内选择，一般在$0\leqslant w_0 \leqslant 2\pi$或$-\pi \leqslant w_0 \leqslant \pi$中选择。</p>
+<p>离散时间复指数信号的低频部分（变化慢的地方）位于$w_0$在0，$2\pi$及其他$\pi$的偶数倍值附近；高频部分位于$w_0$在$\pm \pi$及其他$\pi$的奇数倍附近。</p>
+<p><img src="http://blog.eternityqjl.top/discreteTimeSignal.JPG"></p>
+<h4 id="周期性质"><a href="#周期性质" class="headerlink" title="周期性质"></a>周期性质</h4><p>为了使得信号$e^{jw_0n}$是周期的，必须有：<br>$$<br>e^{jw_0(n+N)} = e^{jw_0n}<br>$$<br>这等效于：<br>$$<br>e^{jw_0N} = 1 \Leftrightarrow w_0N = 2\pi m \Leftrightarrow \frac{w_0}{2\pi} = \frac{m}{N}<br>$$<br>$m$为整数。同时，若$\frac{w_0}{2\pi}$是一个有理数，该信号就是周期的，否则就不是周期的。上式如果$N$和$m$没有公因子，那么$N$九尾基波周期。</p>
+<h4 id="连续时间和离散时间信号的比较"><a href="#连续时间和离散时间信号的比较" class="headerlink" title="连续时间和离散时间信号的比较"></a>连续时间和离散时间信号的比较</h4><p><img src="http://blog.eternityqjl.top/compare_discrete%26continus.JPG"></p>
+<h2 id="1-4-单位冲激与单位阶跃函数"><a href="#1-4-单位冲激与单位阶跃函数" class="headerlink" title="1.4 单位冲激与单位阶跃函数"></a>1.4 单位冲激与单位阶跃函数</h2><h3 id="1-4-1-离散时间单位脉冲和单位阶跃序列"><a href="#1-4-1-离散时间单位脉冲和单位阶跃序列" class="headerlink" title="1.4.1 离散时间单位脉冲和单位阶跃序列"></a>1.4.1 离散时间单位脉冲和单位阶跃序列</h3><p>最简单的离散时间信号之一就是<strong>单位脉冲</strong>（或<strong>单位样本</strong>），定义为：<br>$$<br>\delta[n] =<br>\begin{cases}<br>0, \quad n \ne 0  \<br>1, \quad n = 0<br>\end{cases}<br>$$<br>另一个基本离散时间信号为<strong>单位阶跃</strong>，定义为：<br>$$<br>u[n] =<br>\begin{cases}<br>0, \quad n &lt; 0  \<br>1, \quad n \geqslant 0<br>\end{cases}<br>$$<br>以上两个离散时间信号存在着密切的关系：</p>
+<ul>
+<li>单位脉冲是单位阶跃的<strong>一次差分</strong>，即$\delta[n] = u[n] - u[n-1]$</li>
+<li>离散时间阶跃是单位样本的<strong>求和函数</strong>：$u[n] = \sum_{m = - \infty}^{n} \delta[m]$</li>
+</ul>
+<h3 id="1-4-2-连续时间单位阶跃和单位冲激函数"><a href="#1-4-2-连续时间单位阶跃和单位冲激函数" class="headerlink" title="1.4.2 连续时间单位阶跃和单位冲激函数"></a>1.4.2 连续时间单位阶跃和单位冲激函数</h3><p>连续时间<strong>单位阶跃函数</strong>定义为：<br>$$<br>u(t)=<br>\begin{cases}<br>0, \quad t&lt;0 \<br>1, \quad t&gt;0<br>\end{cases}<br>$$<br>单位阶跃在$t=0$这一单处不连续。</p>
+<p>连续时间单位阶跃是连续时间单位冲激的<strong>积分函数</strong>：<br>$$<br>u(t) = \int_{-\infty}^{t} \delta(\tau) \mathrm{d}\tau<br>$$<br>同时可以看出，连续时间单位冲激可以看成连续时间单位阶跃的<strong>一次微分</strong>：<br>$$<br>\delta(t) = \frac{\mathrm{d}u(t)}{\mathrm{d}t}<br>$$<br>严格来说$u(t)$是不可微的，可以把上式近似为一个在较短时间$\Delta$内完成</p>
+<h2 id="1-5-连续时间和离散时间系统"><a href="#1-5-连续时间和离散时间系统" class="headerlink" title="1.5 连续时间和离散时间系统"></a>1.5 连续时间和离散时间系统</h2><ul>
+<li>连续时间系统：$x(t) \rightarrow y(t)$</li>
+<li>离散时间系统：$x[n] \rightarrow y[n]$</li>
+</ul>
+<p>我们的任务是要鉴别一类系统，透彻地了解一类系统的行为，在很多的实践中重要的系统都通过这一类系统来建模。本书重点关注的线性时不变系统这一特殊类别的系统就属于上述分类特性的一类。</p>
+<h3 id="1-5-1-系统的互联"><a href="#1-5-1-系统的互联" class="headerlink" title="1.5.1 系统的互联"></a>1.5.1 系统的互联</h3><h4 id="串联（级联）"><a href="#串联（级联）" class="headerlink" title="串联（级联）"></a>串联（级联）</h4><p>eg：音频系统：无线电接收机$\rightarrow$唱片播放器$\rightarrow$扬声器</p>
+<h4 id="并联"><a href="#并联" class="headerlink" title="并联"></a>并联</h4><h4 id="反馈互联"><a href="#反馈互联" class="headerlink" title="反馈互联"></a>反馈互联</h4><p>eg：数字控制的一架飞机</p>
+<h3 id="1-5-2-基本系统性质"><a href="#1-5-2-基本系统性质" class="headerlink" title="1.5.2 基本系统性质"></a>1.5.2 基本系统性质</h3><h4 id="记忆系统和无记忆系统"><a href="#记忆系统和无记忆系统" class="headerlink" title="记忆系统和无记忆系统"></a>记忆系统和无记忆系统</h4><p>如果对自变量的每一个值，一个系统的输出仅仅取决于<strong>该时刻的输入</strong>，这个系统就称为<strong>无记忆</strong>系统。例如，如下的表达式：<br>$$<br>y[n]=(2x[n]-x^2[n])^2<br>$$<br>是一个无记忆系统，任何特定时刻$n_0$的输出$y[n]$只取决于该时刻的输入$x[n]$。</p>
+<p><strong>恒等系统</strong>（即输出等于输入）是一种最简单的无记忆系统。</p>
+<p><strong>离散时间记忆系统</strong>的一个例子就是<strong>累加器</strong>：<br>$$<br>y[n]=\sum_{k=-\infty}^{n} x[k]<br>$$<br>第二个离散时间记忆系统的例子是一个<strong>延迟单元</strong>：<br>$$<br>y[n] = x[n - 1]<br>$$<br>一个<strong>连续时间记忆系统</strong>的例子是<strong>一个电容器</strong>，将电流作为输入，电压作为输出，那么有：<br>$$<br>y(t)= \frac{1}{C} \int_{-\infty}^{t} x(\tau) \mathrm{d} \tau<br>$$<br>其中的$C$为电容值。</p>
+<p>一个系统中记忆的概念相应于该系统具有<strong>保留或储存不是当前时刻输入信息的功能</strong>，在许多实际系统中，记忆是直接与能量储存相关联的。</p>
+<h4 id="可逆性与可逆系统"><a href="#可逆性与可逆系统" class="headerlink" title="可逆性与可逆系统"></a>可逆性与可逆系统</h4><p>一个系统如果在不同输入下导致不同输出，就称该系统是<strong>可逆的</strong>。一个系统可逆则一定有一个<strong>逆系统</strong>存在，逆系统与原系统<strong>级联</strong>后，会产生一个输出$w[n]$等于一个系统的输入$x[n]$。</p>
+<p>可逆连续时间系统的一个例子：<br>$$<br>y(t)=2x(t)<br>$$<br>该可逆系统的逆系统为：<br>$$<br>w(t)=\frac{1}{2}y(t)<br>$$<br>一个<strong>不可逆</strong>系统的例子如下：<br>$$<br>y[n]=0<br>$$<br>该系统对任何输入序列产生的都是零输出序列。</p>
+<p>另外一个例子：<br>$$<br>y(t)=x^2(t)<br>$$<br>这种情况无法根据输出确定输入的正负。</p>
+<h4 id="因果性"><a href="#因果性" class="headerlink" title="因果性"></a>因果性</h4><p>如果一个系统<strong>在任何时刻的输出</strong>只取决于<strong>现在的输入以及过去的输入</strong>，该系统就称为<strong>因果系统</strong>。这样的系统也被称为<strong>不可预测系统</strong>，系统的输出值无法预测未来的输入值。</p>
+<p>所有的无记忆系统都是因果的，因为输出仅仅对当前输入值作出响应。</p>
+<blockquote>
+<p>检验系统的因果性时要仔细看系统的输入——输出关系，举两个特殊例子：</p>
+<ul>
+<li>$y[n]=x[-n]$，该系统当输入时间为负值是，输出就与输入的将来值有关，所以该系统不是因果系统。所以检验时要仔细检验在<strong>全部时间</strong>上的输入——输出关系。</li>
+<li>$y(t)=x(t)\cos(t+1)$，检验因果性时要<strong>把输入信号的影响仔细地与系统定义中的其他函数的影响分开</strong>，该系统的输出等于同一时刻的输入乘以一个随时间变化的数，所以可以写作$y(t)=x(t)g(t)$，是因果的。</li>
+</ul>
+</blockquote>
+<h4 id="稳定性"><a href="#稳定性" class="headerlink" title="稳定性"></a>稳定性</h4><p>一个<strong>稳定系统</strong>在小的输入下的响应不会<strong>发散</strong>，这是稳定性的最直观理解。</p>
+<h4 id="时不变性"><a href="#时不变性" class="headerlink" title="时不变性"></a>时不变性</h4><p>系统的特性和行为不随时间而变，该系统就是时不变的。即如果在一个输入信号上有一个时移，在输出信号中产生同样的时移，那么这个系统就是时不变的。</p>
+<p>具体而言，若$y[n]$是离散时间时不变系统在输入为$x[n]$是的输出，当输入为$x[x-x_0]$时，输出为为$y[x-x_0]$，连续时间情况也是相同的道理。</p>
+<h4 id="线性"><a href="#线性" class="headerlink" title="线性"></a>线性</h4><p>如果某个输入信号是由几个信号的<strong>加权和</strong>组成，那么输出也就是系统对这组信号中每一个响应的加权和。</p>
+<p>令$y_1(t)$是一个连续时间系统对输入$x_1(t)$的响应，$y_2(t)$是对输入$x_2(t)$的一个输出，那么一个线性系统就应该有：</p>
+<ul>
+<li>$y_1(t)+y_2(t)$是对$x_1(t)+x_2(t)$的响应</li>
+<li>$ay_1(t)$是对$ax_1(t)$的响应，$a$为任意常数</li>
+</ul>
+<p>以上两个性质称为<strong>可加性</strong>和<strong>齐次性</strong>。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/12/06/%E6%95%B0%E5%AD%97%E7%AD%BE%E5%90%8D%E5%92%8C%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6/" rel="prev" title="数字签名和数字证书">
+      <i class="fa fa-chevron-left"></i> 数字签名和数字证书
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/03/29/latex-problems1/" rel="next" title="第一次使用LaTex——问题整理">
+      第一次使用LaTex——问题整理 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-%E6%8C%87%E6%95%B0%E4%BF%A1%E5%8F%B7%E4%B8%8E%E6%AD%A3%E5%BC%A6%E4%BF%A1%E5%8F%B7"><span class="nav-number">1.</span> <span class="nav-text">1.3 指数信号与正弦信号</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-1-%E8%BF%9E%E7%BB%AD%E6%97%B6%E9%97%B4%E5%A4%8D%E6%8C%87%E6%95%B0%E4%BF%A1%E5%8F%B7%E4%B8%8E%E6%AD%A3%E5%BC%A6%E4%BF%A1%E5%8F%B7"><span class="nav-number">1.1.</span> <span class="nav-text">1.3.1 连续时间复指数信号与正弦信号</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E6%8C%87%E6%95%B0%E4%BF%A1%E5%8F%B7"><span class="nav-number">1.1.1.</span> <span class="nav-text">实指数信号</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%91%A8%E6%9C%9F%E5%A4%8D%E6%8C%87%E6%95%B0%E4%BF%A1%E5%8F%B7%E5%92%8C%E6%AD%A3%E5%BC%A6%E4%BF%A1%E5%8F%B7"><span class="nav-number">1.1.2.</span> <span class="nav-text">周期复指数信号和正弦信号</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%80%E8%88%AC%E5%A4%8D%E6%8C%87%E6%95%B0%E4%BF%A1%E5%8F%B7"><span class="nav-number">1.1.3.</span> <span class="nav-text">一般复指数信号</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-2-%E7%A6%BB%E6%95%A3%E6%97%B6%E9%97%B4%E5%A4%8D%E6%8C%87%E6%95%B0%E4%BF%A1%E5%8F%B7%E4%B8%8E%E6%AD%A3%E5%BC%A6%E4%BF%A1%E5%8F%B7"><span class="nav-number">1.2.</span> <span class="nav-text">1.3.2 离散时间复指数信号与正弦信号</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E6%8C%87%E6%95%B0%E4%BF%A1%E5%8F%B7-1"><span class="nav-number">1.2.1.</span> <span class="nav-text">实指数信号</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AD%A3%E5%BC%A6%E4%BF%A1%E5%8F%B7"><span class="nav-number">1.2.2.</span> <span class="nav-text">正弦信号</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%80%E8%88%AC%E5%A4%8D%E6%8C%87%E6%95%B0%E4%BF%A1%E5%8F%B7-1"><span class="nav-number">1.2.3.</span> <span class="nav-text">一般复指数信号</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-3-%E7%A6%BB%E6%95%A3%E6%97%B6%E9%97%B4%E5%A4%8D%E6%8C%87%E6%95%B0%E5%BA%8F%E5%88%97%E7%9A%84%E5%91%A8%E6%9C%9F%E6%80%A7%E8%B4%A8"><span class="nav-number">1.3.</span> <span class="nav-text">1.3.3 离散时间复指数序列的周期性质</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%A2%91%E7%8E%87%E6%80%A7%E8%B4%A8"><span class="nav-number">1.3.1.</span> <span class="nav-text">频率性质</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%91%A8%E6%9C%9F%E6%80%A7%E8%B4%A8"><span class="nav-number">1.3.2.</span> <span class="nav-text">周期性质</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%9E%E7%BB%AD%E6%97%B6%E9%97%B4%E5%92%8C%E7%A6%BB%E6%95%A3%E6%97%B6%E9%97%B4%E4%BF%A1%E5%8F%B7%E7%9A%84%E6%AF%94%E8%BE%83"><span class="nav-number">1.3.3.</span> <span class="nav-text">连续时间和离散时间信号的比较</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-%E5%8D%95%E4%BD%8D%E5%86%B2%E6%BF%80%E4%B8%8E%E5%8D%95%E4%BD%8D%E9%98%B6%E8%B7%83%E5%87%BD%E6%95%B0"><span class="nav-number">2.</span> <span class="nav-text">1.4 单位冲激与单位阶跃函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-1-%E7%A6%BB%E6%95%A3%E6%97%B6%E9%97%B4%E5%8D%95%E4%BD%8D%E8%84%89%E5%86%B2%E5%92%8C%E5%8D%95%E4%BD%8D%E9%98%B6%E8%B7%83%E5%BA%8F%E5%88%97"><span class="nav-number">2.1.</span> <span class="nav-text">1.4.1 离散时间单位脉冲和单位阶跃序列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-2-%E8%BF%9E%E7%BB%AD%E6%97%B6%E9%97%B4%E5%8D%95%E4%BD%8D%E9%98%B6%E8%B7%83%E5%92%8C%E5%8D%95%E4%BD%8D%E5%86%B2%E6%BF%80%E5%87%BD%E6%95%B0"><span class="nav-number">2.2.</span> <span class="nav-text">1.4.2 连续时间单位阶跃和单位冲激函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5-%E8%BF%9E%E7%BB%AD%E6%97%B6%E9%97%B4%E5%92%8C%E7%A6%BB%E6%95%A3%E6%97%B6%E9%97%B4%E7%B3%BB%E7%BB%9F"><span class="nav-number">3.</span> <span class="nav-text">1.5 连续时间和离散时间系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-1-%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%BA%92%E8%81%94"><span class="nav-number">3.1.</span> <span class="nav-text">1.5.1 系统的互联</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%B2%E8%81%94%EF%BC%88%E7%BA%A7%E8%81%94%EF%BC%89"><span class="nav-number">3.1.1.</span> <span class="nav-text">串联（级联）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B9%B6%E8%81%94"><span class="nav-number">3.1.2.</span> <span class="nav-text">并联</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%8D%E9%A6%88%E4%BA%92%E8%81%94"><span class="nav-number">3.1.3.</span> <span class="nav-text">反馈互联</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-2-%E5%9F%BA%E6%9C%AC%E7%B3%BB%E7%BB%9F%E6%80%A7%E8%B4%A8"><span class="nav-number">3.2.</span> <span class="nav-text">1.5.2 基本系统性质</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%B0%E5%BF%86%E7%B3%BB%E7%BB%9F%E5%92%8C%E6%97%A0%E8%AE%B0%E5%BF%86%E7%B3%BB%E7%BB%9F"><span class="nav-number">3.2.1.</span> <span class="nav-text">记忆系统和无记忆系统</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%AF%E9%80%86%E6%80%A7%E4%B8%8E%E5%8F%AF%E9%80%86%E7%B3%BB%E7%BB%9F"><span class="nav-number">3.2.2.</span> <span class="nav-text">可逆性与可逆系统</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9B%A0%E6%9E%9C%E6%80%A7"><span class="nav-number">3.2.3.</span> <span class="nav-text">因果性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A8%B3%E5%AE%9A%E6%80%A7"><span class="nav-number">3.2.4.</span> <span class="nav-text">稳定性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%97%B6%E4%B8%8D%E5%8F%98%E6%80%A7"><span class="nav-number">3.2.5.</span> <span class="nav-text">时不变性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7"><span class="nav-number">3.2.6.</span> <span class="nav-text">线性</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Eternity"
+      src="http://blog.eternityqjl.top/avator_next.jpg">
+  <p class="site-author-name" itemprop="name">Eternity</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">蜀ICP备19037280号 </a>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Eternity</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
