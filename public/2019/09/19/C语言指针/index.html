@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 5.3.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="http://blog.eternityqjl.top/faviconJ.ico">
-  <link rel="icon" type="image/png" sizes="32x32" href="http://blog.eternityqjl.top/faviconJ.ico">
-  <link rel="icon" type="image/png" sizes="16x16" href="http://blog.eternityqjl.top/faviconJ.ico">
-  <link rel="mask-icon" href="http://blog.eternityqjl.top/faviconJ.ico" color="#222">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -28,7 +28,7 @@
 <meta property="og:description" content="一、指针的一些概念1. 指针的类型 把指针声明语句中的指针名字去掉，剩下的就是指针本身的类型  2. 指针所指向的类型 把指针声明语句中的指针名字和名字前的指针声明符号*去掉，剩下的就是指针指向的类型  3. 指针的值——指针所指向的内存区或地址 指针的值是指针本身存储的数值，该值被编译器当作一个地址（在32位程序中，所有类型的指针的值都是一个32位的整数，因为32位程序的内存地址都是32位长。）">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2019-09-19T05:10:25.000Z">
-<meta property="article:modified_time" content="2021-02-03T06:47:06.661Z">
+<meta property="article:modified_time" content="2021-04-21T08:12:29.812Z">
 <meta property="article:author" content="Eternity">
 <meta property="article:tag" content="指针">
 <meta name="twitter:card" content="summary">
@@ -126,6 +126,11 @@
     <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
 
   </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
         <li class="menu-item menu-item-categories">
 
     <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
@@ -194,7 +199,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-02-03 14:47:06" itemprop="dateModified" datetime="2021-02-03T14:47:06+08:00">2021-02-03</time>
+                <time title="修改时间：2021-04-21 16:12:29" itemprop="dateModified" datetime="2021-04-21T16:12:29+08:00">2021-04-21</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -423,6 +428,7 @@
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
+          
         <span class="site-state-item-count">14</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
@@ -446,12 +452,12 @@
         
 
         
-  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">蜀ICP备19037280号 </a>
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">蜀ICP备 19037280号 </a>
   </div>
 
 <div class="copyright">
   
-  &copy; 
+  &copy; 2019 – 
   <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
@@ -509,61 +515,6 @@
 
 
   
-
-  
-      
-
-<script>
-  if (typeof MathJax === 'undefined') {
-    window.MathJax = {
-      loader: {
-        source: {
-          '[tex]/amsCd': '[tex]/amscd',
-          '[tex]/AMScd': '[tex]/amscd'
-        }
-      },
-      tex: {
-        inlineMath: {'[+]': [['$', '$']]},
-        tags: 'ams'
-      },
-      options: {
-        renderActions: {
-          findScript: [10, doc => {
-            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
-              const display = !!node.type.match(/; *mode=display/);
-              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
-              const text = document.createTextNode('');
-              node.parentNode.replaceChild(text, node);
-              math.start = {node: text, delim: '', n: 0};
-              math.end = {node: text, delim: '', n: 0};
-              doc.math.push(math);
-            });
-          }, '', false],
-          insertedScript: [200, () => {
-            document.querySelectorAll('mjx-container').forEach(node => {
-              let target = node.parentNode;
-              if (target.nodeName.toLowerCase() === 'li') {
-                target.parentNode.classList.add('has-jax');
-              }
-            });
-          }, '', false]
-        }
-      }
-    };
-    (function () {
-      var script = document.createElement('script');
-      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
-      script.defer = true;
-      document.head.appendChild(script);
-    })();
-  } else {
-    MathJax.startup.document.state(0);
-    MathJax.texReset();
-    MathJax.typeset();
-  }
-</script>
-
-    
 
   
 
