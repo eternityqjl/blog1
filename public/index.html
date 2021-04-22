@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 5.3.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="apple-touch-icon" sizes="180x180" href="http://blog.eternityqjl.top/faviconJ.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="http://blog.eternityqjl.top/faviconJ.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="http://blog.eternityqjl.top/faviconJ.ico">
+  <link rel="mask-icon" href="http://blog.eternityqjl.top/faviconJ.ico" color="#222">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -303,10 +303,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="初级排序算法"><a href="#初级排序算法" class="headerlink" title="初级排序算法"></a>初级排序算法</h2><h3 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h3><h4 id="算法描述"><a href="#算法描述" class="headerlink" title="算法描述"></a>算法描述</h4><p>首先找到数组中最小的一个元素，将其与数组的第一个元素进行交换；再在剩余的元素找到最小的一个元素，将其与数组的第二个元素进行交换。如此循环往复，直到将整个数字排序。</p>
-<h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Selection</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(Comparable[] a)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">//将a按照升序排列</span></span><br><span class="line">        <span class="keyword">int</span> N = a.length;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> min = i;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt; N; j++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (less(a[j], a[min]))</span><br><span class="line">                    min = j;</span><br><span class="line">            &#125;</span><br><span class="line">            exch(a, i ,min);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="性能分析"><a href="#性能分析" class="headerlink" title="性能分析"></a>性能分析</h4><ul>
-<li>对长度为$N$的数组，选择排序大概需要$N^2/2$次比较和$N$次交换。</li>
+          <h2 id="初级排序算法">初级排序算法</h2>
+<h3 id="选择排序">选择排序</h3>
+<h4 id="算法描述">算法描述</h4>
+<p>首先找到数组中最小的一个元素，将其与数组的第一个元素进行交换；再在剩余的元素找到最小的一个元素，将其与数组的第二个元素进行交换。如此循环往复，直到将整个数字排序。</p>
+<h4 id="代码实现">代码实现</h4>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Selection</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(Comparable[] a)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">//将a按照升序排列</span></span><br><span class="line">        <span class="keyword">int</span> N = a.length;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> min = i;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt; N; j++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (less(a[j], a[min]))</span><br><span class="line">                    min = j;</span><br><span class="line">            &#125;</span><br><span class="line">            exch(a, i ,min);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="性能分析">性能分析</h4>
+<ul>
+<li>对长度为<span class="math inline">\(N\)</span>的数组，选择排序大概需要<span class="math inline">\(N^2/2\)</span>次比较和<span class="math inline">\(N\)</span>次交换。</li>
 <li>该算法运行时间与输入无关，数据的移动是最少的。</li>
 </ul>
           <!--noindex-->
@@ -389,14 +394,17 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="算数表达式"><a href="#算数表达式" class="headerlink" title="算数表达式"></a>算数表达式</h2><p>这里的算术表达式支持常见的二元运算符<code>+-*/</code>以及接受一个参数的平方根运算符<code>sqrt</code>。这里我们假定表达式中未省略所有的括号。</p>
-<h2 id="计算方法"><a href="#计算方法" class="headerlink" title="计算方法"></a>计算方法</h2><ul>
+          <h2 id="算数表达式">算数表达式</h2>
+<p>这里的算术表达式支持常见的二元运算符<code>+-*/</code>以及接受一个参数的平方根运算符<code>sqrt</code>。这里我们假定表达式中未省略所有的括号。</p>
+<h2 id="计算方法">计算方法</h2>
+<ul>
 <li>将操作数压入<strong>操作数栈</strong></li>
 <li>将运算符压入<strong>运算符栈</strong></li>
 <li>忽略左括号</li>
 <li>遇到右括号时，弹出一个运算符，弹出需要数量的操作数进行运算，然后将得到的结果再压入操作数栈。</li>
 </ul>
-<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> edu.princeton.cs.algs4;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Evaluate</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		Stack&lt;String&gt; ops = <span class="keyword">new</span> Stack&lt;String&gt;();</span><br><span class="line">		Stack&lt;Double&gt; vals = <span class="keyword">new</span> Stack&lt;Double&gt;();</span><br><span class="line">		<span class="keyword">while</span> (!StdIn.isEmpty())</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="comment">//读取字符，如果是运算符则压入运算符栈ops</span></span><br><span class="line">			String s = StdIn.readString();</span><br><span class="line">			<span class="keyword">if</span> (s.equals(<span class="string">&quot;(&quot;</span>));</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span> (s.equals(<span class="string">&quot;+&quot;</span>))    ops.push(s);</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span> (s.equals(<span class="string">&quot;-&quot;</span>))    ops.push(s);</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span> (s.equals(<span class="string">&quot;*&quot;</span>))    ops.push(s);</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span> (s.equals(<span class="string">&quot;/&quot;</span>))    ops.push(s);</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span> (s.equals(<span class="string">&quot;sqrt&quot;</span>))    ops.push(s);</span><br><span class="line">			</span><br><span class="line">			<span class="comment">//如果字符为)，则弹出运算符和操作数，计算结果并压入操作数栈vals</span></span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span> (s.equals(<span class="string">&quot;)&quot;</span>))</span><br><span class="line">			&#123;</span><br><span class="line">				String op = ops.pop();</span><br><span class="line">				<span class="keyword">double</span> v = vals.pop();</span><br><span class="line">				<span class="keyword">if</span> (op.equals(<span class="string">&quot;+&quot;</span>))    v = vals.pop() + v;</span><br><span class="line">				<span class="keyword">else</span> <span class="keyword">if</span> (op.equals(<span class="string">&quot;-&quot;</span>))    v = vals.pop() - v;</span><br><span class="line">				<span class="keyword">else</span> <span class="keyword">if</span> (op.equals(<span class="string">&quot;*&quot;</span>))    v = vals.pop() * v;</span><br><span class="line">				<span class="keyword">else</span> <span class="keyword">if</span> (op.equals(<span class="string">&quot;/&quot;</span>))    v = vals.pop() / v;</span><br><span class="line">				<span class="keyword">else</span> <span class="keyword">if</span> (op.equals(<span class="string">&quot;sqrt&quot;</span>))    v = Math.sqrt(v);</span><br><span class="line">				</span><br><span class="line">				vals.push(v);</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="comment">//如果字符既非运算符又非括号，将其作为double值压入操作数栈vals</span></span><br><span class="line">			<span class="keyword">else</span> vals.push(Double.parseDouble(s));</span><br><span class="line">		&#125;</span><br><span class="line">		StdOut.println(vals.pop());</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="代码实现">代码实现</h2>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> edu.princeton.cs.algs4;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Evaluate</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		Stack&lt;String&gt; ops = <span class="keyword">new</span> Stack&lt;String&gt;();</span><br><span class="line">		Stack&lt;Double&gt; vals = <span class="keyword">new</span> Stack&lt;Double&gt;();</span><br><span class="line">		<span class="keyword">while</span> (!StdIn.isEmpty())</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="comment">//读取字符，如果是运算符则压入运算符栈ops</span></span><br><span class="line">			String s = StdIn.readString();</span><br><span class="line">			<span class="keyword">if</span> (s.equals(<span class="string">&quot;(&quot;</span>));</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span> (s.equals(<span class="string">&quot;+&quot;</span>))    ops.push(s);</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span> (s.equals(<span class="string">&quot;-&quot;</span>))    ops.push(s);</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span> (s.equals(<span class="string">&quot;*&quot;</span>))    ops.push(s);</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span> (s.equals(<span class="string">&quot;/&quot;</span>))    ops.push(s);</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span> (s.equals(<span class="string">&quot;sqrt&quot;</span>))    ops.push(s);</span><br><span class="line">			</span><br><span class="line">			<span class="comment">//如果字符为)，则弹出运算符和操作数，计算结果并压入操作数栈vals</span></span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span> (s.equals(<span class="string">&quot;)&quot;</span>))</span><br><span class="line">			&#123;</span><br><span class="line">				String op = ops.pop();</span><br><span class="line">				<span class="keyword">double</span> v = vals.pop();</span><br><span class="line">				<span class="keyword">if</span> (op.equals(<span class="string">&quot;+&quot;</span>))    v = vals.pop() + v;</span><br><span class="line">				<span class="keyword">else</span> <span class="keyword">if</span> (op.equals(<span class="string">&quot;-&quot;</span>))    v = vals.pop() - v;</span><br><span class="line">				<span class="keyword">else</span> <span class="keyword">if</span> (op.equals(<span class="string">&quot;*&quot;</span>))    v = vals.pop() * v;</span><br><span class="line">				<span class="keyword">else</span> <span class="keyword">if</span> (op.equals(<span class="string">&quot;/&quot;</span>))    v = vals.pop() / v;</span><br><span class="line">				<span class="keyword">else</span> <span class="keyword">if</span> (op.equals(<span class="string">&quot;sqrt&quot;</span>))    v = Math.sqrt(v);</span><br><span class="line">				</span><br><span class="line">				vals.push(v);</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="comment">//如果字符既非运算符又非括号，将其作为double值压入操作数栈vals</span></span><br><span class="line">			<span class="keyword">else</span> vals.push(Double.parseDouble(s));</span><br><span class="line">		&#125;</span><br><span class="line">		StdOut.println(vals.pop());</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -470,11 +478,14 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="3-1-概述和运输层服务"><a href="#3-1-概述和运输层服务" class="headerlink" title="3.1 概述和运输层服务"></a>3.1 概述和运输层服务</h2><p>运输层协议在不同主机上的应用进程之间提供了<em>逻辑通信</em>，这并非物理上的实际通信。在发送端，运输层将从应用程序接收到的报文转换成运输层分组，该分组称为<em>运输层报文段</em>，实现方法是将应用报文划分为一个个小的块，为每个块加上运输层首部生成运输层报文段，然后在端系统中传递给网络层，网络层将其封装成网络层分组，向目的地发送。</p>
+          <h2 id="概述和运输层服务">3.1 概述和运输层服务</h2>
+<p>运输层协议在不同主机上的应用进程之间提供了<em>逻辑通信</em>，这并非物理上的实际通信。在发送端，运输层将从应用程序接收到的报文转换成运输层分组，该分组称为<em>运输层报文段</em>，实现方法是将应用报文划分为一个个小的块，为每个块加上运输层首部生成运输层报文段，然后在端系统中传递给网络层，网络层将其封装成网络层分组，向目的地发送。</p>
 <p>因特网由TCP和UDP两种运输层协议。</p>
-<h3 id="3-1-1-运输层和网络层的关系"><a href="#3-1-1-运输层和网络层的关系" class="headerlink" title="3.1.1 运输层和网络层的关系"></a>3.1.1 运输层和网络层的关系</h3><p>网络层提供了<strong>主机</strong>之间的逻辑通信，而运输层为运行在不同主机上的<strong>进程</strong>之间提供了逻辑通信。</p>
+<h3 id="运输层和网络层的关系">3.1.1 运输层和网络层的关系</h3>
+<p>网络层提供了<strong>主机</strong>之间的逻辑通信，而运输层为运行在不同主机上的<strong>进程</strong>之间提供了逻辑通信。</p>
 <p>运输层协议至工作在端系统中，同时网络中的路由器既不处理也不识别运输层加在应用层报文的任何信息。运输层协议能提供的服务常常受制于底层网络层协议，例如，如果网络层协议无法为主机之间发送的运输层报文段提供时延和带宽保证，运输层协议可就无法为<strong>进程之间</strong>发送的应用程序报文提供时延和带宽保证。</p>
-<h3 id="3-1-2-运输层概述"><a href="#3-1-2-运输层概述" class="headerlink" title="3.1.2 运输层概述"></a>3.1.2 运输层概述</h3><p>首先定义两个名词的意义：</p>
+<h3 id="运输层概述">3.1.2 运输层概述</h3>
+<p>首先定义两个名词的意义：</p>
 <ul>
 <li>报文段：运输层分组，即TCP和UDP的分组</li>
 <li>数据报：网络层分组</li>
@@ -560,7 +571,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="1-SSL-TLS简介"><a href="#1-SSL-TLS简介" class="headerlink" title="1. SSL/TLS简介"></a>1. SSL/TLS简介</h2><p><strong>TLS</strong>（<strong>T</strong>ransport <strong>L</strong>ayer <strong>S</strong>ecurity，<strong>传输层安全协议</strong>），以及它的前身<strong>SSL</strong>（<strong>S</strong>ecure <strong>S</strong>ockets <strong>L</strong>ayer，<strong>安全套接层</strong>）是一种安全协议。Netscape公司在1994年推出HTTPS协议，使用SSL进行加密，这是SSL的起源。1999年公布了第一版的TLS协议，类似于SLLv3，只是对其做出了一些更改。</p>
+          <h2 id="ssltls简介">1. SSL/TLS简介</h2>
+<p><strong>TLS</strong>（<strong>T</strong>ransport <strong>L</strong>ayer <strong>S</strong>ecurity，<strong>传输层安全协议</strong>），以及它的前身<strong>SSL</strong>（<strong>S</strong>ecure <strong>S</strong>ockets <strong>L</strong>ayer，<strong>安全套接层</strong>）是一种安全协议。Netscape公司在1994年推出HTTPS协议，使用SSL进行加密，这是SSL的起源。1999年公布了第一版的TLS协议，类似于SLLv3，只是对其做出了一些更改。</p>
 <p>SSL协议处在计算机网络中的应用层和运输层之间，它不依赖于平台和运行程序的协议。</p>
 <p><strong>几个知名的使用SSL加密的协议</strong>：</p>
 <p><strong>HTTP over SSL (HTTPS)</strong></p>
@@ -642,8 +654,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h2><p>最近在写笔记文档和实验报告的时候遇到一些处理资料图片的问题，PDF电子书或文档中的插图一般为矢量图，自己写笔记如果需要引用这些插图时，一般会直接截图，截图为JEPG或PNG格式，并非矢量图，会在新的文档中出现失真。所以为了解决这个问题，我使用<strong>Adobe Acrobat</strong>和<strong>inkscape</strong>两个软件将PDF中的矢量图导出为<strong>SVG</strong>格式的矢量图。以下为具体步骤：</p>
-<h2 id="1-在Adobe-Acrobat中选择编辑PDF选项"><a href="#1-在Adobe-Acrobat中选择编辑PDF选项" class="headerlink" title="1. 在Adobe Acrobat中选择编辑PDF选项"></a>1. 在<code>Adobe Acrobat</code>中选择<code>编辑PDF</code>选项</h2><p><img src="http://blog.eternityqjl.top/convertingPDFtoSVG_1.JPG"></p>
+          <h2 id="前言">0. 前言</h2>
+<p>最近在写笔记文档和实验报告的时候遇到一些处理资料图片的问题，PDF电子书或文档中的插图一般为矢量图，自己写笔记如果需要引用这些插图时，一般会直接截图，截图为JEPG或PNG格式，并非矢量图，会在新的文档中出现失真。所以为了解决这个问题，我使用<strong>Adobe Acrobat</strong>和<strong>inkscape</strong>两个软件将PDF中的矢量图导出为<strong>SVG</strong>格式的矢量图。以下为具体步骤：</p>
+<h2 id="在adobe-acrobat中选择编辑pdf选项">1. 在<code>Adobe Acrobat</code>中选择<code>编辑PDF</code>选项</h2>
+<p><img src="http://blog.eternityqjl.top/convertingPDFtoSVG_1.JPG" /></p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2020/04/08/convertPDFtoSVG/#more" rel="contents">
@@ -724,9 +738,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="0-前言"><a href="#0-前言" class="headerlink" title="0.前言"></a>0.前言</h2><p>第一次使用Tex语言完整地完成了一篇实验报告的构建排版，这过程中遇到了各种各样的问题，有些问题虽然解决了，但在原理方面还是一知半解，之后再遇到还希望能多看文档。这篇博客是来记录第一次编写过程中遇到的一些问题。</p>
+          <h2 id="前言">0.前言</h2>
+<p>第一次使用Tex语言完整地完成了一篇实验报告的构建排版，这过程中遇到了各种各样的问题，有些问题虽然解决了，但在原理方面还是一知半解，之后再遇到还希望能多看文档。这篇博客是来记录第一次编写过程中遇到的一些问题。</p>
 <p>这是第一次实验报告导出的<a target="_blank" rel="noopener" href="http://blog.eternityqjl.top/SS_test1.pdf">pdf文档</a>封面展示：</p>
-<p><img src="http://blog.eternityqjl.top/SS_test1_cover.jpg"></p>
+<p><img src="http://blog.eternityqjl.top/SS_test1_cover.jpg" /></p>
 <p>这是<a target="_blank" rel="noopener" href="http://blog.eternityqjl.top/SS_test1.tex">tex源代码</a>。</p>
           <!--noindex-->
             <div class="post-button">
@@ -808,9 +823,17 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="1-3-指数信号与正弦信号"><a href="#1-3-指数信号与正弦信号" class="headerlink" title="1.3 指数信号与正弦信号"></a>1.3 指数信号与正弦信号</h2><h3 id="1-3-1-连续时间复指数信号与正弦信号"><a href="#1-3-1-连续时间复指数信号与正弦信号" class="headerlink" title="1.3.1 连续时间复指数信号与正弦信号"></a>1.3.1 连续时间复指数信号与正弦信号</h3><p>连续时间复指数信号有如下形式：<br>$$<br>x(t)=Ce^{at}<br>$$</p>
-<h4 id="实指数信号"><a href="#实指数信号" class="headerlink" title="实指数信号"></a>实指数信号</h4><p>上式中的$C$和$a$都为实数的信号。</p>
-<h4 id="周期复指数信号和正弦信号"><a href="#周期复指数信号和正弦信号" class="headerlink" title="周期复指数信号和正弦信号"></a>周期复指数信号和正弦信号</h4><p>第二种重要的信号为将上式$a$限制为纯虚数的信号（<strong>复指数信号</strong>）：<br>$$<br>x(t)=e^{jw_0t}<br>$$<br>当基波周期$T_0 = \left| \frac {2\pi} {w_0} \right|$时，该信号是周期信号。</p>
+          <h2 id="指数信号与正弦信号">1.3 指数信号与正弦信号</h2>
+<h3 id="连续时间复指数信号与正弦信号">1.3.1 连续时间复指数信号与正弦信号</h3>
+<p>连续时间复指数信号有如下形式： <span class="math display">\[
+x(t)=Ce^{at}
+\]</span></p>
+<h4 id="实指数信号">实指数信号</h4>
+<p>上式中的<span class="math inline">\(C\)</span>和<span class="math inline">\(a\)</span>都为实数的信号。</p>
+<h4 id="周期复指数信号和正弦信号">周期复指数信号和正弦信号</h4>
+<p>第二种重要的信号为将上式<span class="math inline">\(a\)</span>限制为纯虚数的信号（<strong>复指数信号</strong>）： <span class="math display">\[
+x(t)=e^{jw_0t}
+\]</span> 当基波周期<span class="math inline">\(T_0 = \left| \frac {2\pi} {w_0} \right|\)</span>时，该信号是周期信号。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2020/03/14/signalSystem-CH01/#more" rel="contents">
@@ -975,7 +998,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>转眼间2019年就要结束了，依稀记得2019年的刚开始我还在发空间动态说自己又买了一本日历，然而…明年就不买了吧，我并没有记得经常去看日历，更别说去每天一张一张地撕它。这一年里经历了非常多的事情，从学习、生活、关于未来的各方各面，我都发生了极大的改变，这源于我不断变化的想法，目标总是飘忽不定，我思考过，也经常迷茫，现在也是。</p>
+          <p>转眼间2019年就要结束了，依稀记得2019年的刚开始我还在发空间动态说自己又买了一本日历，然而...明年就不买了吧，我并没有记得经常去看日历，更别说去每天一张一张地撕它。这一年里经历了非常多的事情，从学习、生活、关于未来的各方各面，我都发生了极大的改变，这源于我不断变化的想法，目标总是飘忽不定，我思考过，也经常迷茫，现在也是。</p>
 <p>在写下这些话的时间里，我其实是非常难过和害怕的，这一个周末似乎没干什么事情就又要浑浑噩噩地结束了，直到现在还有一个DDL等着我，明早截止，我还没做完，间歇性拖延症晚期这件事情，一直发生在我身上，毫不夸张地说，我可以不间歇地拖延整整24小时，这过程中总想着做些什么、改变些什么，但除了睡觉，大部分时间眼睛都盯在手机屏幕上，尽管我知道这样做一点儿也不好，但结果还是发生了。我知道学习的重要性，也会去为了一个想要实现的东西不断地思考并找到解决方法，就比如搭建网站这件事情，前前后后花了很多的时间也学习了很多相关知识，基本掌握了中间的原理，结果在我预想的时间之前很久就做出来了，结果还是超乎预期的好。说实话，完成一件能看的到结果的事情能给人的心理带来很大的快感的愉悦，但愉悦过后，又只剩下了迷茫和拖延，并且在为了找到下一个实践目标而苦苦挣扎着。有时候大脑盯着手机屏幕看一些信息的时候，知道这是自己不想接收和浪费时间的，但就是控制不住自己去点开看，这样的人性的弱点也造就了很多的商机，造就了很多企业和公司的成功。</p>
 <p>说点儿别的。在关于情感和人际交往方面，我可能是一个与绝大多数人都不一样的人，在情感上，我很少与他人或者是在公开场合表露（包括我的社交媒体，我发现，自己现在很少在社交媒体上表露自己的情感，更多的是分享一些自己的兴趣爱好，比如我热爱的摄影，因而，我也就把自己的空间对所有人开放了，微信这个东西另当别论，说实话，我挺讨厌这个软件的），但我还是知道自己想要的是什么，纵然我在过去的一年里总是带着一些自卑的情感，很久没有与他人进行深入内心的交谈，KY的与陌生人打电话活动也错过了很多次，每次都是在想和别人深入交流的时候才想起来，结果肯定是已经结束了，今后还是要多多关注，想想能与一同关注KY的人打电话是一件挺幸福的事情，也希望自己能早日找到灵魂伴侣。在人际交往方面，我尝试过学校的很多社团和活动，最终无一例外全都放弃了，我觉得也挺好，这也证明了我确实不喜欢过多的浮于表面和拉帮结派建造复杂人际关系的事情，做好自己就最好了，能认识几个朋友还是随缘了，人也并不需要那么多看上去像是朋友的朋友。</p>
 <p>扯了这么多，还是回到最重要的学习和事业上吧。12月希望自己能好好学习学校的课程知识，好好地应对一下考试。明年下半年就要大三了，这学期结束以后要为成为一个前端工程师立一些目标，毕竟就快要毕业了，还是希望自己能去做自己喜欢的工作，上研究生这件事就暂时不考虑了，我在经历了一些事情以后对于读研这件事一点儿也不感兴趣了，做好自己就好了。</p>
@@ -1163,6 +1186,8 @@
 
 
 
+
+  
 
   
 

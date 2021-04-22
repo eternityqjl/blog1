@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 5.3.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="apple-touch-icon" sizes="180x180" href="http://blog.eternityqjl.top/faviconJ.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="http://blog.eternityqjl.top/faviconJ.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="http://blog.eternityqjl.top/faviconJ.ico">
+  <link rel="mask-icon" href="http://blog.eternityqjl.top/faviconJ.ico" color="#222">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -20,12 +20,12 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="1. SSL&#x2F;TLS简介TLS（Transport Layer Security，传输层安全协议），以及它的前身SSL（Secure Sockets Layer，安全套接层）是一种安全协议。Netscape公司在1994年推出HTTPS协议，使用SSL进行加密，这是SSL的起源。1999年公布了第一版的TLS协议，类似于SLLv3，只是对其做出了一些更改。 SSL协议处在计算机网络中的应用层和运输">
+  <meta name="description" content="1. SSL&#x2F;TLS简介 TLS（Transport Layer Security，传输层安全协议），以及它的前身SSL（Secure Sockets Layer，安全套接层）是一种安全协议。Netscape公司在1994年推出HTTPS协议，使用SSL进行加密，这是SSL的起源。1999年公布了第一版的TLS协议，类似于SLLv3，只是对其做出了一些更改。 SSL协议处在计算机网络中的应用层和运">
 <meta property="og:type" content="article">
 <meta property="og:title" content="TLS（HTTPS）协议">
 <meta property="og:url" content="http://example.com/2020/04/19/TLS/index.html">
 <meta property="og:site_name" content="Jialong&#39;s Blog">
-<meta property="og:description" content="1. SSL&#x2F;TLS简介TLS（Transport Layer Security，传输层安全协议），以及它的前身SSL（Secure Sockets Layer，安全套接层）是一种安全协议。Netscape公司在1994年推出HTTPS协议，使用SSL进行加密，这是SSL的起源。1999年公布了第一版的TLS协议，类似于SLLv3，只是对其做出了一些更改。 SSL协议处在计算机网络中的应用层和运输">
+<meta property="og:description" content="1. SSL&#x2F;TLS简介 TLS（Transport Layer Security，传输层安全协议），以及它的前身SSL（Secure Sockets Layer，安全套接层）是一种安全协议。Netscape公司在1994年推出HTTPS协议，使用SSL进行加密，这是SSL的起源。1999年公布了第一版的TLS协议，类似于SLLv3，只是对其做出了一些更改。 SSL协议处在计算机网络中的应用层和运">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://blog.eternityqjl.top/SSL%E5%8D%8F%E8%AE%AE%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84_1.png">
 <meta property="article:published_time" content="2020-04-19T08:15:26.000Z">
@@ -224,7 +224,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="1-SSL-TLS简介"><a href="#1-SSL-TLS简介" class="headerlink" title="1. SSL/TLS简介"></a>1. SSL/TLS简介</h2><p><strong>TLS</strong>（<strong>T</strong>ransport <strong>L</strong>ayer <strong>S</strong>ecurity，<strong>传输层安全协议</strong>），以及它的前身<strong>SSL</strong>（<strong>S</strong>ecure <strong>S</strong>ockets <strong>L</strong>ayer，<strong>安全套接层</strong>）是一种安全协议。Netscape公司在1994年推出HTTPS协议，使用SSL进行加密，这是SSL的起源。1999年公布了第一版的TLS协议，类似于SLLv3，只是对其做出了一些更改。</p>
+        <h2 id="ssltls简介">1. SSL/TLS简介</h2>
+<p><strong>TLS</strong>（<strong>T</strong>ransport <strong>L</strong>ayer <strong>S</strong>ecurity，<strong>传输层安全协议</strong>），以及它的前身<strong>SSL</strong>（<strong>S</strong>ecure <strong>S</strong>ockets <strong>L</strong>ayer，<strong>安全套接层</strong>）是一种安全协议。Netscape公司在1994年推出HTTPS协议，使用SSL进行加密，这是SSL的起源。1999年公布了第一版的TLS协议，类似于SLLv3，只是对其做出了一些更改。</p>
 <p>SSL协议处在计算机网络中的应用层和运输层之间，它不依赖于平台和运行程序的协议。</p>
 <p><strong>几个知名的使用SSL加密的协议</strong>：</p>
 <p><strong>HTTP over SSL (HTTPS)</strong></p>
@@ -236,40 +237,45 @@
 <li>SMTP over TLS在标准文档RFC2487中</li>
 </ul>
 <a id="more"></a>
-
-<h2 id="2-SSL原理详解"><a href="#2-SSL原理详解" class="headerlink" title="2. SSL原理详解"></a>2. SSL原理详解</h2><h3 id="2-0-基本运行过程"><a href="#2-0-基本运行过程" class="headerlink" title="2.0 基本运行过程"></a>2.0 基本运行过程</h3><p>SSL/TLS协议是采用<strong>公钥加密法</strong>实现的，客户端先向服务器端索要公钥，用公钥加密信息，服务器收到密文后，用自己的私钥解密；二者协商生成”对话密钥“，采用该”对话密钥“进行加密通信。</p>
-<h3 id="2-1-SSL建立的总过程"><a href="#2-1-SSL建立的总过程" class="headerlink" title="2.1 SSL建立的总过程"></a>2.1 SSL建立的总过程</h3><p>客户端向服务器索要并验证公钥，双方协商生成”对话密钥“的过程又称为”握手阶段“，该阶段涉及<strong>四次握手</strong>通信，且该阶段的通信都是明文的。以下一一来分析。</p>
-<h4 id="1-客户端发出请求（ClientHello）"><a href="#1-客户端发出请求（ClientHello）" class="headerlink" title="1. 客户端发出请求（ClientHello）"></a>1. 客户端发出请求（ClientHello）</h4><p>该步客户端（通常为浏览器）向服务器提供以下信息：</p>
+<h2 id="ssl原理详解">2. SSL原理详解</h2>
+<h3 id="基本运行过程">2.0 基本运行过程</h3>
+<p>SSL/TLS协议是采用<strong>公钥加密法</strong>实现的，客户端先向服务器端索要公钥，用公钥加密信息，服务器收到密文后，用自己的私钥解密；二者协商生成”对话密钥“，采用该”对话密钥“进行加密通信。</p>
+<h3 id="ssl建立的总过程">2.1 SSL建立的总过程</h3>
+<p>客户端向服务器索要并验证公钥，双方协商生成”对话密钥“的过程又称为”握手阶段“，该阶段涉及<strong>四次握手</strong>通信，且该阶段的通信都是明文的。以下一一来分析。</p>
+<h4 id="客户端发出请求clienthello">1. 客户端发出请求（ClientHello）</h4>
+<p>该步客户端（通常为浏览器）向服务器提供以下信息：</p>
 <ul>
 <li>支持的协议<strong>版本（Version）</strong>，如TLSv1.0</li>
 <li>一个客户端生成的<strong>随机数（Random）</strong>，之后用于生成”对话密钥“</li>
-<li><strong>会话ID（Session id）</strong>：<ul>
+<li><strong>会话ID（Session id）</strong>：
+<ul>
 <li>如果客户端第一次连接到服务器，那么该字段为空。</li>
 <li>如果该字段不为空，则说明以前与服务器有连接，在此期间，服务器使用Session ID映射对称密钥，并将Session ID存储在客户端浏览器中，为映射设置一个时间限，如果浏览器将来连接到同一台服务器，它将发送Session ID，服务器对映射的Session ID进行验证，并使用以前用过的对称密钥来恢复会话，该情况下不需要握手，也成为<strong>SSL会话恢复</strong>。</li>
-</ul>
-</li>
+</ul></li>
 <li>支持的<strong>加密套件（Cipher Suites）</strong>，这是由客户按优先级排列的，但完全由服务器决定发送与否。服务器会从客户端发送的加密套件中选择一种作为共同的加密套件，如RSA公钥加密。</li>
 <li>支持的<strong>压缩方法</strong>，这是为了减少带宽。从TLS 1.3开始，协议禁用了TLS压缩，因为使用压缩时攻击可以捕获到用HTTP头发送的参数，该攻击可以劫持Cookie。</li>
 <li>扩展包。</li>
 </ul>
-<h4 id="2-服务器回应（ServerHello）"><a href="#2-服务器回应（ServerHello）" class="headerlink" title="2. 服务器回应（ServerHello）"></a>2. 服务器回应（ServerHello）</h4><p>该步骤包含以下内容：</p>
+<h4 id="服务器回应serverhello">2. 服务器回应（ServerHello）</h4>
+<p>该步骤包含以下内容：</p>
 <ul>
 <li>确认使用的<strong>版本</strong>，如TLSv1.0，如果浏览器与服务器支持的版本不一致，服务器会关闭加密通信。</li>
 <li>一个服务器生成的<strong>随机数</strong>，之后用于生成”对话密钥“</li>
 <li>确认使用的<strong>加密套件</strong></li>
-<li><strong>会话ID</strong>（Session ID）：<ul>
+<li><strong>会话ID</strong>（Session ID）：
+<ul>
 <li>服务器将约定的Session参数存储在TLS缓存中，并生成与之对应的Session ID，它将与ServerHello一起发送到客户端。客户端可以写入约定的参数到此Session ID，并给定到期时间，客户端将在ClientHello中包含该ID。如果客户端再次连接到该服务器，服务器可以检查与Session ID对应的缓存参数，并重用他们而无需再次握手。这可以节省大量计算成本。</li>
 <li>但在谷歌等大流量应用程序中这种方法存在缺点，每天有数百万人连接到服务器，服务器必须使用Session ID保留所有Session参数的TLS缓存，这是一笔巨大的开销。为解决该问题，在扩展包中加入<strong>Session Tickets</strong>，在这里客户端可以在ClientHello中指定它是否支持Session Tickets，然后服务器将创建一个新的Session Tickets，并使用只有服务器知道的经过私钥加密的Session参数，该参数存储在客户端中，因此所有Session数据仅存储在客户端计算机上，但Ticket仍然是安全的，因为该密钥只有服务器知道。</li>
-</ul>
-</li>
+</ul></li>
 <li><strong>扩展包</strong></li>
 <li><strong>服务器证书</strong></li>
 </ul>
 <p>当服务器需要确认客户端身份时，就会再包含一个请求，要求客户端提供”客户端证书“。例如金融机构只允许认证客户连入自己的网络，回向正式用户提供USB密钥（U盾），里面包含一张客户端证书。</p>
-<h4 id="3-客户端回应"><a href="#3-客户端回应" class="headerlink" title="3. 客户端回应"></a>3. 客户端回应</h4><p>客户端收到服务器回应后首先验证服务器的证书，如果证书存在问题，如证书过期、由非可信机构颁布、或证书域名与实际域名不一致，会想客户端访问者发出警告，询问是否继续通信。</p>
+<h4 id="客户端回应">3. 客户端回应</h4>
+<p>客户端收到服务器回应后首先验证服务器的证书，如果证书存在问题，如证书过期、由非可信机构颁布、或证书域名与实际域名不一致，会想客户端访问者发出警告，询问是否继续通信。</p>
 <p>证书没有问题则客户端会从中取出公钥然后发送以下信息：</p>
 <ul>
-<li>一个**随机数（pre-master-key)**；该随机数用服务器公钥加密，防止被窃听。</li>
+<li>一个<strong>随机数（pre-master-key)</strong>；该随机数用服务器公钥加密，防止被窃听。</li>
 <li>编码改变通知，表示随后的信息都将用双方商定的加密方法和密钥发送。</li>
 <li>客户端结束握手通知，该项同时也是前面发送所有内容的哈希值，用来供服务器验证。</li>
 </ul>
@@ -277,25 +283,28 @@
 <blockquote>
 <p>pre-master-key与前面服务器和客户端在Hello阶段产生的两个随机数结合在一起生成了Master Secret。</p>
 </blockquote>
-<h4 id="4-服务器的最后回应"><a href="#4-服务器的最后回应" class="headerlink" title="4. 服务器的最后回应"></a>4. 服务器的最后回应</h4><p>服务器收到客户端第三个随机数pre-master-key后，计算生成本次会话使用的“会话密钥”，然后向客户端发送以下信息：</p>
+<h4 id="服务器的最后回应">4. 服务器的最后回应</h4>
+<p>服务器收到客户端第三个随机数pre-master-key后，计算生成本次会话使用的“会话密钥”，然后向客户端发送以下信息：</p>
 <ul>
 <li>编码改变通知，表示随后的信息都将用双方商定的加密方法和密钥发送。</li>
 <li>服务器握手结束通知，该项同时也是前面发送的所有内容的哈希值，用来供客户端验证。</li>
 </ul>
 <p>至此整个握手阶段就结束了，接下来客户端与服务器进入加密通信，就是完全使用普通的HTTP协议，只是使用了“会话密钥”加密内容。</p>
-<h3 id="2-2-SSL协议的结构体系"><a href="#2-2-SSL协议的结构体系" class="headerlink" title="2.2 SSL协议的结构体系"></a>2.2 SSL协议的结构体系</h3><p><img src="http://blog.eternityqjl.top/SSL%E5%8D%8F%E8%AE%AE%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84_1.png"></p>
+<h3 id="ssl协议的结构体系">2.2 SSL协议的结构体系</h3>
+<p><img src="http://blog.eternityqjl.top/SSL%E5%8D%8F%E8%AE%AE%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84_1.png" /></p>
 <p>SSL体系结构包含两个协议子层，底层为<strong>SSL记录协议层</strong>；高层为<strong>SSL握手协议层</strong>。</p>
 <ul>
 <li><strong>SSL记录协议层</strong>：记录协议为高层协议提供基本的安全服务，如数据封装、压缩、加密等基本功能。所以我们可以知道，所有的传输数据都被封装在记录中。</li>
-<li><strong>SSL握手协议层</strong>包括：<ul>
+<li><strong>SSL握手协议层</strong>包括：
+<ul>
 <li>SSL握手协议：协调客户和服务器的状态，是双方能达到状态的同步</li>
 <li>SSL密码参数修改协议：更新用于当前连接的密码组。</li>
 <li>SSL告警协议：发现异常时为对等方传递警告</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h2 id="3-参考"><a href="#3-参考" class="headerlink" title="3. 参考"></a>3. 参考</h2><ul>
-<li><a target="_blank" rel="noopener" href="https://cshihong.github.io/2019/05/09/SSL%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/">SSL/TLS协议详解|曹世宏的博客</a></li>
+<h2 id="参考">3. 参考</h2>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://cshihong.github.io/2019/05/09/SSL协议详解/">SSL/TLS协议详解|曹世宏的博客</a></li>
 <li><a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2014/02/ssl_tls.html">SSL/TLS协议运行机制的概述|阮一峰</a></li>
 </ul>
 
@@ -381,7 +390,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-SSL-TLS%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">1. SSL&#x2F;TLS简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-SSL%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3"><span class="nav-number">2.</span> <span class="nav-text">2. SSL原理详解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-0-%E5%9F%BA%E6%9C%AC%E8%BF%90%E8%A1%8C%E8%BF%87%E7%A8%8B"><span class="nav-number">2.1.</span> <span class="nav-text">2.0 基本运行过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-SSL%E5%BB%BA%E7%AB%8B%E7%9A%84%E6%80%BB%E8%BF%87%E7%A8%8B"><span class="nav-number">2.2.</span> <span class="nav-text">2.1 SSL建立的总过程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%8F%91%E5%87%BA%E8%AF%B7%E6%B1%82%EF%BC%88ClientHello%EF%BC%89"><span class="nav-number">2.2.1.</span> <span class="nav-text">1. 客户端发出请求（ClientHello）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%9B%9E%E5%BA%94%EF%BC%88ServerHello%EF%BC%89"><span class="nav-number">2.2.2.</span> <span class="nav-text">2. 服务器回应（ServerHello）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%9B%9E%E5%BA%94"><span class="nav-number">2.2.3.</span> <span class="nav-text">3. 客户端回应</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E6%9C%80%E5%90%8E%E5%9B%9E%E5%BA%94"><span class="nav-number">2.2.4.</span> <span class="nav-text">4. 服务器的最后回应</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-SSL%E5%8D%8F%E8%AE%AE%E7%9A%84%E7%BB%93%E6%9E%84%E4%BD%93%E7%B3%BB"><span class="nav-number">2.3.</span> <span class="nav-text">2.2 SSL协议的结构体系</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%8F%82%E8%80%83"><span class="nav-number">3.</span> <span class="nav-text">3. 参考</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ssltls%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">1. SSL&#x2F;TLS简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ssl%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3"><span class="nav-number">2.</span> <span class="nav-text">2. SSL原理详解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E8%BF%90%E8%A1%8C%E8%BF%87%E7%A8%8B"><span class="nav-number">2.1.</span> <span class="nav-text">2.0 基本运行过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ssl%E5%BB%BA%E7%AB%8B%E7%9A%84%E6%80%BB%E8%BF%87%E7%A8%8B"><span class="nav-number">2.2.</span> <span class="nav-text">2.1 SSL建立的总过程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%8F%91%E5%87%BA%E8%AF%B7%E6%B1%82clienthello"><span class="nav-number">2.2.1.</span> <span class="nav-text">1. 客户端发出请求（ClientHello）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%9B%9E%E5%BA%94serverhello"><span class="nav-number">2.2.2.</span> <span class="nav-text">2. 服务器回应（ServerHello）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%9B%9E%E5%BA%94"><span class="nav-number">2.2.3.</span> <span class="nav-text">3. 客户端回应</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E6%9C%80%E5%90%8E%E5%9B%9E%E5%BA%94"><span class="nav-number">2.2.4.</span> <span class="nav-text">4. 服务器的最后回应</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ssl%E5%8D%8F%E8%AE%AE%E7%9A%84%E7%BB%93%E6%9E%84%E4%BD%93%E7%B3%BB"><span class="nav-number">2.3.</span> <span class="nav-text">2.2 SSL协议的结构体系</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">3.</span> <span class="nav-text">3. 参考</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -494,6 +503,8 @@
 
 
 
+
+  
 
   
 

@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 5.3.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="apple-touch-icon" sizes="180x180" href="http://blog.eternityqjl.top/faviconJ.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="http://blog.eternityqjl.top/faviconJ.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="http://blog.eternityqjl.top/faviconJ.ico">
+  <link rel="mask-icon" href="http://blog.eternityqjl.top/faviconJ.ico" color="#222">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -230,9 +230,10 @@
       
         <p>应用层是计算机网络从上往下的第一层，这一层的主要内容是网络应用的原理和实现，通过学习几种常见的网络应用程序，并且开发运行在TCP和UTP(运输层)上的网络应用程序，这些应用程序包含Web、电子邮件、DNS、P2P等等。</p>
 <a id="more"></a>
-
-<h2 id="1-应用层协议"><a href="#1-应用层协议" class="headerlink" title="1.应用层协议"></a>1.应用层协议</h2><p>开发网络应用程序是要开发运行在不同端系统上并且通过网络(下层协议)彼此通信的程序，这过程中不需要为下层的网络核心设备写程序，因为它们不在应用层上起作用。</p>
-<h3 id="1-1-网络应用程序体系结构"><a href="#1-1-网络应用程序体系结构" class="headerlink" title="1.1 网络应用程序体系结构"></a>1.1 网络应用程序体系结构</h3><p><strong>客户——服务器体系结构</strong></p>
+<h2 id="应用层协议">1.应用层协议</h2>
+<p>开发网络应用程序是要开发运行在不同端系统上并且通过网络(下层协议)彼此通信的程序，这过程中不需要为下层的网络核心设备写程序，因为它们不在应用层上起作用。</p>
+<h3 id="网络应用程序体系结构">1.1 网络应用程序体系结构</h3>
+<p><strong>客户——服务器体系结构</strong></p>
 <ul>
 <li>客户：发送主机请求</li>
 <li>服务器：总是打开的主机，接收来自客户的请求</li>
@@ -245,7 +246,8 @@
 <li>具有自扩展性，报文在主机之间直接发送，服务器用来追踪IP，有安全隐患。</li>
 </ul>
 <p>举例：BitTorrent、Skype</p>
-<h3 id="1-2-进程通信"><a href="#1-2-进程通信" class="headerlink" title="1.2 进程通信"></a>1.2 进程通信</h3><p>端系统之间的通信实际上是<strong>进程</strong>，进程通过跨越网络发送<strong>报文</strong>来进行通信。进程是运行在端系统上的程序，同一个端系统和不同端系统之间的进程都可以进行通信，这里主要讨论不同端系统之间跨越网络的通信。</p>
+<h3 id="进程通信">1.2 进程通信</h3>
+<p>端系统之间的通信实际上是<strong>进程</strong>，进程通过跨越网络发送<strong>报文</strong>来进行通信。进程是运行在端系统上的程序，同一个端系统和不同端系统之间的进程都可以进行通信，这里主要讨论不同端系统之间跨越网络的通信。</p>
 <p><strong>客户与服务器之间的进程</strong></p>
 <ul>
 <li>客户-服务器体系中，比如Web服务器，一个进程被标识为客户(Client)，另一个进程被标识为服务器(Server)。</li>
@@ -259,7 +261,8 @@
 <li>IP地址：用来标识目的地主机。</li>
 <li>端口号：用来指定接受进程(即接受套接字)，例如Web服务器用端口号80标识，邮件服务器进程用25标识。</li>
 </ul>
-<h3 id="1-3-供应用程序使用的运输服务"><a href="#1-3-供应用程序使用的运输服务" class="headerlink" title="1.3 供应用程序使用的运输服务"></a>1.3 供应用程序使用的运输服务</h3><p>开发应用程序时，需要选择一种适合的运输层协议，运输层协议能够提供的服务主要有以下：</p>
+<h3 id="供应用程序使用的运输服务">1.3 供应用程序使用的运输服务</h3>
+<p>开发应用程序时，需要选择一种适合的运输层协议，运输层协议能够提供的服务主要有以下：</p>
 <ul>
 <li><strong>可靠数据传输</strong></li>
 </ul>
@@ -275,7 +278,8 @@
 <ul>
 <li>安全性</li>
 </ul>
-<h3 id="1-4-因特网提供和未提供的运输服务"><a href="#1-4-因特网提供和未提供的运输服务" class="headerlink" title="1.4 因特网提供和未提供的运输服务"></a>1.4 因特网提供和未提供的运输服务</h3><p>因特网为应用程序提供两个运输层协议，TCP和UDP，开发者必须做出选择。</p>
+<h3 id="因特网提供和未提供的运输服务">1.4 因特网提供和未提供的运输服务</h3>
+<p>因特网为应用程序提供两个运输层协议，TCP和UDP，开发者必须做出选择。</p>
 <p><strong>TCP服务</strong></p>
 <ul>
 <li>面向连接服务：报文数据流动前，TCP让客户和服务器交换运输层控制信息(即握手)，之后一个<em>TCP连接</em>就建立了，这条连接是<em>全双工</em>的，应用程序运行结束后要拆除该连接。</li>
@@ -290,21 +294,25 @@
 <blockquote>
 <p>注，这里只是简要的内容，更多详细内容将在第三章运输层中提到。</p>
 </blockquote>
-<hr>
+<hr />
 <p><strong>未提供的服务</strong></p>
 <p>以上两个协议提供了可靠数据传输、安全性相关的服务，但并未提供2.3中所述的<em>吞吐量和定时</em>的服务，所以因特网并不提供这两项服务。虽然未提供具体的服务，但因特网已经运行很多年，对于时间敏感的应用已经被设计得尽可能应对这种保证的缺乏。</p>
-<h3 id="1-5-应用层协议总结"><a href="#1-5-应用层协议总结" class="headerlink" title="1.5 应用层协议总结"></a>1.5 应用层协议总结</h3><p>应用层协议定义了以下内容：</p>
+<h3 id="应用层协议总结">1.5 应用层协议总结</h3>
+<p>应用层协议定义了以下内容：</p>
 <ul>
 <li>交换的报文类型，如请求和响应报文</li>
 <li>报文语法</li>
 <li>字段语义</li>
 <li>确定进程何时发送报文</li>
 </ul>
-<h2 id="2-Web和HTTP"><a href="#2-Web和HTTP" class="headerlink" title="2.Web和HTTP"></a>2.Web和HTTP</h2><h3 id="2-1-HTTP概况"><a href="#2-1-HTTP概况" class="headerlink" title="2.1 HTTP概况"></a>2.1 HTTP概况</h3><p><strong>超文本传输协议（HyperText Transfer Protocol，HTTP）</strong>是Web的应用层协议，它由客户程序和服务器程序实现，客户和服务器运行在不同端系统中，通过HTTP报文进行会话。</p>
+<h2 id="web和http">2.Web和HTTP</h2>
+<h3 id="http概况">2.1 HTTP概况</h3>
+<p><strong>超文本传输协议（HyperText Transfer Protocol，HTTP）</strong>是Web的应用层协议，它由客户程序和服务器程序实现，客户和服务器运行在不同端系统中，通过HTTP报文进行会话。</p>
 <p><strong>Web页面</strong>是由对象组成的，一个对象只是一个文件，如一个HTML文件、一张JEPG图片、一段视频，它们可以由URL寻址(URL地址由两部分组成，主机名和路径)。多数Web页面由一个HTML基本文件和一些对象组成。</p>
 <p>HTTP使用<strong>TCP</strong>作为支撑运输协议，客户首先发起一个与服务器的TCP连接，建立连接后浏览器和服务器就可以通过套接字进行交互。</p>
 <p>HTTP是一个<strong>无状态协议</strong>，服务器不会储存客户的状态信息，无论用户进行多少次的重复请求，服务器都会做出反应。</p>
-<h3 id="2-2-非持续性连接和持续性连接"><a href="#2-2-非持续性连接和持续性连接" class="headerlink" title="2.2 非持续性连接和持续性连接"></a>2.2 非持续性连接和持续性连接</h3><ul>
+<h3 id="非持续性连接和持续性连接">2.2 非持续性连接和持续性连接</h3>
+<ul>
 <li><em>非持续性连接</em>：客户服务器之间的请求和响应都是经一个单独的TCP连接发送。</li>
 <li><em>持续性连接</em>：二者之间的请求和响应经过相同的TCP连接发送。</li>
 </ul>
@@ -318,18 +326,21 @@
 <li>HTTP 1.1 连接下，服务器发送响应后保持该TCP连接打开，相同客户和服务器之间，后续的请求和响应报文能够通过相同的连接传送。如果一条连接经过一段时间间隔未使用，则HTTP服务器就会关闭它。</li>
 <li>HTTP/2 允许相同连接中的多个请求和回答相互交错。</li>
 </ul>
-<h3 id="2-3-HTTP报文格式"><a href="#2-3-HTTP报文格式" class="headerlink" title="2.3 HTTP报文格式"></a>2.3 HTTP报文格式</h3><p><strong>请求报文</strong></p>
+<h3 id="http报文格式">2.3 HTTP报文格式</h3>
+<p><strong>请求报文</strong></p>
 <figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">GET</span> <span class="string">/somedir/page.html</span> <span class="meta">HTTP/1.1</span></span><br><span class="line"><span class="attribute">Host</span><span class="punctuation">: </span>www.someschool.edu	#指明了对象所在主机</span><br><span class="line"><span class="attribute">Connection</span><span class="punctuation">: </span>close	#让服务器在发送完被请求对象后就关闭这条连接</span><br><span class="line"><span class="attribute">User-agent</span><span class="punctuation">: </span>Mozilla/5.0		#浏览器类型</span><br><span class="line"><span class="attribute">Accept-language</span><span class="punctuation">: </span>fr		#语言</span><br></pre></td></tr></table></figure>
 <ul>
-<li>第一行为<em>请求行</em>，共有三个字段：<ul>
+<li>第一行为<em>请求行</em>，共有三个字段：
+<ul>
 <li>方法字段：可取：GET、POST、HEAD、PUT、DELETE，绝大部分请求使用GET。</li>
 <li>URL字段：带有请求对象的标识</li>
 <li>HTTP版本字段</li>
-</ul>
-</li>
+</ul></li>
 <li>第一行后的后继行都叫<em>首部行</em>，具体意义见程序。</li>
 </ul>
-<p><img src="http://blog.eternityqjl.top/%E8%AF%B7%E6%B1%82%E6%8A%A5%E6%96%87.jpg" alt="请求报文"></p>
+<figure>
+<img src="http://blog.eternityqjl.top/%E8%AF%B7%E6%B1%82%E6%8A%A5%E6%96%87.jpg" alt="请求报文" /><figcaption>请求报文</figcaption>
+</figure>
 <ul>
 <li><p>首部行后有一个实体体(entity body)，使用<strong>GET</strong>请求时实体体为空，而当使用<strong>POST</strong>方法时才使用该实实体。</p>
 <ul>
@@ -338,12 +349,9 @@
 </ul>
 <blockquote>
 <p>用表单生成的请求报文不是必须使用POST方法，相反也经常使用GET方法，并在所请求的URL中包括输入的数据</p>
-</blockquote>
-</li>
-<li><p><em>HEAD方法</em>类似于GET方法，服务器收到一个HEAD方法的请求时，会用一个HTTP报文进行响应但并不会返回请求的对象，该方法常用在<em>调试跟踪</em>中.</p>
-</li>
-<li><p>PUT方法被那些需要向Web服务器上传对象的应用程序使用，DELETE方法允许应用程序删除服务器上的对象。</p>
-</li>
+</blockquote></li>
+<li><p><em>HEAD方法</em>类似于GET方法，服务器收到一个HEAD方法的请求时，会用一个HTTP报文进行响应但并不会返回请求的对象，该方法常用在<em>调试跟踪</em>中.</p></li>
+<li><p>PUT方法被那些需要向Web服务器上传对象的应用程序使用，DELETE方法允许应用程序删除服务器上的对象。</p></li>
 </ul>
 <p><strong>响应报文</strong></p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">HTTP/1.1</span> <span class="number">200</span> OK</span><br><span class="line"><span class="attribute">Connection</span><span class="punctuation">: </span>close	#发送完报文后关闭该TCP连接</span><br><span class="line"><span class="attribute">Date</span><span class="punctuation">: </span>Tue, 18 Aug 2015 15:44:04 GMT		#指示服务器产生并发送该响应报文的日期和时间</span><br><span class="line"><span class="attribute">Server</span><span class="punctuation">: </span>Apache/2.2.3 (CentOS)	#服务器类型及系统，对应于请求报文中的User-agent字段</span><br><span class="line"><span class="attribute">Last-Modified</span><span class="punctuation">: </span>Tue, 18 Aug 2015 15:11:03 GMT	#对象创建或最后修改的日期和时间</span><br><span class="line"><span class="attribute">Content-Length</span><span class="punctuation">: </span>6821	#被发送对象的字节数</span><br><span class="line"><span class="attribute">Content-Type</span><span class="punctuation">: </span>text/html		#对象类型</span><br><span class="line"></span><br><span class="line">(data data data ...)</span><br></pre></td></tr></table></figure>
@@ -352,7 +360,9 @@
 <li>6个<strong>首部行</strong>(2至7行)</li>
 <li><strong>实体体</strong>：报文的部分，即包含了所请求的对象本身。</li>
 </ul>
-<p><img src="http://blog.eternityqjl.top/%E5%93%8D%E5%BA%94%E6%8A%A5%E6%96%87.jpg" alt="响应报文"></p>
+<figure>
+<img src="http://blog.eternityqjl.top/%E5%93%8D%E5%BA%94%E6%8A%A5%E6%96%87.jpg" alt="响应报文" /><figcaption>响应报文</figcaption>
+</figure>
 <p>状态码和它们对应的短语：</p>
 <ul>
 <li>200 OK：请求成功</li>
@@ -361,7 +371,8 @@
 <li>404 Not Found：被请求文档不在服务器中</li>
 <li>505 HTTP Version Not Supported：服务器不支持请求报文只用的HTTP协议版本</li>
 </ul>
-<h3 id="2-4-cookie"><a href="#2-4-cookie" class="headerlink" title="2.4 cookie"></a>2.4 cookie</h3><p>HTTP服务器是无状态的，但一个Web站点希望能够识别用户身份，所以HTTP使用cookie允许站点对用户进行追踪。</p>
+<h3 id="cookie">2.4 cookie</h3>
+<p>HTTP服务器是无状态的，但一个Web站点希望能够识别用户身份，所以HTTP使用cookie允许站点对用户进行追踪。</p>
 <p><strong>cookie技术组件</strong>：</p>
 <ul>
 <li>HTTP响应报文中的一个cookie首部行</li>
@@ -370,21 +381,25 @@
 <li>位于Web站点的一个后端数据库</li>
 </ul>
 <p><strong>一般工作流程</strong>：第一次访问某个Web服务器时，服务器会为用户创建一个ID，这个ID会通过响应报文中的一个首部行传给端系统，记录在cookie文件中，同时这个ID被记录在服务器的后端数据库中；当再次访问这个网站时，浏览器会查询cookie文件并抽取对于该网站的识别码，并放到HTTP请求报文的cookie首部中，此时服务器可以跟踪该用户在站点的活动，显示一些内容，比如浏览购物网站会提供上次加入购物车的内容。</p>
-<h3 id="2-5-Web缓存（代理服务器，proxy-server）"><a href="#2-5-Web缓存（代理服务器，proxy-server）" class="headerlink" title="2.5 Web缓存（代理服务器，proxy server）"></a>2.5 Web缓存（代理服务器，proxy server）</h3><p>代理服务器是能代表初始Web服务器来满足HTTP请求的网络实体。</p>
+<h3 id="web缓存代理服务器proxy-server">2.5 Web缓存（代理服务器，proxy server）</h3>
+<p>代理服务器是能代表初始Web服务器来满足HTTP请求的网络实体。</p>
 <p><strong>部署Web缓存器的原因</strong>：</p>
 <ul>
 <li>能大大减少对客户请求的响应时间</li>
 <li>减低因特网上的Web流量，改善应用性能</li>
 </ul>
-<h3 id="2-6-条件GET方法"><a href="#2-6-条件GET方法" class="headerlink" title="2.6 条件GET方法"></a>2.6 条件GET方法</h3><p>虽然高速缓存能减少响应时间，但也有一个问题，存放在缓存器中的对象副本可能是陈旧的，而HTTP有一种机制，允许缓存器证实它的对象是最新的，及条件GET方法。</p>
+<h3 id="条件get方法">2.6 条件GET方法</h3>
+<p>虽然高速缓存能减少响应时间，但也有一个问题，存放在缓存器中的对象副本可能是陈旧的，而HTTP有一种机制，允许缓存器证实它的对象是最新的，及条件GET方法。</p>
 <p><strong>条件GET</strong>：</p>
 <ul>
 <li>请求报文使用GET方法</li>
 <li>请求报文中包含一个<code>If-Modified-Since:</code>首部行。</li>
 </ul>
 <p>代理服务器代表请求浏览器向Web服务器发送一个请求报文，Web服务器向缓存器发送具有请求对象的响应报文，缓存器将对象转发到浏览器的同时也在本地缓存了该对象，重要的是也同时储存占了最后修改日期；一段时间后，另一个用户通过该缓存器请求同一个对象，该对象可以能已经被修改了，所以缓存器发送一个条件GET执行最新检查，该条件GET包含<code>If-Modified-Since:</code>首部行，该报文告诉服务器，只有当自指定日期后该对象被修改过，才发送该对象。</p>
-<h2 id="3-DNS-因特网目录服务"><a href="#3-DNS-因特网目录服务" class="headerlink" title="3.DNS:因特网目录服务"></a>3.DNS:因特网目录服务</h2><p>主机可以使用主机名(hostname)或是IP地址来进行标识，显然主机名更容易被人们记住，但路由器更喜欢定长的、有层次地IP地址，所以需要一个能进行主机名到IP地址的转换目录服务。这即是<strong>域名系统(Domain Name System, DNS)</strong></p>
-<h3 id="3-1-DNS提供的服务"><a href="#3-1-DNS提供的服务" class="headerlink" title="3.1 DNS提供的服务"></a>3.1 DNS提供的服务</h3><p><strong>DNS组成</strong></p>
+<h2 id="dns因特网目录服务">3.DNS:因特网目录服务</h2>
+<p>主机可以使用主机名(hostname)或是IP地址来进行标识，显然主机名更容易被人们记住，但路由器更喜欢定长的、有层次地IP地址，所以需要一个能进行主机名到IP地址的转换目录服务。这即是<strong>域名系统(Domain Name System, DNS)</strong></p>
+<h3 id="dns提供的服务">3.1 DNS提供的服务</h3>
+<p><strong>DNS组成</strong></p>
 <ul>
 <li>由分层的DNS服务器实现的分布式数据库</li>
 <li>使主机能查询分布式数据库的应用层协议，DNS服务器通常是运行BIND软件的UNIX机器</li>
@@ -401,24 +416,27 @@
 <p><strong>DNS提供的其他服务</strong></p>
 <ul>
 <li>主机别名：主机名可以拥有一个或多个别名，最初的主机名称为<em>规范主机名</em>，浏览器可以通过调用DNS来获得一个主机别名对应的规范主机名以及主机IP地址</li>
-<li>负载分配：<ul>
+<li>负载分配：
+<ul>
 <li>一个繁忙的站点会被冗余在多台服务器上，每台服务器都有着不同的IP地址；所以由于这些冗余服务器的存在，一个IP地址集合于同一个规范主机名相联系</li>
 <li>当用户对映射到某地址集合的主机名发出DNS请求时，该DNS服务器用IP地址的整个集合进行响应，但在每个回答中循环这些地址的次序；客户总是向IP地址排在最前面的服务器发送HTTP请求，所有DNS就在松油冗余的Web服务器之间循环分配了负载。</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h3 id="3-2-DNS工作机理"><a href="#3-2-DNS工作机理" class="headerlink" title="3.2 DNS工作机理"></a>3.2 DNS工作机理</h3><p>DNS由分布于全球的大量DNS服务器以及定义了DNS服务器于查询主机之间通信方式的应用层协议组成。集中式DNS设计(全球公用一台DNS服务器)的问题：单点故障、通信容量、远距离延时、维护。</p>
+<h3 id="dns工作机理">3.2 DNS工作机理</h3>
+<p>DNS由分布于全球的大量DNS服务器以及定义了DNS服务器于查询主机之间通信方式的应用层协议组成。集中式DNS设计(全球公用一台DNS服务器)的问题：单点故障、通信容量、远距离延时、维护。</p>
 <p><strong>分布式、层次数据库</strong></p>
-<p><img src="http://blog.eternityqjl.top/DNS%E6%9C%8D%E5%8A%A1%E5%99%A8.jpg" alt="DNS服务器"></p>
+<figure>
+<img src="http://blog.eternityqjl.top/DNS%E6%9C%8D%E5%8A%A1%E5%99%A8.jpg" alt="DNS服务器" /><figcaption>DNS服务器</figcaption>
+</figure>
 <p>如图，有三个类型的服务器：根DNS服务器、顶级域DNS服务器、权威DNS服务器</p>
 <ul>
 <li>根DNS服务器：由400多个根名字服务器，由不同组织管理，提供顶级域服务器的IP地址。</li>
 <li>顶级域(Top-Level Domain, TLD)DNS服务器：每个顶级域(包括国家顶级域)都有TLD服务器，提供权威DNS服务器的IP地址。</li>
-<li>权威DNS服务器：具有公共可访问主机的组织机构必须提供公共可访问的DNS记录；一个组织机构可通过：<ul>
+<li>权威DNS服务器：具有公共可访问主机的组织机构必须提供公共可访问的DNS记录；一个组织机构可通过：
+<ul>
 <li>构建自己的权威DNS服务器</li>
 <li>租用服务商提供的权威DNS服务器</li>
-</ul>
-</li>
+</ul></li>
 </ul>
 <p>还有一类称为<em>本地DNS服务器</em>，这类服务器不属于上图所示的层次结构；每个ISP都有一台本地DNS服务器，本地DNS服务器于主机之间距离很近，甚至可能在同一个局域网中，它起代理作用，并将DNS请求转发到DNS服务器层次结构中。</p>
 <p>DNS查询一般分为两类：<em>递归查询</em>、<em>迭代查询</em></p>
@@ -426,44 +444,49 @@
 <li><em>递归查询</em>：DNS服务器收到客户机请求时，必须使用一个准确的查询结构回复客户机，如果DNS服务器本地没有储存DNS信息，该服务器会<strong>向其他服务器询问</strong>，并将返回的查询结果提交给客户机。</li>
 <li><em>迭代查询</em>：DNS服务器会向客户机提供其他能够解析查询请求的DNS服务器地址，当客户机发送请求时，DNS服务器<strong>不直接返回结果</strong>，而是<strong>告诉客户机另一台DNS服务器地址</strong>，客户机再想这台服务器体提交请求，一次循环到返回查询结果为止。</li>
 </ul>
-<p><img src="http://blog.eternityqjl.top/DNS%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BA%A4%E4%BA%92.JPG" alt="DNS服务器交互"></p>
+<figure>
+<img src="http://blog.eternityqjl.top/DNS%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BA%A4%E4%BA%92.JPG" alt="DNS服务器交互" /><figcaption>DNS服务器交互</figcaption>
+</figure>
 <p>所以图中<em>请求主机和本地DNS服务器</em>之间为递归查询，<em>本地DNS服务器和其他DNS服务器</em>之间为迭代查询。</p>
 <p><strong>DNS缓存</strong></p>
 <p>DNS缓存用来改善延时性能并减少在因特网上传输的DNS报文数，例如上图所示，当本地服务器从某个DNS服务器接收到一个回答，他能缓存包含在该回答内的任何信息，当一个主机向本地DNS服务器查询已经缓存的地址时就能够直接将IP地址返回给主机。而主机和主机名于IP地址间的映射不是永久的，DNS服务器一般在一段时间(通常设置为两天)后丢弃缓存信息。</p>
-<h3 id="3-3-DNS记录和报文"><a href="#3-3-DNS记录和报文" class="headerlink" title="3.3 DNS记录和报文"></a>3.3 DNS记录和报文</h3><p>DNS服务器存储了*资源记录(Resource Record, RR)*，RR提供了主机名到IP地址的映射。</p>
+<h3 id="dns记录和报文">3.3 DNS记录和报文</h3>
+<p>DNS服务器存储了<em>资源记录(Resource Record, RR)</em>，RR提供了主机名到IP地址的映射。</p>
 <p><strong>资源记录</strong>元组：</p>
 <p>(Name, Value, Type, TTL)</p>
 <ul>
 <li>TTL是该记录的生存时间，决定了资源记录应当从缓存中删除的时间。</li>
-<li>Name和Value的值取决于Type：<ul>
+<li>Name和Value的值取决于Type：
+<ul>
 <li>Type = A，则Name是主机名，Value是主机名对应的IP地址</li>
 <li>Type = NS，则Name是一个域(如foo.com)，而Value知道如何获得该域中主机IP地址的权威DNS服务器的主机名。</li>
 <li>Type = CNAME，则Value是别名为Name的主机对应的规范主机名，如(foo.com, relay1.bar.foo.com, CNAME)。</li>
 <li>Type = MX，则Value是个别名为Name的邮件服务器对应的规范主机名。</li>
-</ul>
-</li>
+</ul></li>
 </ul>
 <p><strong>DNS报文</strong></p>
-<p><img src="http://blog.eternityqjl.top/DNS%E6%8A%A5%E6%96%87.JPG" alt="DNS报文"></p>
+<figure>
+<img src="http://blog.eternityqjl.top/DNS%E6%8A%A5%E6%96%87.JPG" alt="DNS报文" /><figcaption>DNS报文</figcaption>
+</figure>
 <p>DNS报文有查询和回答两种，且两种报文的格式相同。</p>
 <ul>
-<li>首部区域：前12字节为首部区域，有6个字段<ul>
+<li>首部区域：前12字节为首部区域，有6个字段
+<ul>
 <li>标识符：16比特的数，用于标识该查询。该标识符会被复制到回答报文中，以便匹配。</li>
-<li>标志字段：有若干标志<ul>
+<li>标志字段：有若干标志
+<ul>
 <li>1比特的“查询/回答”标志位</li>
 <li>1比特的“权威的”标志位</li>
 <li>1比特的“希望递归”标志位，用户在该DNS服务器没有某记录时希望它执行递归查询</li>
 <li>1比特的“递归可用”标志位</li>
-</ul>
-</li>
+</ul></li>
 <li>4个有关数量的字段，指出了4类数据区域出现的数量</li>
-</ul>
-</li>
-<li>问题区域：包含正在进行的查询信息<ul>
+</ul></li>
+<li>问题区域：包含正在进行的查询信息
+<ul>
 <li>名字字段：包含正在查询的主机名字</li>
 <li>类型字段：包含Type的值</li>
-</ul>
-</li>
+</ul></li>
 <li>回答区域：来自DNS服务器的回答报文，包含了对最初请求名字的资源记录，即(Name, Value, Type, TTL)；回答区域可以包含多条RR，所以一个主机名能有多个IP地址。</li>
 <li>权威区域：包含了其他权威服务器的记录。</li>
 <li>附加区域：其他有帮助的信息</li>
@@ -471,9 +494,12 @@
 <blockquote>
 <p>DNS脆弱性，一种针对DNS的攻击时分布式拒绝服务（DDos）。</p>
 </blockquote>
-<h2 id="4-P2P文件分发"><a href="#4-P2P文件分发" class="headerlink" title="4.P2P文件分发"></a>4.P2P文件分发</h2><p>P2P体系结构对基础设施服务器几乎没有依赖，成对间歇连接的主机(对等放)彼此直接通信。</p>
-<h3 id="4-1-P2P体系结构的扩展性"><a href="#4-1-P2P体系结构的扩展性" class="headerlink" title="4.1 P2P体系结构的扩展性"></a>4.1 P2P体系结构的扩展性</h3><p>客户——服务器体系和P2P体系的比较，结论为在相同的网络速率环境下，随着分发文件数量的增加，P2P的最小分发时间与客户——服务器体系相比差距越来越大，优势越来越明显。</p>
-<h3 id="4-2-BitTorrent"><a href="#4-2-BitTorrent" class="headerlink" title="4.2 BitTorrent"></a>4.2 BitTorrent</h3><p>BT是一种用于文件分发的流行P2P协议，参与一个特定分发文件的所有对等方的集合被称为一个<strong>洪流(torrent)**，一个洪流中的对等方彼此下载等长度的文件</strong>块**，典型长度为256KB.</p>
+<h2 id="p2p文件分发">4.P2P文件分发</h2>
+<p>P2P体系结构对基础设施服务器几乎没有依赖，成对间歇连接的主机(对等放)彼此直接通信。</p>
+<h3 id="p2p体系结构的扩展性">4.1 P2P体系结构的扩展性</h3>
+<p>客户——服务器体系和P2P体系的比较，结论为在相同的网络速率环境下，随着分发文件数量的增加，P2P的最小分发时间与客户——服务器体系相比差距越来越大，优势越来越明显。</p>
+<h3 id="bittorrent">4.2 BitTorrent</h3>
+<p>BT是一种用于文件分发的流行P2P协议，参与一个特定分发文件的所有对等方的集合被称为一个<strong>洪流(torrent)</strong>，一个洪流中的对等方彼此下载等长度的文件<strong>块</strong>，典型长度为256KB.</p>
 <p>当一个对等方首次加入一个洪流，它没有块，随着时间的流逝，它累计了越来越多的块，同时也为其他对等放上载了多个块；当对等方获得了整个文件，它也许离开洪流，也许留在洪流中并继续向其他对等方上载块。</p>
 <ul>
 <li><strong>追踪器</strong>：每个洪流都具有一个的基础设施节点；当一个对等方加入洪流时，他向追踪器注册自己，并周期性地通知追踪器它仍在洪流中。一个给定的洪流可能在任何时刻具有数以百计或千计的对等方。</li>
@@ -484,12 +510,15 @@
 <li><strong>最稀缺优先</strong>技术：针对自己没有的块，在邻居中寻找这些块的副本最少的，并首先请求这些稀缺的块，这也可以同时均衡每个块在洪流中的副本数量。</li>
 <li><strong>对换算法</strong>：对等方根据当前能够以最高速率向他提供数据的邻居给出优先权；并且确定向流入速率前四的邻居提供数据，且每隔10秒就重新计算速率并重新确定4个对等方，这4个对等方被称为<strong>疏通</strong>。每过30秒对换方将重新选择一名新的对换伴侣并开始与那位伴侣进行对换，并且如果二者直接都满足对换算法规则，那么互相将对方放入自己的前4人中，这样能使对等方趋于找到彼此的协调速率上载。</li>
 </ul>
-<h2 id="5-视频流和内容分发网"><a href="#5-视频流和内容分发网" class="headerlink" title="5.视频流和内容分发网"></a>5.视频流和内容分发网</h2><h3 id="5-1-HTTP流和DASH"><a href="#5-1-HTTP流和DASH" class="headerlink" title="5.1 HTTP流和DASH"></a>5.1 HTTP流和DASH</h3><p>在HTTP流中，视频是指存储在HTTP服务器中的一个文件，每个文件有特定的URL，用户要看视频时，客户与服务器创建一个TCP连接并对URL发送HTTP GET请求，服务器在HTTP响应报文中发送该视频；在客户一侧，视频字节被收集在客户应用缓存中，当缓存中的字节量超过预先设定的门槛，客户应用程序就开始播放视频。</p>
+<h2 id="视频流和内容分发网">5.视频流和内容分发网</h2>
+<h3 id="http流和dash">5.1 HTTP流和DASH</h3>
+<p>在HTTP流中，视频是指存储在HTTP服务器中的一个文件，每个文件有特定的URL，用户要看视频时，客户与服务器创建一个TCP连接并对URL发送HTTP GET请求，服务器在HTTP响应报文中发送该视频；在客户一侧，视频字节被收集在客户应用缓存中，当缓存中的字节量超过预先设定的门槛，客户应用程序就开始播放视频。</p>
 <ul>
-<li>**经HTTP的动态适应性流(Dynamic Adaptive Streaming over HTTP, DASH)**：DASH中视频被编码为几个不同版本，每个版本有不同的比特率(画质)，当用户的可用带宽较高时，自然选择来自高速率版本的块，同时可用带宽较低时自然选择低速率的块。</li>
+<li><strong>经HTTP的动态适应性流(Dynamic Adaptive Streaming over HTTP, DASH)</strong>：DASH中视频被编码为几个不同版本，每个版本有不同的比特率(画质)，当用户的可用带宽较高时，自然选择来自高速率版本的块，同时可用带宽较低时自然选择低速率的块。</li>
 <li><strong>告示文件</strong>：存在于HTTP服务器中，为每个版本提供一个URL及其比特率。</li>
 </ul>
-<h3 id="5-2-内容分发网"><a href="#5-2-内容分发网" class="headerlink" title="5.2 内容分发网"></a>5.2 内容分发网</h3><p>**内容分发网(Content Distribution Network, CDN)**：是现在主流视频流公司用来向全世界用户分发视频数据的部署在全球多个地理位置的服务器，服务器中存储了视频和其他相关内容的副本。</p>
+<h3 id="内容分发网">5.2 内容分发网</h3>
+<p><strong>内容分发网(Content Distribution Network, CDN)</strong>：是现在主流视频流公司用来向全世界用户分发视频数据的部署在全球多个地理位置的服务器，服务器中存储了视频和其他相关内容的副本。</p>
 <p>CDN服务器安置原则：</p>
 <ul>
 <li><strong>深入</strong>：靠近端用户，改善时延和吞吐量。</li>
@@ -594,7 +623,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%BA%94%E7%94%A8%E5%B1%82%E5%8D%8F%E8%AE%AE"><span class="nav-number">1.</span> <span class="nav-text">1.应用层协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 网络应用程序体系结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-%E8%BF%9B%E7%A8%8B%E9%80%9A%E4%BF%A1"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 进程通信</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-%E4%BE%9B%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E4%BD%BF%E7%94%A8%E7%9A%84%E8%BF%90%E8%BE%93%E6%9C%8D%E5%8A%A1"><span class="nav-number">1.3.</span> <span class="nav-text">1.3 供应用程序使用的运输服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-%E5%9B%A0%E7%89%B9%E7%BD%91%E6%8F%90%E4%BE%9B%E5%92%8C%E6%9C%AA%E6%8F%90%E4%BE%9B%E7%9A%84%E8%BF%90%E8%BE%93%E6%9C%8D%E5%8A%A1"><span class="nav-number">1.4.</span> <span class="nav-text">1.4 因特网提供和未提供的运输服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-%E5%BA%94%E7%94%A8%E5%B1%82%E5%8D%8F%E8%AE%AE%E6%80%BB%E7%BB%93"><span class="nav-number">1.5.</span> <span class="nav-text">1.5 应用层协议总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Web%E5%92%8CHTTP"><span class="nav-number">2.</span> <span class="nav-text">2.Web和HTTP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-HTTP%E6%A6%82%E5%86%B5"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 HTTP概况</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E9%9D%9E%E6%8C%81%E7%BB%AD%E6%80%A7%E8%BF%9E%E6%8E%A5%E5%92%8C%E6%8C%81%E7%BB%AD%E6%80%A7%E8%BF%9E%E6%8E%A5"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 非持续性连接和持续性连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-HTTP%E6%8A%A5%E6%96%87%E6%A0%BC%E5%BC%8F"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 HTTP报文格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-cookie"><span class="nav-number">2.4.</span> <span class="nav-text">2.4 cookie</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-Web%E7%BC%93%E5%AD%98%EF%BC%88%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%8Cproxy-server%EF%BC%89"><span class="nav-number">2.5.</span> <span class="nav-text">2.5 Web缓存（代理服务器，proxy server）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-6-%E6%9D%A1%E4%BB%B6GET%E6%96%B9%E6%B3%95"><span class="nav-number">2.6.</span> <span class="nav-text">2.6 条件GET方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-DNS-%E5%9B%A0%E7%89%B9%E7%BD%91%E7%9B%AE%E5%BD%95%E6%9C%8D%E5%8A%A1"><span class="nav-number">3.</span> <span class="nav-text">3.DNS:因特网目录服务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-DNS%E6%8F%90%E4%BE%9B%E7%9A%84%E6%9C%8D%E5%8A%A1"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 DNS提供的服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-DNS%E5%B7%A5%E4%BD%9C%E6%9C%BA%E7%90%86"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 DNS工作机理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-DNS%E8%AE%B0%E5%BD%95%E5%92%8C%E6%8A%A5%E6%96%87"><span class="nav-number">3.3.</span> <span class="nav-text">3.3 DNS记录和报文</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-P2P%E6%96%87%E4%BB%B6%E5%88%86%E5%8F%91"><span class="nav-number">4.</span> <span class="nav-text">4.P2P文件分发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-P2P%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84%E7%9A%84%E6%89%A9%E5%B1%95%E6%80%A7"><span class="nav-number">4.1.</span> <span class="nav-text">4.1 P2P体系结构的扩展性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-BitTorrent"><span class="nav-number">4.2.</span> <span class="nav-text">4.2 BitTorrent</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E8%A7%86%E9%A2%91%E6%B5%81%E5%92%8C%E5%86%85%E5%AE%B9%E5%88%86%E5%8F%91%E7%BD%91"><span class="nav-number">5.</span> <span class="nav-text">5.视频流和内容分发网</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-HTTP%E6%B5%81%E5%92%8CDASH"><span class="nav-number">5.1.</span> <span class="nav-text">5.1 HTTP流和DASH</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-%E5%86%85%E5%AE%B9%E5%88%86%E5%8F%91%E7%BD%91"><span class="nav-number">5.2.</span> <span class="nav-text">5.2 内容分发网</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BA%94%E7%94%A8%E5%B1%82%E5%8D%8F%E8%AE%AE"><span class="nav-number">1.</span> <span class="nav-text">1.应用层协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 网络应用程序体系结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9B%E7%A8%8B%E9%80%9A%E4%BF%A1"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 进程通信</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BE%9B%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E4%BD%BF%E7%94%A8%E7%9A%84%E8%BF%90%E8%BE%93%E6%9C%8D%E5%8A%A1"><span class="nav-number">1.3.</span> <span class="nav-text">1.3 供应用程序使用的运输服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%A0%E7%89%B9%E7%BD%91%E6%8F%90%E4%BE%9B%E5%92%8C%E6%9C%AA%E6%8F%90%E4%BE%9B%E7%9A%84%E8%BF%90%E8%BE%93%E6%9C%8D%E5%8A%A1"><span class="nav-number">1.4.</span> <span class="nav-text">1.4 因特网提供和未提供的运输服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%94%E7%94%A8%E5%B1%82%E5%8D%8F%E8%AE%AE%E6%80%BB%E7%BB%93"><span class="nav-number">1.5.</span> <span class="nav-text">1.5 应用层协议总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web%E5%92%8Chttp"><span class="nav-number">2.</span> <span class="nav-text">2.Web和HTTP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#http%E6%A6%82%E5%86%B5"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 HTTP概况</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%9E%E6%8C%81%E7%BB%AD%E6%80%A7%E8%BF%9E%E6%8E%A5%E5%92%8C%E6%8C%81%E7%BB%AD%E6%80%A7%E8%BF%9E%E6%8E%A5"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 非持续性连接和持续性连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#http%E6%8A%A5%E6%96%87%E6%A0%BC%E5%BC%8F"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 HTTP报文格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cookie"><span class="nav-number">2.4.</span> <span class="nav-text">2.4 cookie</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web%E7%BC%93%E5%AD%98%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8proxy-server"><span class="nav-number">2.5.</span> <span class="nav-text">2.5 Web缓存（代理服务器，proxy server）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9D%A1%E4%BB%B6get%E6%96%B9%E6%B3%95"><span class="nav-number">2.6.</span> <span class="nav-text">2.6 条件GET方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dns%E5%9B%A0%E7%89%B9%E7%BD%91%E7%9B%AE%E5%BD%95%E6%9C%8D%E5%8A%A1"><span class="nav-number">3.</span> <span class="nav-text">3.DNS:因特网目录服务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#dns%E6%8F%90%E4%BE%9B%E7%9A%84%E6%9C%8D%E5%8A%A1"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 DNS提供的服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dns%E5%B7%A5%E4%BD%9C%E6%9C%BA%E7%90%86"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 DNS工作机理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dns%E8%AE%B0%E5%BD%95%E5%92%8C%E6%8A%A5%E6%96%87"><span class="nav-number">3.3.</span> <span class="nav-text">3.3 DNS记录和报文</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#p2p%E6%96%87%E4%BB%B6%E5%88%86%E5%8F%91"><span class="nav-number">4.</span> <span class="nav-text">4.P2P文件分发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#p2p%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84%E7%9A%84%E6%89%A9%E5%B1%95%E6%80%A7"><span class="nav-number">4.1.</span> <span class="nav-text">4.1 P2P体系结构的扩展性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bittorrent"><span class="nav-number">4.2.</span> <span class="nav-text">4.2 BitTorrent</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%86%E9%A2%91%E6%B5%81%E5%92%8C%E5%86%85%E5%AE%B9%E5%88%86%E5%8F%91%E7%BD%91"><span class="nav-number">5.</span> <span class="nav-text">5.视频流和内容分发网</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#http%E6%B5%81%E5%92%8Cdash"><span class="nav-number">5.1.</span> <span class="nav-text">5.1 HTTP流和DASH</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E5%AE%B9%E5%88%86%E5%8F%91%E7%BD%91"><span class="nav-number">5.2.</span> <span class="nav-text">5.2 内容分发网</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -707,6 +736,8 @@
 
 
 
+
+  
 
   
 

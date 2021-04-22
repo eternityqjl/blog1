@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 5.3.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="apple-touch-icon" sizes="180x180" href="http://blog.eternityqjl.top/faviconJ.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="http://blog.eternityqjl.top/faviconJ.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="http://blog.eternityqjl.top/faviconJ.ico">
+  <link rel="mask-icon" href="http://blog.eternityqjl.top/faviconJ.ico" color="#222">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -20,12 +20,12 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="一、数据结构及相关概念0. 要想知道什么是数据结构，首先要了解与“数据”相关的概念，这样才能一步步理解什么是数据结构。 我们首先用放书这件事情来举例。  如果正常情况下只有你自己一个人的书，那么你把他们一本一本立起来放在书架上就可以了。 那么如果有一个图书馆那么多的书应该怎样办么？总不能把他们乱起八糟的立起来放吧？那么是不是应该先按照社会科学、理科类、工科类、外语类等等的分类方式先分类，然后按照具">
+  <meta name="description" content="一、数据结构及相关概念 0. 要想知道什么是数据结构，首先要了解与“数据”相关的概念，这样才能一步步理解什么是数据结构。 我们首先用放书这件事情来举例。  如果正常情况下只有你自己一个人的书，那么你把他们一本一本立起来放在书架上就可以了。 那么如果有一个图书馆那么多的书应该怎样办么？总不能把他们乱起八糟的立起来放吧？那么是不是应该先按照社会科学、理科类、工科类、外语类等等的分类方式先分类，然后按照">
 <meta property="og:type" content="article">
 <meta property="og:title" content="什么是数据结构？什么又是算法？">
 <meta property="og:url" content="http://example.com/2019/09/19/%E4%BB%80%E4%B9%88%E6%98%AF%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%9F%E4%BB%80%E4%B9%88%E5%8F%88%E6%98%AF%E7%AE%97%E6%B3%95%EF%BC%9F/index.html">
 <meta property="og:site_name" content="Jialong&#39;s Blog">
-<meta property="og:description" content="一、数据结构及相关概念0. 要想知道什么是数据结构，首先要了解与“数据”相关的概念，这样才能一步步理解什么是数据结构。 我们首先用放书这件事情来举例。  如果正常情况下只有你自己一个人的书，那么你把他们一本一本立起来放在书架上就可以了。 那么如果有一个图书馆那么多的书应该怎样办么？总不能把他们乱起八糟的立起来放吧？那么是不是应该先按照社会科学、理科类、工科类、外语类等等的分类方式先分类，然后按照具">
+<meta property="og:description" content="一、数据结构及相关概念 0. 要想知道什么是数据结构，首先要了解与“数据”相关的概念，这样才能一步步理解什么是数据结构。 我们首先用放书这件事情来举例。  如果正常情况下只有你自己一个人的书，那么你把他们一本一本立起来放在书架上就可以了。 那么如果有一个图书馆那么多的书应该怎样办么？总不能把他们乱起八糟的立起来放吧？那么是不是应该先按照社会科学、理科类、工科类、外语类等等的分类方式先分类，然后按照">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://py2kq5jlv.bkt.clouddn.com/%E6%95%B0%E6%8D%AE.png">
 <meta property="og:image" content="http://py2kq5jlv.bkt.clouddn.com/%E4%B8%BE%E4%BE%8B_%E4%B8%96%E7%95%8C%E4%B8%8A%E6%89%80%E6%9C%89%E4%B9%A6.png">
@@ -225,7 +225,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="一、数据结构及相关概念"><a href="#一、数据结构及相关概念" class="headerlink" title="一、数据结构及相关概念"></a>一、数据结构及相关概念</h2><p><strong>0. 要想知道什么是数据结构，首先要了解与“数据”相关的概念，这样才能一步步理解什么是数据结构。</strong></p>
+        <h2 id="一数据结构及相关概念">一、数据结构及相关概念</h2>
+<p><strong>0. 要想知道什么是数据结构，首先要了解与“数据”相关的概念，这样才能一步步理解什么是数据结构。</strong></p>
 <p>我们首先用放书这件事情来举例。</p>
 <ul>
 <li>如果正常情况下只有你自己一个人的书，那么你把他们一本一本立起来放在书架上就可以了。</li>
@@ -252,25 +253,29 @@
 <li>是<strong>性质相同的数据元素</strong>的集合，是数据的子集。</li>
 <li>数据元素是一本具体的书，那么性质相同数据元素的集合不就代表了<strong>一类具体的书籍</strong>吗，就比如计算机类的书籍，其中包含了”数据机构与算法这本书“。</li>
 </ul>
-<hr>
+<hr />
 <p>看到这儿是不是对这几者的关系还有点儿晕？没关系，我们用思维导图来再次说明。</p>
-<p><img src="http://py2kq5jlv.bkt.clouddn.com/%E6%95%B0%E6%8D%AE.png" alt="数据.png"></p>
+<figure>
+<img src="http://py2kq5jlv.bkt.clouddn.com/%E6%95%B0%E6%8D%AE.png" alt="数据.png" /><figcaption>数据.png</figcaption>
+</figure>
 <p><strong>数据</strong>是由每一个具体的<strong>数据元素</strong>组成的，相同的数据元素同属于一个<strong>数据对象</strong>，每个数据元素中又有具体的信息——<strong>数据项</strong>。</p>
-<hr>
+<hr />
 <p>接下来让我们再次把这些概念对应到具体的例子”书”中。</p>
-<p><img src="http://py2kq5jlv.bkt.clouddn.com/%E4%B8%BE%E4%BE%8B_%E4%B8%96%E7%95%8C%E4%B8%8A%E6%89%80%E6%9C%89%E4%B9%A6.png" alt="举例_世界上所有书.png"></p>
-<p>世界上所有书就是一个<strong>数据</strong>，每一本具体的书例如“数据结构与算法”就是一个<strong>数据元素</strong>，每本书中的具体信息例如“书名、作者、ISBN码…”就是多个<strong>数据项</strong>，一些相同类型的书的类型例如“计算机类书籍”就是一个<strong>数据对象</strong>。</p>
+<figure>
+<img src="http://py2kq5jlv.bkt.clouddn.com/%E4%B8%BE%E4%BE%8B_%E4%B8%96%E7%95%8C%E4%B8%8A%E6%89%80%E6%9C%89%E4%B9%A6.png" alt="举例_世界上所有书.png" /><figcaption>举例_世界上所有书.png</figcaption>
+</figure>
+<p>世界上所有书就是一个<strong>数据</strong>，每一本具体的书例如“数据结构与算法”就是一个<strong>数据元素</strong>，每本书中的具体信息例如“书名、作者、ISBN码...”就是多个<strong>数据项</strong>，一些相同类型的书的类型例如“计算机类书籍”就是一个<strong>数据对象</strong>。</p>
 <p>现在你应该清楚以上4个概念了吧？</p>
 <p>那我们回到最初的问题，什么是<strong>数据结构</strong>？</p>
 <p>这里我们同样举例子来说明。</p>
-<p><img src="http://py2kq5jlv.bkt.clouddn.com/%E6%95%B0%E6%8D%AE%E5%AF%B9%E8%B1%A11%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B1%BB%E4%B9%A6%E7%B1%8D.png" alt="数据对象1：计算机类书籍.png"></p>
-<p>首先，一个类别的书籍中有许多具体的书，如”C语言”、”数据结构与算法”、”编译原理”，而这些书之间又有一些<strong>关联</strong>，比如<strong>某个算法可以用C语言来实现<em>，**</em></strong>编译过程中需要用到特定的算法<strong>等等，这些存在关联的书即”数据元素”的集合就叫做</strong>数据结构**。</p>
+<figure>
+<img src="http://py2kq5jlv.bkt.clouddn.com/%E6%95%B0%E6%8D%AE%E5%AF%B9%E8%B1%A11%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B1%BB%E4%B9%A6%E7%B1%8D.png" alt="数据对象1：计算机类书籍.png" /><figcaption>数据对象1：计算机类书籍.png</figcaption>
+</figure>
+<p>首先，一个类别的书籍中有许多具体的书，如"C语言"、"数据结构与算法"、"编译原理"，而这些书之间又有一些<strong>关联</strong>，比如<strong>某个算法可以用C语言来实现<em>，</em>编译过程中需要用到特定的算法</strong>等等，这些存在关联的书即"数据元素"的集合就叫做<strong>数据结构</strong>。</p>
 <p><strong>4.</strong> 数据结构</p>
 <ul>
-<li><p>相互之间存在一种或多种特定关系的数据元素的集合。</p>
-</li>
-<li><p>大多数算法都需要我们适当地组织数据，而为了组织数据就产生了数据结构。</p>
-</li>
+<li><p>相互之间存在一种或多种特定关系的数据元素的集合。</p></li>
+<li><p>大多数算法都需要我们适当地组织数据，而为了组织数据就产生了数据结构。</p></li>
 <li><p>结构</p>
 <blockquote>
 <p>逻辑结构</p>
@@ -285,14 +290,15 @@
 <p>顺序储存结构</p>
 <p>链式储存结构</p>
 </blockquote>
-</blockquote>
-</li>
+</blockquote></li>
 </ul>
 <p>(注：这里不具体展开介绍各个数据结构，在后面的附录里进行介绍)</p>
-<h2 id="二、抽象数据类型"><a href="#二、抽象数据类型" class="headerlink" title="二、抽象数据类型"></a>二、抽象数据类型</h2><ul>
+<h2 id="二抽象数据类型">二、抽象数据类型</h2>
+<ul>
 <li>指一个数学模型以及定义在该数据模型上的一组操作。</li>
 </ul>
-<h2 id="三、算法"><a href="#三、算法" class="headerlink" title="三、算法"></a>三、算法</h2><ul>
+<h2 id="三算法">三、算法</h2>
+<ul>
 <li>编写一段计算机程序一般都是实现一种 已有的方法来解决某个问题。这种方法大多 和使用的编程语言无关——它适用于各种计 算机以及编程语言。</li>
 <li>你要在图书馆中找到一本书，需要通过索引查找来确定这本书的位置，这个找书的过程就是一个算法。</li>
 </ul>
@@ -376,7 +382,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%8F%8A%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5"><span class="nav-number">1.</span> <span class="nav-text">一、数据结构及相关概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E6%8A%BD%E8%B1%A1%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">2.</span> <span class="nav-text">二、抽象数据类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E7%AE%97%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">三、算法</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%8F%8A%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5"><span class="nav-number">1.</span> <span class="nav-text">一、数据结构及相关概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E6%8A%BD%E8%B1%A1%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">2.</span> <span class="nav-text">二、抽象数据类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E7%AE%97%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">三、算法</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -489,6 +495,8 @@
 
 
 
+
+  
 
   
 

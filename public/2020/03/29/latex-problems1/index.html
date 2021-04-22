@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 5.3.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="apple-touch-icon" sizes="180x180" href="http://blog.eternityqjl.top/faviconJ.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="http://blog.eternityqjl.top/faviconJ.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="http://blog.eternityqjl.top/faviconJ.ico">
+  <link rel="mask-icon" href="http://blog.eternityqjl.top/faviconJ.ico" color="#222">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -20,12 +20,12 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="0.前言第一次使用Tex语言完整地完成了一篇实验报告的构建排版，这过程中遇到了各种各样的问题，有些问题虽然解决了，但在原理方面还是一知半解，之后再遇到还希望能多看文档。这篇博客是来记录第一次编写过程中遇到的一些问题。 这是第一次实验报告导出的pdf文档封面展示：  这是tex源代码。">
+  <meta name="description" content="0.前言 第一次使用Tex语言完整地完成了一篇实验报告的构建排版，这过程中遇到了各种各样的问题，有些问题虽然解决了，但在原理方面还是一知半解，之后再遇到还希望能多看文档。这篇博客是来记录第一次编写过程中遇到的一些问题。 这是第一次实验报告导出的pdf文档封面展示：  这是tex源代码。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="第一次使用LaTex——问题整理">
 <meta property="og:url" content="http://example.com/2020/03/29/latex-problems1/index.html">
 <meta property="og:site_name" content="Jialong&#39;s Blog">
-<meta property="og:description" content="0.前言第一次使用Tex语言完整地完成了一篇实验报告的构建排版，这过程中遇到了各种各样的问题，有些问题虽然解决了，但在原理方面还是一知半解，之后再遇到还希望能多看文档。这篇博客是来记录第一次编写过程中遇到的一些问题。 这是第一次实验报告导出的pdf文档封面展示：  这是tex源代码。">
+<meta property="og:description" content="0.前言 第一次使用Tex语言完整地完成了一篇实验报告的构建排版，这过程中遇到了各种各样的问题，有些问题虽然解决了，但在原理方面还是一知半解，之后再遇到还希望能多看文档。这篇博客是来记录第一次编写过程中遇到的一些问题。 这是第一次实验报告导出的pdf文档封面展示：  这是tex源代码。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://blog.eternityqjl.top/SS_test1_cover.jpg">
 <meta property="og:image" content="http://blog.eternityqjl.top/equationSample.JPG">
@@ -225,15 +225,17 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="0-前言"><a href="#0-前言" class="headerlink" title="0.前言"></a>0.前言</h2><p>第一次使用Tex语言完整地完成了一篇实验报告的构建排版，这过程中遇到了各种各样的问题，有些问题虽然解决了，但在原理方面还是一知半解，之后再遇到还希望能多看文档。这篇博客是来记录第一次编写过程中遇到的一些问题。</p>
+        <h2 id="前言">0.前言</h2>
+<p>第一次使用Tex语言完整地完成了一篇实验报告的构建排版，这过程中遇到了各种各样的问题，有些问题虽然解决了，但在原理方面还是一知半解，之后再遇到还希望能多看文档。这篇博客是来记录第一次编写过程中遇到的一些问题。</p>
 <p>这是第一次实验报告导出的<a target="_blank" rel="noopener" href="http://blog.eternityqjl.top/SS_test1.pdf">pdf文档</a>封面展示：</p>
-<p><img src="http://blog.eternityqjl.top/SS_test1_cover.jpg"></p>
+<p><img src="http://blog.eternityqjl.top/SS_test1_cover.jpg" /></p>
 <p>这是<a target="_blank" rel="noopener" href="http://blog.eternityqjl.top/SS_test1.tex">tex源代码</a>。</p>
 <a id="more"></a>
-
-<h2 id="章节标题的特殊符号"><a href="#章节标题的特殊符号" class="headerlink" title="章节标题的特殊符号"></a>章节标题的特殊符号</h2><p>当我在章节标题的大括号内输入行内公式时出现了错误，查找后发现pdf书签中不能使用特殊符号，需要用命令<code>\texorpdfstring&#123;&#125;&#123;&#125;</code>分别定义在TEX文档输出的代码和PDF书签处的纯文本形式，第一个括号<code>&#123;&#125;</code>中填写tex文档代码，第二个括号<code>&#123;&#125;</code>填写文本形式的书签，如下所示：</p>
+<h2 id="章节标题的特殊符号">章节标题的特殊符号</h2>
+<p>当我在章节标题的大括号内输入行内公式时出现了错误，查找后发现pdf书签中不能使用特殊符号，需要用命令<code>\texorpdfstring&#123;&#125;&#123;&#125;</code>分别定义在TEX文档输出的代码和PDF书签处的纯文本形式，第一个括号<code>&#123;&#125;</code>中填写tex文档代码，第二个括号<code>&#123;&#125;</code>填写文本形式的书签，如下所示：</p>
 <figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">%1.1</span><br><span class="line">\subsection[第3题（1）]&#123;第3题（1）求\texorpdfstring&#123;$x_1(t)&#x3D;1.5e^&#123;-2t&#125;u(t)$&#125;&#123;x1&#125;，</span><br><span class="line">\texorpdfstring&#123;$x_2(t)&#x3D;cos(t2)[u(t)-u(t-2)]$&#125;&#123;x2&#125;的卷积积分</span><br><span class="line">\texorpdfstring&#123;$y_1(t)&#x3D;x_1(t)*x_2(t)$&#125;&#123;y1&#125;。 &#125;</span><br></pre></td></tr></table></figure>
-<h2 id="代码段的设置"><a href="#代码段的设置" class="headerlink" title="代码段的设置"></a>代码段的设置</h2><p>在文章中添加代码段需要用到<code>listings</code>宏包，代码段的基本设置参数如下所示：</p>
+<h2 id="代码段的设置">代码段的设置</h2>
+<p>在文章中添加代码段需要用到<code>listings</code>宏包，代码段的基本设置参数如下所示：</p>
 <blockquote>
 <p><a target="_blank" rel="noopener" href="http://texdoc.net/texmf-dist/doc/latex/listings/listings.pdf">listings宏包文档</a></p>
 </blockquote>
@@ -245,12 +247,13 @@
 <li>如果代码段中出现tex语言的特殊符号，需要使用转义字符<code>\</code>，如<code>#</code>就需要转换为<code>\#</code>。</li>
 </ul>
 <p>如果想要改变代码段中的字体，需要用到<code>fontspec</code>宏包，这个宏包需要用<code>XeLaTex</code>或<code>LuaLaTex</code>进行编译，由于我的实验报告封面使用的有些元素在使用这两者编译时无法识别，我这次就没使用，下次写实验报告一定仔细研究一下，实现这个功能。</p>
-<h2 id="数学公式中的align"><a href="#数学公式中的align" class="headerlink" title="数学公式中的align"></a>数学公式中的align</h2><blockquote>
-<p>参考：<a target="_blank" rel="noopener" href="https://tex.stackexchange.com/questions/372384/erroneous-nesting-of-equation-structures-message-i-cant-see-whats-wrong">“Erroneous nesting of equation structures” message- I can’t see what’s wrong?</a></p>
+<h2 id="数学公式中的align">数学公式中的align</h2>
+<blockquote>
+<p>参考：<a target="_blank" rel="noopener" href="https://tex.stackexchange.com/questions/372384/erroneous-nesting-of-equation-structures-message-i-cant-see-whats-wrong">“Erroneous nesting of equation structures” message- I can't see what's wrong?</a></p>
 </blockquote>
 <p>数学公式中需要写等号对齐的公式段是不需要写<code>$$...$$</code>或者<code>begin&#123;equation&#125;...end&#123;equation&#125;</code>，直接将公式写在<code>begin&#123;align&#125;...end&#123;align&#125;</code>的中间即可，如下所示：</p>
 <figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">\begin&#123;align&#125;</span><br><span class="line">y_2[n]</span><br><span class="line">&amp;&#x3D;x_3[n]*x_4[n] \\</span><br><span class="line">&amp;&#x3D;((-\frac&#123;2&#125;&#123;3&#125;)^n u[n-1])*((-1)^&#123;n+1&#125;u[n-1]-(-2)^&#123;n-2&#125;u[n-2]) \\</span><br><span class="line">&amp;&#x3D;\sum_&#123;k&#x3D;-\infty&#125;^&#123;+\infty&#125;(-\frac&#123;2&#125;&#123;3&#125;)^k u[k-1]((-1)^&#123;n-k+1&#125;u[n-k+1]-(-2)^&#123;n-k-2&#125;u[n-k-2]) \\</span><br><span class="line">&amp;&#x3D;\sum_&#123;k&#x3D;1&#125;^&#123;+\infty&#125;(-\frac&#123;2&#125;&#123;3&#125;)^k ((-1)^&#123;n-k+1&#125;u[n-k+1]-(-2)^&#123;n-k-2&#125;u[n-k-2]) \\</span><br><span class="line">&amp;&#x3D;</span><br><span class="line">\begin&#123;cases&#125;</span><br><span class="line">	0, \ n&lt;0 \\</span><br><span class="line">	\sum_&#123;k&#x3D;1&#125;^&#123;+\infty&#125;(-\frac&#123;2&#125;&#123;3&#125;)^k (-1)^&#123;n-k+1&#125;u[n-k+1], \ 0 \leq n \leq 2 \\</span><br><span class="line">	\sum_&#123;k&#x3D;1&#125;^&#123;+\infty&#125;(-\frac&#123;2&#125;&#123;3&#125;)^k ((-1)^&#123;n-k+1&#125;u[n-k+1]-(-2)^&#123;n-k-2&#125;u[n-k-2]),\ n&gt;2</span><br><span class="line">\end&#123;cases&#125;</span><br><span class="line">\end&#123;align&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="http://blog.eternityqjl.top/equationSample.JPG"></p>
+<p><img src="http://blog.eternityqjl.top/equationSample.JPG" /></p>
 
     </div>
 
@@ -334,7 +337,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0-%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">0.前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AB%A0%E8%8A%82%E6%A0%87%E9%A2%98%E7%9A%84%E7%89%B9%E6%AE%8A%E7%AC%A6%E5%8F%B7"><span class="nav-number">2.</span> <span class="nav-text">章节标题的特殊符号</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E6%AE%B5%E7%9A%84%E8%AE%BE%E7%BD%AE"><span class="nav-number">3.</span> <span class="nav-text">代码段的设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F%E4%B8%AD%E7%9A%84align"><span class="nav-number">4.</span> <span class="nav-text">数学公式中的align</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">0.前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AB%A0%E8%8A%82%E6%A0%87%E9%A2%98%E7%9A%84%E7%89%B9%E6%AE%8A%E7%AC%A6%E5%8F%B7"><span class="nav-number">2.</span> <span class="nav-text">章节标题的特殊符号</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E6%AE%B5%E7%9A%84%E8%AE%BE%E7%BD%AE"><span class="nav-number">3.</span> <span class="nav-text">代码段的设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F%E4%B8%AD%E7%9A%84align"><span class="nav-number">4.</span> <span class="nav-text">数学公式中的align</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -447,6 +450,8 @@
 
 
 
+
+  
 
   
 

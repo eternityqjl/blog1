@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 5.3.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="apple-touch-icon" sizes="180x180" href="http://blog.eternityqjl.top/faviconJ.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="http://blog.eternityqjl.top/faviconJ.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="http://blog.eternityqjl.top/faviconJ.ico">
+  <link rel="mask-icon" href="http://blog.eternityqjl.top/faviconJ.ico" color="#222">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -27,8 +27,8 @@
 <meta property="og:site_name" content="Jialong&#39;s Blog">
 <meta property="og:description" content="SPI、I2C、UART：串行通信协议 COM口：串行通信端口，是物理接口形式（硬件），一般有4针杜邦头和D型9针插头两种。可以有很多种协议 TTL、RS-232指的是电平标准 TTL电平：低电平为0，高电平为1 RS-232电平：正电平(+15V)为0，负电平(-15V)为1 最近在画PCB研究几个MCU的时候遇到引脚连接方面的一些问题，对于MCU进行串行通信传输数据的过程不太了解，因此写一篇博">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://blog.eternityqjl.top/SPI_%E4%B8%80%E5%AF%B9%E4%B8%80.PNG">
-<meta property="og:image" content="http://blog.eternityqjl.top/SPI_%E4%B8%80%E5%AF%B9%E5%A4%9A.PNG">
+<meta property="og:image" content="http://blog.eternityqjl.top/SPI_一对一.PNG">
+<meta property="og:image" content="http://blog.eternityqjl.top/SPI_一对多.PNG">
 <meta property="og:image" content="http://blog.eternityqjl.top/SPI_photo_1.png">
 <meta property="og:image" content="http://blog.eternityqjl.top/I2C_trans.PNG">
 <meta property="og:image" content="http://blog.eternityqjl.top/1024px-I2C.svg.png">
@@ -38,7 +38,7 @@
 <meta property="article:author" content="Eternity">
 <meta property="article:tag" content="串口">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://blog.eternityqjl.top/SPI_%E4%B8%80%E5%AF%B9%E4%B8%80.PNG">
+<meta name="twitter:image" content="http://blog.eternityqjl.top/SPI_一对一.PNG">
 
 <link rel="canonical" href="http://example.com/2021/02/05/%E4%B8%B2%E5%8F%A3/">
 
@@ -236,128 +236,148 @@
 <p>RS-232电平：正电平(+15V)为0，负电平(-15V)为1</p>
 <p>最近在画PCB研究几个MCU的时候遇到引脚连接方面的一些问题，对于MCU进行串行通信传输数据的过程不太了解，因此写一篇博客来学习一下这些通信协议。</p>
 <a id="more"></a>
-
-<h2 id="0-一些概念"><a href="#0-一些概念" class="headerlink" title="0. 一些概念"></a>0. 一些概念</h2><h3 id="同步-Synchronous-和异步-Asynchronous"><a href="#同步-Synchronous-和异步-Asynchronous" class="headerlink" title="同步(Synchronous)和异步(Asynchronous)"></a>同步(Synchronous)和异步(Asynchronous)</h3><p><strong>同步</strong>就是整个处理过程顺序执行，当各个过程都执行完毕后，返回结果。这是一种线性执行的方式，执行的流程不能跨越。一般用于流程性比较强的程序。</p>
+<h2 id="一些概念">0. 一些概念</h2>
+<h3 id="同步synchronous和异步asynchronous">同步(Synchronous)和异步(Asynchronous)</h3>
+<p><strong>同步</strong>就是整个处理过程顺序执行，当各个过程都执行完毕后，返回结果。这是一种线性执行的方式，执行的流程不能跨越。一般用于流程性比较强的程序。</p>
 <p><strong>异步</strong>：是只发送了调用的命令，调用者无需等待被调用的方法完全执行完毕，可以继续执行下面的流程，是一种并行处理的方式。比如页面数据架子啊的过程，不需要等待所有数据获取后再显示页面。</p>
 <p>二者的区别就在于同步需要等待，异步不需要等待。</p>
-<h3 id="全双工和半双工"><a href="#全双工和半双工" class="headerlink" title="全双工和半双工"></a>全双工和半双工</h3><p><strong>全双工</strong>是指可以<strong>同时</strong>进行<strong>双向信号</strong>传输。</p>
+<h3 id="全双工和半双工">全双工和半双工</h3>
+<p><strong>全双工</strong>是指可以<strong>同时</strong>进行<strong>双向信号</strong>传输。</p>
 <p><strong>半双工</strong>是指可以及进行<strong>双向信号传输</strong>但<strong>同一时刻只能向一个</strong>方向传输。</p>
-<h2 id="SPI协议"><a href="#SPI协议" class="headerlink" title="SPI协议"></a>SPI协议</h2><p>串行外设接口总线（Serial Peripheral Interface Bus，SPI）是一种用于芯片通信的<strong>同步</strong>串行通信接口规范，设备之间使用<strong>全双工</strong>模式通信，采用一对一或一对多的主从模式。一般用于短距离通信。</p>
-<h3 id="SPI物理层接口"><a href="#SPI物理层接口" class="headerlink" title="SPI物理层接口"></a>SPI物理层接口</h3><p>SPI总线共规定了4个逻辑信号接口：</p>
+<h2 id="spi协议">SPI协议</h2>
+<p>串行外设接口总线（Serial Peripheral Interface Bus，SPI）是一种用于芯片通信的<strong>同步</strong>串行通信接口规范，设备之间使用<strong>全双工</strong>模式通信，采用一对一或一对多的主从模式。一般用于短距离通信。</p>
+<h3 id="spi物理层接口">SPI物理层接口</h3>
+<p>SPI总线共规定了4个逻辑信号接口：</p>
 <ul>
 <li>SCLK/SCK（Serial Clock）：<strong>时钟</strong>信号线，由主机产生，决定了SPI的通信速率。</li>
 <li>MOSI（Master Output, Slave Input）：<strong>主机输出从机输入</strong>信号，数据由<strong>主机</strong>发出。</li>
 <li>MISO（Master Input, Slave Output）：<strong>从机输出主机输入</strong>信号，数据由<strong>从机</strong>发出。</li>
 <li>nSS（Slave Select）：<strong>片选</strong>信号：用于选取SPI从设备，每个从设备独立拥有该条nSS信号线，占据主机的一个引脚，从设备的其他总线是并联到主机的。从设备的nSS引脚被置拉低时表明该从设备被主机选中。</li>
 </ul>
-<p><img src="http://blog.eternityqjl.top/SPI_%E4%B8%80%E5%AF%B9%E4%B8%80.PNG" alt="SPI_一对一"></p>
-<p><img src="http://blog.eternityqjl.top/SPI_%E4%B8%80%E5%AF%B9%E5%A4%9A.PNG" alt="SPI_一对多"></p>
+<figure>
+<img src="http://blog.eternityqjl.top/SPI_一对一.PNG" alt="SPI_一对一" /><figcaption>SPI_一对一</figcaption>
+</figure>
+<figure>
+<img src="http://blog.eternityqjl.top/SPI_一对多.PNG" alt="SPI_一对多" /><figcaption>SPI_一对多</figcaption>
+</figure>
 <p>（图片来自维基百科<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%BA%8F%E5%88%97%E5%91%A8%E9%82%8A%E4%BB%8B%E9%9D%A2">序列周边接口</a>）</p>
-<h3 id="SPI协议层"><a href="#SPI协议层" class="headerlink" title="SPI协议层"></a>SPI协议层</h3><p><img src="http://blog.eternityqjl.top/SPI_photo_1.png" alt="SPI_photo_1"></p>
+<h3 id="spi协议层">SPI协议层</h3>
+<figure>
+<img src="http://blog.eternityqjl.top/SPI_photo_1.png" alt="SPI_photo_1" /><figcaption>SPI_photo_1</figcaption>
+</figure>
 <p>（图片来自<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_29344757/article/details/76855350">SPI通讯协议介绍</a>）</p>
 <p>如图为SPI的通信时序图，nSS、SCK、MOSI信号均由主机产生，MISO信号由从机产生。当nSS为低电平时信号有效。每个时钟周期MOSI和MISO传输一位数据。偶数边采样。</p>
-<h4 id="通信起始-结束信号"><a href="#通信起始-结束信号" class="headerlink" title="通信起始/结束信号"></a>通信起始/结束信号</h4><p>nSS信号由高电平变为低电平即为通信的起始，由低电平变为高电平即为通信的结束。</p>
-<h4 id="有效数据的采集"><a href="#有效数据的采集" class="headerlink" title="有效数据的采集"></a>有效数据的采集</h4><p>上图中SCK为偶数边沿时数据得到有效采样，此时MISO和MOSI的数据有效，高电平表示1，低电平表示0，其他时刻的数据无效。</p>
+<h4 id="通信起始结束信号">通信起始/结束信号</h4>
+<p>nSS信号由高电平变为低电平即为通信的起始，由低电平变为高电平即为通信的结束。</p>
+<h4 id="有效数据的采集">有效数据的采集</h4>
+<p>上图中SCK为偶数边沿时数据得到有效采样，此时MISO和MOSI的数据有效，高电平表示1，低电平表示0，其他时刻的数据无效。</p>
 <p>数据传输时高位在先还是低位在先SPI协议并未规定，需要双方自行约定，一般采用高位在先（MSB）方式传输。</p>
 <blockquote>
 <p>两个概念：</p>
 <ul>
-<li>时钟极性（CPOL）：通信设备处于空闲状态（SPI开始通信前，即nSS无效）时，SCK的状态。<ul>
+<li>时钟极性（CPOL）：通信设备处于空闲状态（SPI开始通信前，即nSS无效）时，SCK的状态。
+<ul>
 <li>CPOL = 0：SCK在空闲时为低电平</li>
 <li>CPOL = 1：SCK在空闲时为高电平</li>
-</ul>
-</li>
-<li>时钟相位（CPHA）：数据的采样时刻位于SCK的偶数边还是奇数边。<ul>
+</ul></li>
+<li>时钟相位（CPHA）：数据的采样时刻位于SCK的偶数边还是奇数边。
+<ul>
 <li>CPHA = 0：在SCK的奇数边沿采样</li>
 <li>CPHA = 1：在SCK的偶数边沿采样</li>
-</ul>
-</li>
+</ul></li>
 </ul>
 </blockquote>
 <p>所以，数据的采样时刻并非由上升沿/下降沿所决定；在采样时刻，MOSI和MISO信号不能进行高低电平的变换。</p>
 <p>所以，SPI有如下4种工作模式：</p>
 <table>
 <thead>
-<tr>
-<th align="center">工作模式</th>
-<th align="center">CPOL</th>
-<th align="center">CPHA</th>
-<th align="center">空闲时的SCK时钟</th>
-<th align="center">采样时钟</th>
-<th align="center">是否常用</th>
+<tr class="header">
+<th style="text-align: center;">工作模式</th>
+<th style="text-align: center;">CPOL</th>
+<th style="text-align: center;">CPHA</th>
+<th style="text-align: center;">空闲时的SCK时钟</th>
+<th style="text-align: center;">采样时钟</th>
+<th style="text-align: center;">是否常用</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">0</td>
-<td align="center">0</td>
-<td align="center">0</td>
-<td align="center">低</td>
-<td align="center">奇数次边沿</td>
-<td align="center">Y</td>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">低</td>
+<td style="text-align: center;">奇数次边沿</td>
+<td style="text-align: center;">Y</td>
 </tr>
-<tr>
-<td align="center">1</td>
-<td align="center">0</td>
-<td align="center">1</td>
-<td align="center">低</td>
-<td align="center">偶数次边沿</td>
-<td align="center">N</td>
+<tr class="even">
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">低</td>
+<td style="text-align: center;">偶数次边沿</td>
+<td style="text-align: center;">N</td>
 </tr>
-<tr>
-<td align="center">2</td>
-<td align="center">1</td>
-<td align="center">0</td>
-<td align="center">高</td>
-<td align="center">奇数次边沿</td>
-<td align="center">Y</td>
+<tr class="odd">
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">高</td>
+<td style="text-align: center;">奇数次边沿</td>
+<td style="text-align: center;">Y</td>
 </tr>
-<tr>
-<td align="center">3</td>
-<td align="center">1</td>
-<td align="center">1</td>
-<td align="center">高</td>
-<td align="center">偶数次边沿</td>
-<td align="center">N</td>
+<tr class="even">
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">高</td>
+<td style="text-align: center;">偶数次边沿</td>
+<td style="text-align: center;">N</td>
 </tr>
-</tbody></table>
-<h2 id="mathrm-I-2-mathrm-C-协议"><a href="#mathrm-I-2-mathrm-C-协议" class="headerlink" title="$\mathrm{I}^2\mathrm{C}$协议"></a>$\mathrm{I}^2\mathrm{C}$协议</h2><p>$\mathrm{I}^2\mathrm{C}$（Inter-Integrated Circuit）集成电路总线，是飞利浦设计的一种简单的双向两线<strong>同步串行</strong>总线，为全双工，是为了实现有效的IC之间的控制；是一种串行通信总线，为了让嵌入式设备连接低速设备。</p>
-<p><img src="http://blog.eternityqjl.top/I2C_trans.PNG" alt="I2C_trans"></p>
-<p><img src="http://blog.eternityqjl.top/1024px-I2C.svg.png" alt="1024px-I2C.svg"></p>
-<p>$\mathrm{I}^2\mathrm{C}$只需要两个接口即可通信：</p>
+</tbody>
+</table>
+<h2 id="mathrmi2mathrmc协议"><span class="math inline">\(\mathrm{I}^2\mathrm{C}\)</span>协议</h2>
+<p><span class="math inline">\(\mathrm{I}^2\mathrm{C}\)</span>（Inter-Integrated Circuit）集成电路总线，是飞利浦设计的一种简单的双向两线<strong>同步串行</strong>总线，为全双工，是为了实现有效的IC之间的控制；是一种串行通信总线，为了让嵌入式设备连接低速设备。</p>
+<figure>
+<img src="http://blog.eternityqjl.top/I2C_trans.PNG" alt="I2C_trans" /><figcaption>I2C_trans</figcaption>
+</figure>
+<figure>
+<img src="http://blog.eternityqjl.top/1024px-I2C.svg.png" alt="1024px-I2C.svg" /><figcaption>1024px-I2C.svg</figcaption>
+</figure>
+<p><span class="math inline">\(\mathrm{I}^2\mathrm{C}\)</span>只需要两个接口即可通信：</p>
 <ul>
 <li><strong>SDA（Serial Data）</strong>：串行数据接口</li>
 <li><strong>SCL（Serial Clock）</strong>：串行时钟</li>
 </ul>
 <p>SDA和SCL都是双向线路，都通过一个电流源或上拉电阻接到正的电源电压，总线<strong>空闲</strong>时，这两条线路都是<strong>高电平</strong>。</p>
-<p>$\mathrm{I}^2\mathrm{C}$总线支持任何IC生产过程。两线在连接到总线的器件间传递信息。每个器件都有一个唯一的地址识别，而且都可以作为一个发送器或接收器。</p>
-<p>$\mathrm{I}^2\mathrm{C}$总线是一个<strong>多主机</strong>的总线，即可以连接多于一个能控制总线的器件到总线。如果两个或多个主机同时尝试初始化传输数据，为了避免产生混乱，发展出了一个<strong>仲裁</strong>的过程。</p>
-<p>$\mathrm{I}^2\mathrm{C}$的参考设计使用了一个7比特长度的地址空间，但是保留了16个地址，所以一组总线最多可以和112个节点通信。但连接到总线的接口数量其实是由总线电容是400pF的限制决定的（这里不深入了解）。</p>
-<p>$\mathrm{I}^2\mathrm{C}$有几种常见的传输模式，标准模式（100kbps）、低速模式（10kbps），时钟频率可以被降为0，即可以暂停通信。</p>
-<h2 id="UART串口"><a href="#UART串口" class="headerlink" title="UART串口"></a>UART串口</h2><h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>通用<strong>异步</strong>收发传输器（异步串行通信口）（Universal Asynchronous Receiver/Transmitter），是一种<strong>串行、异步、全双工</strong>的通信协议。他的工作原理是把数据的字节按照比特顺序发送，另一端的UART把比特组装为字节。</p>
+<p><span class="math inline">\(\mathrm{I}^2\mathrm{C}\)</span>总线支持任何IC生产过程。两线在连接到总线的器件间传递信息。每个器件都有一个唯一的地址识别，而且都可以作为一个发送器或接收器。</p>
+<p><span class="math inline">\(\mathrm{I}^2\mathrm{C}\)</span>总线是一个<strong>多主机</strong>的总线，即可以连接多于一个能控制总线的器件到总线。如果两个或多个主机同时尝试初始化传输数据，为了避免产生混乱，发展出了一个<strong>仲裁</strong>的过程。</p>
+<p><span class="math inline">\(\mathrm{I}^2\mathrm{C}\)</span>的参考设计使用了一个7比特长度的地址空间，但是保留了16个地址，所以一组总线最多可以和112个节点通信。但连接到总线的接口数量其实是由总线电容是400pF的限制决定的（这里不深入了解）。</p>
+<p><span class="math inline">\(\mathrm{I}^2\mathrm{C}\)</span>有几种常见的传输模式，标准模式（100kbps）、低速模式（10kbps），时钟频率可以被降为0，即可以暂停通信。</p>
+<h2 id="uart串口">UART串口</h2>
+<h3 id="简介">简介</h3>
+<p>通用<strong>异步</strong>收发传输器（异步串行通信口）（Universal Asynchronous Receiver/Transmitter），是一种<strong>串行、异步、全双工</strong>的通信协议。他的工作原理是把数据的字节按照比特顺序发送，另一端的UART把比特组装为字节。</p>
 <p>串行通信是指利用一条传输线将数据一位位地顺序传送，也可以用两个信号线组成全双工通信，如rs232。特点是通信线路简单，利用简单的线缆就可实现通信，降低成本，适用于远距离通信，但传输速度慢的应用场合。</p>
-<h3 id="数据帧"><a href="#数据帧" class="headerlink" title="数据帧"></a>数据帧</h3><p>每个字符表示为一个帧(10bit)，异步通信以一个字符为传输单位；两个UART设备之间通信不需要时钟线，需要在两个UART设备上指定相同的传输速率(<strong>波特率，bps</strong>)，以及<strong>空闲位、起始位、校验位、结束位</strong>。</p>
+<h3 id="数据帧">数据帧</h3>
+<p>每个字符表示为一个帧(10bit)，异步通信以一个字符为传输单位；两个UART设备之间通信不需要时钟线，需要在两个UART设备上指定相同的传输速率(<strong>波特率，bps</strong>)，以及<strong>空闲位、起始位、校验位、结束位</strong>。</p>
 <ul>
-<li><p>空闲位(1bit)：高电平，指没有数据传输。</p>
-</li>
-<li><p>起始位(1bit)：低电平。</p>
-</li>
-<li><p>数据位(8bit or 7bit)：一般先传输最低位</p>
-</li>
+<li><p>空闲位(1bit)：高电平，指没有数据传输。</p></li>
+<li><p>起始位(1bit)：低电平。</p></li>
+<li><p>数据位(8bit or 7bit)：一般先传输最低位</p></li>
 <li><p>（可选）奇偶校验位(1bit)：</p>
 <blockquote>
-<ol>
+<ol type="1">
 <li>无校验</li>
 <li>奇校验：如果数据位中1的数目是偶数，则校验位为1；如果1的数目是奇数，则校验位为0</li>
 <li>偶校验：如果数据位中1的数目是偶数，则校验位为0；如果1的数目是奇数，则校验位为1</li>
 <li>mark parity / parity：校验位时钟为1/0。（不常用）</li>
 </ol>
-</blockquote>
-</li>
-<li><p>结束位(1bit)：高电平。</p>
-</li>
+</blockquote></li>
+<li><p>结束位(1bit)：高电平。</p></li>
 </ul>
-<h2 id="JTAG边界扫描"><a href="#JTAG边界扫描" class="headerlink" title="JTAG边界扫描"></a>JTAG边界扫描</h2><p>JTAG主要用于验证设计和测试印刷电路板。</p>
-<h3 id="电气特性"><a href="#电气特性" class="headerlink" title="电气特性"></a>电气特性</h3><p>JTAG的接口是将4/5个接口连接到芯片上，电路板上的很多芯片可以将其JTAG接口通过Daisy Chain（菊花链）的方式连在一起，这样我们就可以访问一块印刷电路板上的所有芯片。</p>
+<h2 id="jtag边界扫描">JTAG边界扫描</h2>
+<p>JTAG主要用于验证设计和测试印刷电路板。</p>
+<h3 id="电气特性">电气特性</h3>
+<p>JTAG的接口是将4/5个接口连接到芯片上，电路板上的很多芯片可以将其JTAG接口通过Daisy Chain（菊花链）的方式连在一起，这样我们就可以访问一块印刷电路板上的所有芯片。</p>
 <p>连接引脚为：</p>
 <ul>
 <li>TDI（Test Data Input）：测试数据输入</li>
@@ -366,7 +386,9 @@
 <li>TMS（Test Model Selection）：测试模式选择</li>
 <li>TRST（测试复位）可选</li>
 </ul>
-<p><img src="http://blog.eternityqjl.top/Jtag_chain.svg.jpg" alt="Jtag_chain.svg"></p>
+<figure>
+<img src="http://blog.eternityqjl.top/Jtag_chain.svg.jpg" alt="Jtag_chain.svg" /><figcaption>Jtag_chain.svg</figcaption>
+</figure>
 <p>（图片来自维基百科<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/JTAG">JTAG</a>）</p>
 <p>由于只有一条数据线，所以通信使用的协议应为串行传输；时钟从TCK引脚引入；配置通过TMS引脚采用状态机的方式一次操作一位来实现；TRST引脚是可选的相对待测逻辑低电平有效复位开关，通常为异步，有时也为同步。</p>
 
@@ -449,7 +471,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0-%E4%B8%80%E4%BA%9B%E6%A6%82%E5%BF%B5"><span class="nav-number">1.</span> <span class="nav-text">0. 一些概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%8C%E6%AD%A5-Synchronous-%E5%92%8C%E5%BC%82%E6%AD%A5-Asynchronous"><span class="nav-number">1.1.</span> <span class="nav-text">同步(Synchronous)和异步(Asynchronous)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%A8%E5%8F%8C%E5%B7%A5%E5%92%8C%E5%8D%8A%E5%8F%8C%E5%B7%A5"><span class="nav-number">1.2.</span> <span class="nav-text">全双工和半双工</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SPI%E5%8D%8F%E8%AE%AE"><span class="nav-number">2.</span> <span class="nav-text">SPI协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SPI%E7%89%A9%E7%90%86%E5%B1%82%E6%8E%A5%E5%8F%A3"><span class="nav-number">2.1.</span> <span class="nav-text">SPI物理层接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SPI%E5%8D%8F%E8%AE%AE%E5%B1%82"><span class="nav-number">2.2.</span> <span class="nav-text">SPI协议层</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%9A%E4%BF%A1%E8%B5%B7%E5%A7%8B-%E7%BB%93%E6%9D%9F%E4%BF%A1%E5%8F%B7"><span class="nav-number">2.2.1.</span> <span class="nav-text">通信起始&#x2F;结束信号</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%89%E6%95%88%E6%95%B0%E6%8D%AE%E7%9A%84%E9%87%87%E9%9B%86"><span class="nav-number">2.2.2.</span> <span class="nav-text">有效数据的采集</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mathrm-I-2-mathrm-C-%E5%8D%8F%E8%AE%AE"><span class="nav-number">3.</span> <span class="nav-text">$\mathrm{I}^2\mathrm{C}$协议</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UART%E4%B8%B2%E5%8F%A3"><span class="nav-number">4.</span> <span class="nav-text">UART串口</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%80%E4%BB%8B"><span class="nav-number">4.1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%B8%A7"><span class="nav-number">4.2.</span> <span class="nav-text">数据帧</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JTAG%E8%BE%B9%E7%95%8C%E6%89%AB%E6%8F%8F"><span class="nav-number">5.</span> <span class="nav-text">JTAG边界扫描</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%B5%E6%B0%94%E7%89%B9%E6%80%A7"><span class="nav-number">5.1.</span> <span class="nav-text">电气特性</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E4%BA%9B%E6%A6%82%E5%BF%B5"><span class="nav-number">1.</span> <span class="nav-text">0. 一些概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%8C%E6%AD%A5synchronous%E5%92%8C%E5%BC%82%E6%AD%A5asynchronous"><span class="nav-number">1.1.</span> <span class="nav-text">同步(Synchronous)和异步(Asynchronous)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%A8%E5%8F%8C%E5%B7%A5%E5%92%8C%E5%8D%8A%E5%8F%8C%E5%B7%A5"><span class="nav-number">1.2.</span> <span class="nav-text">全双工和半双工</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#spi%E5%8D%8F%E8%AE%AE"><span class="nav-number">2.</span> <span class="nav-text">SPI协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#spi%E7%89%A9%E7%90%86%E5%B1%82%E6%8E%A5%E5%8F%A3"><span class="nav-number">2.1.</span> <span class="nav-text">SPI物理层接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#spi%E5%8D%8F%E8%AE%AE%E5%B1%82"><span class="nav-number">2.2.</span> <span class="nav-text">SPI协议层</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%9A%E4%BF%A1%E8%B5%B7%E5%A7%8B%E7%BB%93%E6%9D%9F%E4%BF%A1%E5%8F%B7"><span class="nav-number">2.2.1.</span> <span class="nav-text">通信起始&#x2F;结束信号</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%89%E6%95%88%E6%95%B0%E6%8D%AE%E7%9A%84%E9%87%87%E9%9B%86"><span class="nav-number">2.2.2.</span> <span class="nav-text">有效数据的采集</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mathrmi2mathrmc%E5%8D%8F%E8%AE%AE"><span class="nav-number">3.</span> <span class="nav-text">\(\mathrm{I}^2\mathrm{C}\)协议</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#uart%E4%B8%B2%E5%8F%A3"><span class="nav-number">4.</span> <span class="nav-text">UART串口</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%80%E4%BB%8B"><span class="nav-number">4.1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%B8%A7"><span class="nav-number">4.2.</span> <span class="nav-text">数据帧</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jtag%E8%BE%B9%E7%95%8C%E6%89%AB%E6%8F%8F"><span class="nav-number">5.</span> <span class="nav-text">JTAG边界扫描</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%B5%E6%B0%94%E7%89%B9%E6%80%A7"><span class="nav-number">5.1.</span> <span class="nav-text">电气特性</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -562,6 +584,8 @@
 
 
 
+
+  
 
   
 
