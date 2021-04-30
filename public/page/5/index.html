@@ -165,6 +165,156 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2019/09/19/%E4%BB%80%E4%B9%88%E6%98%AF%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%9F%E4%BB%80%E4%B9%88%E5%8F%88%E6%98%AF%E7%AE%97%E6%B3%95%EF%BC%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="http://blog.eternityqjl.top/avator_next.jpg">
+      <meta itemprop="name" content="Eternity">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jialong's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/09/19/%E4%BB%80%E4%B9%88%E6%98%AF%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%9F%E4%BB%80%E4%B9%88%E5%8F%88%E6%98%AF%E7%AE%97%E6%B3%95%EF%BC%9F/" class="post-title-link" itemprop="url">什么是数据结构？什么又是算法？</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-09-19 13:55:19" itemprop="dateCreated datePublished" datetime="2019-09-19T13:55:19+08:00">2019-09-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-04-23 17:20:24" itemprop="dateModified" datetime="2021-04-23T17:20:24+08:00">2021-04-23</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">数据结构与算法</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="数据结构及相关概念">数据结构及相关概念</h2>
+<p><strong>0. 要想知道什么是数据结构，首先要了解与“数据”相关的概念，这样才能一步步理解什么是数据结构。</strong></p>
+<p>我们首先用放书这件事情来举例。</p>
+<ul>
+<li>如果正常情况下只有你自己一个人的书，那么你把他们一本一本立起来放在书架上就可以了。</li>
+<li>那么如果有一个图书馆那么多的书应该怎样办么？总不能把他们乱起八糟的立起来放吧？那么是不是应该先按照社会科学、理科类、工科类、外语类等等的分类方式先分类，然后按照具体所属的类别把他们一个个放进去？其实数据结构的相关的概念就是一个这样简单的道理。</li>
+</ul>
+<p>下面我们来进行具体的描述。</p>
+<p><strong>1.</strong> 数据</p>
+<ul>
+<li>是对客观事物的<strong>符号</strong>表示，在计算机科学中是指所有能输入到计算机中并被计算机程序处理的符号的总称。</li>
+<li>其实就对应了<strong>图书馆中的所有书</strong>。</li>
+</ul>
+<p><strong>2.</strong> 数据元素</p>
+<ul>
+<li>是<strong>数据的基本单位</strong>，在计算机程序中通常作为一个整体进行考虑号处理。</li>
+<li>对应的就是<strong>某一本具体的书</strong>，比如”数据结构与算法“这本书。</li>
+</ul>
+<p><strong>3.</strong> 数据项</p>
+<ul>
+<li><strong>一个数据元素</strong>可由<strong>若干个数据项</strong>组成，数据项是数据的不可分割的最小单位。</li>
+<li>数据项不就是对应了<strong>书中的具体信息</strong>，比如书的作者、章节内容、ISBN编号等等。</li>
+</ul>
+<p><strong>4.</strong> 数据对象</p>
+<ul>
+<li>是<strong>性质相同的数据元素</strong>的集合，是数据的子集。</li>
+<li>数据元素是一本具体的书，那么性质相同数据元素的集合不就代表了<strong>一类具体的书籍</strong>吗，就比如计算机类的书籍，其中包含了”数据机构与算法这本书“。</li>
+</ul>
+<hr />
+<p>看到这儿是不是对这几者的关系还有点儿晕？没关系，我们用思维导图来再次说明。</p>
+<figure>
+<img src="http://py2kq5jlv.bkt.clouddn.com/%E6%95%B0%E6%8D%AE.png" alt="数据.png" /><figcaption aria-hidden="true">数据.png</figcaption>
+</figure>
+<p><strong>数据</strong>是由每一个具体的<strong>数据元素</strong>组成的，相同的数据元素同属于一个<strong>数据对象</strong>，每个数据元素中又有具体的信息——<strong>数据项</strong>。</p>
+<hr />
+<p>接下来让我们再次把这些概念对应到具体的例子”书”中。</p>
+<figure>
+<img src="http://py2kq5jlv.bkt.clouddn.com/%E4%B8%BE%E4%BE%8B_%E4%B8%96%E7%95%8C%E4%B8%8A%E6%89%80%E6%9C%89%E4%B9%A6.png" alt="举例_世界上所有书.png" /><figcaption aria-hidden="true">举例_世界上所有书.png</figcaption>
+</figure>
+<p>世界上所有书就是一个<strong>数据</strong>，每一本具体的书例如“数据结构与算法”就是一个<strong>数据元素</strong>，每本书中的具体信息例如“书名、作者、ISBN码...”就是多个<strong>数据项</strong>，一些相同类型的书的类型例如“计算机类书籍”就是一个<strong>数据对象</strong>。</p>
+<p>现在你应该清楚以上4个概念了吧？</p>
+<p>那我们回到最初的问题，什么是<strong>数据结构</strong>？</p>
+<p>这里我们同样举例子来说明。</p>
+<figure>
+<img src="http://py2kq5jlv.bkt.clouddn.com/%E6%95%B0%E6%8D%AE%E5%AF%B9%E8%B1%A11%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B1%BB%E4%B9%A6%E7%B1%8D.png" alt="数据对象1：计算机类书籍.png" /><figcaption aria-hidden="true">数据对象1：计算机类书籍.png</figcaption>
+</figure>
+<p>首先，一个类别的书籍中有许多具体的书，如"C语言"、"数据结构与算法"、"编译原理"，而这些书之间又有一些<strong>关联</strong>，比如<strong>某个算法可以用C语言来实现<em>，</em>编译过程中需要用到特定的算法</strong>等等，这些存在关联的书即"数据元素"的集合就叫做<strong>数据结构</strong>。</p>
+<p><strong>4.</strong> 数据结构</p>
+<ul>
+<li><p>相互之间存在一种或多种特定关系的数据元素的集合。</p></li>
+<li><p>大多数算法都需要我们适当地组织数据，而为了组织数据就产生了数据结构。</p></li>
+<li><p>结构</p>
+<blockquote>
+<p>逻辑结构</p>
+<blockquote>
+<p>集合</p>
+<p>线性结构</p>
+<p>树形结构</p>
+<p>网状结构或图状结构</p>
+</blockquote>
+<p>物理结构(储存结构)</p>
+<blockquote>
+<p>顺序储存结构</p>
+<p>链式储存结构</p>
+</blockquote>
+</blockquote></li>
+</ul>
+<p>(注：这里不具体展开介绍各个数据结构，在后面的附录里进行介绍)</p>
+<h2 id="抽象数据类型">抽象数据类型</h2>
+<ul>
+<li>指一个数学模型以及定义在该数据模型上的一组操作。</li>
+</ul>
+<h2 id="算法">算法</h2>
+<ul>
+<li>编写一段计算机程序一般都是实现一种 已有的方法来解决某个问题。这种方法大多 和使用的编程语言无关——它适用于各种计 算机以及编程语言。</li>
+<li>你要在图书馆中找到一本书，需要通过索引查找来确定这本书的位置，这个找书的过程就是一个算法。</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2019/09/19/C%E8%AF%AD%E8%A8%80%E6%8C%87%E9%92%88/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -412,7 +562,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-count">22</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -425,7 +575,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-count">19</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
