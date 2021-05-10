@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="http://blog.eternityqjl.top/faviconJ.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="http://blog.eternityqjl.top/faviconJ.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="http://blog.eternityqjl.top/faviconJ.ico">
+  <link rel="mask-icon" href="http://blog.eternityqjl.top/faviconJ.ico" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="IO库 IO类 为了支持不同类型的IO操作，除了iostream外，标准库还定义了其他一些IO类型：  头文件iostream：  istream, wistream类型，从流读取数据 ostream, wostream类型，向流写入数据 iostream, wiostream类型，读写流  头文件fstream：  ifstream类型，从文件读取数据 ofstream">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++回顾2——标准库">
+<meta property="og:url" content="http://example.com/2021/05/10/C-%E5%9B%9E%E9%A1%BE2%E2%80%94%E2%80%94%E6%A0%87%E5%87%86%E5%BA%93/index.html">
+<meta property="og:site_name" content="Jialong&#39;s Blog">
+<meta property="og:description" content="IO库 IO类 为了支持不同类型的IO操作，除了iostream外，标准库还定义了其他一些IO类型：  头文件iostream：  istream, wistream类型，从流读取数据 ostream, wostream类型，向流写入数据 iostream, wiostream类型，读写流  头文件fstream：  ifstream类型，从文件读取数据 ofstream">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-05-10T13:04:06.000Z">
+<meta property="article:modified_time" content="2021-05-10T13:05:44.479Z">
+<meta property="article:author" content="Eternity">
+<meta property="article:tag" content="C++">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2021/05/10/C-%E5%9B%9E%E9%A1%BE2%E2%80%94%E2%80%94%E6%A0%87%E5%87%86%E5%BA%93/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>C++回顾2——标准库 | Jialong's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Jialong's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Do things I love, and seek happiness.</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/05/10/C-%E5%9B%9E%E9%A1%BE2%E2%80%94%E2%80%94%E6%A0%87%E5%87%86%E5%BA%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="http://blog.eternityqjl.top/avator_next.jpg">
+      <meta itemprop="name" content="Eternity">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jialong's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          C++回顾2——标准库
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-05-10 21:04:06 / 修改时间：21:05:44" itemprop="dateCreated datePublished" datetime="2021-05-10T21:04:06+08:00">2021-05-10</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C-%E5%9B%9E%E9%A1%BE/" itemprop="url" rel="index"><span itemprop="name">C++回顾</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="io库">IO库</h2>
+<h3 id="io类">IO类</h3>
+<p>为了支持不同类型的IO操作，除了iostream外，标准库还定义了其他一些IO类型：</p>
+<ul>
+<li>头文件iostream：
+<ul>
+<li>istream, wistream类型，从流读取数据</li>
+<li>ostream, wostream类型，向流写入数据</li>
+<li>iostream, wiostream类型，读写流</li>
+</ul></li>
+<li>头文件fstream：
+<ul>
+<li>ifstream类型，从文件读取数据</li>
+<li>ofstream类型，向文件写入数据</li>
+<li>fstream类型，读写文件</li>
+</ul></li>
+<li>头文件sstream
+<ul>
+<li>istringstream类型：从string读取数据</li>
+<li>ostringstream类型：向string写入数据</li>
+<li>stringstream类型：读写string</li>
+</ul></li>
+</ul>
+<p>类型前加一个w的类型是为了支持宽字符，用来操纵wchart_t类型。</p>
+<a id="more"></a>
+<p><strong>IO类型之间的关系</strong>：</p>
+<p>类型ifstream和istringstream都继承自istream，我们可以向使用istream对象一样来使用ifstream和istringstream。</p>
+<h4 id="io对象无拷贝或赋值">IO对象无拷贝或赋值</h4>
+<p>由于不能拷贝IO对象，因此我们也不能将形参或范围类型设置为流类型，进行IO操作额函数通常以<strong>引用</strong>的方式传递和范围流。读写一个IO对象会改变其状态，因此传递和范围的引用不能是const的。</p>
+<h4 id="条件状态">条件状态</h4>
+<p>IO类定义了一些函数和标志，帮助我们访问和操纵流的条件状态：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;strm为一种IO类型，即上一节给出的各个类型</span><br><span class="line">strm::iostate	&#x2F;&#x2F;提供了表达条件状态的完整功能</span><br><span class="line">strm::badbit	&#x2F;&#x2F;用来指出流已崩溃</span><br><span class="line">strm::failbit	&#x2F;&#x2F;用来指出一个IO操作失败</span><br><span class="line">strm::eofbit	&#x2F;&#x2F;用来指出流到达了文件结束</span><br><span class="line">strm::goodbit	&#x2F;&#x2F;用来指出流位处于错误状态。</span><br><span class="line">&#x2F;&#x2F;其余见书</span><br></pre></td></tr></table></figure>
+<h4 id="管理输出缓冲">管理输出缓冲</h4>
+<p>每个输出流都管理一个缓冲区。</p>
+<p>导致缓冲刷新的原因：</p>
+<ul>
+<li>程序正常结束，作为return的一部分操作。</li>
+<li>缓冲区满时，需要刷新。</li>
+<li>使用操纵符如endl显示刷新缓冲区。</li>
+<li>每个输出操作后可以用操纵夫unitbuf设置流的内部状态来清空缓冲区。</li>
+<li>一个输出流可能被关联到另一个输出流。</li>
+</ul>
+<p>刷新输出缓冲区：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;hi&quot;</span> &lt;&lt; <span class="built_in">endl</span>;	<span class="comment">//输出hi和一个空格，然后刷新缓冲区</span></span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;hi&quot;</span> &lt;&lt; flush;	<span class="comment">//输出hi，然后刷新缓冲区，不附加额外字符</span></span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;hi&quot;</span> &lt;&lt; ends;	<span class="comment">//输出hi和一个空字符，然后刷新缓冲区</span></span><br></pre></td></tr></table></figure>
+<h3 id="文件输入输出">文件输入输出</h3>
+<p>头文件定义了如上所示的三个类型来住处文件IO。</p>
+<p>除了继承自iostream类型的行为外，fstream中的定义还增加了新的成员来管理与流关联的文件：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">fstream fstrm;	<span class="comment">//创建一个未绑定的流文件fstrm; fstream是头文件fstream中定义的一个类型</span></span><br><span class="line"><span class="function">fstream <span class="title">fstrm</span><span class="params">(s)</span></span>;	<span class="comment">//创建一个fstream并打开名为s的文件</span></span><br><span class="line"><span class="function">fstream <span class="title">fstrm</span><span class="params">(s,mode)</span></span>;	<span class="comment">//与上一个相同，但按指定mode打开</span></span><br><span class="line">fstrm.open(s)	<span class="comment">//打开名为s的文件并将文件与fstrm绑定</span></span><br><span class="line">fstrm.close()	<span class="comment">//关闭与fstrm绑定的文件，返回void</span></span><br><span class="line">fstrm.is_open()	<span class="comment">//返回一个bool, 指出关联的文件是否成功打开尚未关闭</span></span><br></pre></td></tr></table></figure>
+<h4 id="使用文件流对象">使用文件流对象</h4>
+<h4 id="文件模式">文件模式</h4>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">mode</th>
+<th style="text-align: center;">功能</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">in</td>
+<td style="text-align: center;">以读方式打开</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">out</td>
+<td style="text-align: center;">以写方式打开</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">app</td>
+<td style="text-align: center;">每次写操作前均定位到文件末尾</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">ate</td>
+<td style="text-align: center;">打开文件后立即定位到末尾</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">trunc</td>
+<td style="text-align: center;">截断文件</td>
+</tr>
+</tbody>
+</table>
+<h4 id="以out模式打开文件会丢弃已有数据">以out模式打开文件会丢弃已有数据</h4>
+<h3 id="string流">string流</h3>
+<h2 id="顺序容器">顺序容器</h2>
+<p>一个容器就是一些特定类型对象的集合。</p>
+<p>顺序容器提供了<strong>控制元素存储</strong>和<strong>访问顺序</strong>的能力。这种顺序与元素加入容器时的位置相对应。</p>
+<h3 id="概述">概述</h3>
+<p>顺序容器都提供了<strong>快速顺序访问元素</strong>的能力。</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">符号</th>
+<th style="text-align: center;">顺序容器类型(名称)</th>
+<th style="text-align: center;">性能</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">vector</td>
+<td style="text-align: center;">可变大小数组</td>
+<td style="text-align: center;">支持快速随机访问。在尾部之外的位置插入删除元素很慢</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">deque</td>
+<td style="text-align: center;">双端队列</td>
+<td style="text-align: center;">支持快速随机访问。在头尾插入删除速度很快</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">list</td>
+<td style="text-align: center;">双向链表</td>
+<td style="text-align: center;">只支持双向顺序访问。在list中任何位置插入删除元素都很快</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">forward_list</td>
+<td style="text-align: center;">单项链表</td>
+<td style="text-align: center;">只支持单项顺序访问。在forward_list中任何位置插入删除元素都很快</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">array</td>
+<td style="text-align: center;">固定大小数组</td>
+<td style="text-align: center;">支持快速随机访问。不能添加删除元素</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">string</td>
+<td style="text-align: center;">与vector相似的容器，专门用于保存字符</td>
+<td style="text-align: center;">随机访问快，在尾部插入删除速度快</td>
+</tr>
+</tbody>
+</table>
+<p>除了固定大小的array外，其他容器都提供高效的内存管理。容器保存元素的策略对容器操作的效率有着很大影响。</p>
+<p>string和vector将元素保存在<strong>连续的内存空间</strong>中，因此由元素的下标来计算其地址非常快速。但在这两种容器的中间位置插入和删除元素的速度非常慢，因为一次插入或删除后，需要移动插入、删除位置后的<strong>所有元素</strong>以保证存储的连续。</p>
+<p>list和forward_list两个容器能令任何位置的添加和删除操作都很快，但这两种容器<strong>不支持随机访问</strong>，因为元素保存的内存空间不连续，只能通过遍历整个容器来访问一个元素。与vector和string相比，额外内存开销也很大。</p>
+<p>forward_list与最好的手写单向链表数据结构性能相当，因此没有size操作，因为保存或计算大小会多出额外开销。</p>
+<p>deque支持快读随机访问，在该容器中间位置添加或删除元素速度很慢，但在两端很快。</p>
+<h3 id="容器库概览">容器库概览</h3>
+<p>容器类型上的操作分成了层次：</p>
+<ul>
+<li>某些操作式所有容器都提供的；</li>
+<li>另外一些操作仅针对顺序容器、关联容器或无序容器；</li>
+<li>还有一些操作只适合一小部分容器。</li>
+</ul>
+<p>容器通过<strong>尖括号</strong>指定类型。</p>
+<h4 id="容器操作">容器操作</h4>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iterator	</span><br></pre></td></tr></table></figure>
+<h4 id="迭代器">迭代器</h4>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">*iter	&#x2F;&#x2F;返回迭代器iter所指元素的引用</span><br><span class="line">iter-&gt;name	&#x2F;&#x2F;解引用iter并获取该元素的名为mem的成员</span><br><span class="line">++iter	&#x2F;&#x2F;令iter指示容器中的下一个元素</span><br><span class="line">--iter	&#x2F;&#x2F;令iter指示容器中的上一个元素</span><br><span class="line">iter1 &#x3D;&#x3D; iter2</span><br></pre></td></tr></table></figure>
+<p>一个<strong>迭代器范围</strong>由一对迭代器表示，这两个迭代器被称为begin和end，begin指向容器第一个元素，end指向容器的<strong>尾后元素</strong>，这种元素范围被称为<strong>左闭合区间</strong>，即<code>[begin, end)</code>。</p>
+<p>对构成范围的迭代器的要求：<strong>end不在begin之前</strong>。可以通过对begin进行若干次递增，使得begin==end。</p>
+<h4 id="容器类型成员">容器类型成员</h4>
+<p>每个容器都定义了多个类型。如之前使用过的<code>interator</code>、<code>size_type</code>等。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">interator</span><br><span class="line">const_iterator</span><br><span class="line">size_type</span><br><span class="line">difference_type</span><br><span class="line">value_type</span><br><span class="line">reference</span><br><span class="line">const_reference</span><br></pre></td></tr></table></figure>
+<h4 id="begin和end成员">begin和end成员</h4>
+<p>begin和end操作生成指向容器中第一个元素和尾元素之后位置的迭代器。还有不同类型的反向迭代器、const迭代器。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">list&lt;int&gt; a &#x3D; &#123;1, 2, 3&#125;;</span><br><span class="line">auto it1 &#x3D; a.begin();	&#x2F;&#x2F;list&lt;int&gt;::iterator</span><br><span class="line">auto it2 &#x3D; a.rbegin();	&#x2F;&#x2F;反向迭代器 list&lt;int&gt;::reverse_iterator</span><br><span class="line">auto it3 &#x3D; a.cbegin();	&#x2F;&#x2F;const迭代器 list&lt;int&gt;::const_iterator</span><br></pre></td></tr></table></figure>
+<h4 id="容器定义和初始化">容器定义和初始化</h4>
+<p>每个容器类型都定义了一个默认构造函数。除了array外，其他容器的默认构造函数都会创建一个指定类型的空容器。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">C c;	&#x2F;&#x2F;默认构造函数</span><br><span class="line">C c1(c2)	&#x2F;&#x2F;c1初始化为c2的拷贝。两者必须是相同类型的容器</span><br><span class="line">C c&#123;a,b,c...&#125;	&#x2F;&#x2F;c初始化为初始化列表中元素的拷贝</span><br><span class="line">C c(b,e)	&#x2F;&#x2F;c初始化为迭代器b和e指定范围中元素的拷贝</span><br></pre></td></tr></table></figure>
+<p>与顺序容器大小相关的构造函数：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">ivec</span><span class="params">(<span class="number">10</span>, <span class="number">-1</span>)</span></span>;	<span class="comment">//10个int元素，每个都初始化为1</span></span><br><span class="line"><span class="function"><span class="built_in">list</span>&lt;<span class="built_in">string</span>&gt; <span class="title">scev</span><span class="params">(<span class="number">10</span>)</span></span>;	<span class="comment">//10个元素，每个都是空string</span></span><br></pre></td></tr></table></figure>
+<p>标准库array具有固定大小</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">array</span>&lt;<span class="keyword">int</span>, 42&gt;	<span class="comment">//类型为保存42个int的数组</span></span><br><span class="line"><span class="built_in">array</span>&lt;<span class="built_in">string</span>, 10&gt;	<span class="comment">//类型为保存10个string的数组</span></span><br></pre></td></tr></table></figure>
+<p>使用array时必须同时指定<strong>元素类型</strong>和<strong>大小</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">array</span>&lt;<span class="keyword">int</span>&gt;::size_type j;	<span class="comment">//错误，未指定大小</span></span><br></pre></td></tr></table></figure>
+<h4 id="赋值和swap">赋值和swap</h4>
+<p>赋值将左边容器中的所有元素替换为右边容器中元素的拷贝。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">c1 &#x3D; c2;</span><br><span class="line">c &#x3D; &#123;a, b, c&#125;</span><br><span class="line">swap(c1, c2)</span><br><span class="line">c1.swap(c2)	&#x2F;&#x2F;与上一个等价</span><br><span class="line">&#x2F;&#x2F;assign操作不适用于关联容器和array</span><br><span class="line">seq.assign(b,e)	&#x2F;&#x2F;将seq中的元素替换为迭代器b和e所表示范围的元素</span><br><span class="line">seq.assign(il)	&#x2F;&#x2F;将seq中的元素替换为初始化列表il中的元素</span><br></pre></td></tr></table></figure>
+<p>assign用参数所指定的元素拷贝替换左边容器中所有元素。</p>
+<p>swap只是交换了两个容器内部的<strong>数据结构</strong>，但例外是swap两个array会真正交换它们的元素。</p>
+<h4 id="容器大小操作">容器大小操作</h4>
+<p>成员函数<code>size</code>返回容器中元素的数目；empty当size为0时返回布尔值true，否则返回false；max_size返回一个大于或等于该类型容器所能容纳的最大元素数的值。</p>
+<p>forward_list支持max_size和empty但不支持size。</p>
+<h4 id="关系运算符">关系运算符</h4>
+<p>每个容器类型都支持相等运算符(即<code>==</code>和<code>!=</code>)；除<strong>无序关联容器</strong>外的所有容器都支持关系运算符(&gt;、&gt;=、&lt;、&lt;=)。</p>
+<p>关系运算符左右两边的运算对象必须是相同类型的容器，且保存元素的类型也必须相等。</p>
+<h3 id="顺序容器操作">顺序容器操作</h3>
+<p>顺序容器和关联容器的不同在于两者<strong>组织元素的方式</strong>。</p>
+<p>除了上一节介绍的所有容器都支持的操作外，本章剩余部分将介绍顺序容器的所有操作。</p>
+<h4 id="向顺序容器添加元素">向顺序容器添加元素</h4>
+<p>向顺序容器中除了array外添加元素的操作：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">c.push_back(t)			<span class="comment">//在c的尾部创建值为t或由args创建的元素</span></span><br><span class="line">c.emplace_back(args)</span><br><span class="line">c.push_front(t)			<span class="comment">//在c的头部创建值为t或由args创建的元素</span></span><br><span class="line">c.emplace_front(args)</span><br><span class="line">c.insert(p,t)			<span class="comment">//在迭代器p指向的元素之前创建一个值为t的元素</span></span><br><span class="line">c.insert(p,n,t)			<span class="comment">//在迭代器p指向的元素之前插入n个值为t的元素。返回指向新添加的第一个元素的迭代器</span></span><br><span class="line">c.insert(p,b,e)			<span class="comment">//将迭代器b和e指向范围内的元素插入到迭代器p指向的元素之前，b和e不能指向c中的元素。返回指向新添加的第一个元素的迭代器</span></span><br><span class="line">c.insert(p,il)			<span class="comment">//il为一个花括号包围的元素值列表，将这些值插入到迭代器p指向的元素之前。返回指向新添加的第一个元素的迭代器</span></span><br></pre></td></tr></table></figure>
+<p><code>forword_list</code>不支持<code>push_back</code>和<code>emplace_back</code>。</p>
+<p><code>vector</code>和<code>string</code>不支持<code>push_front</code>和<code>emplace_front</code>.</p>
+<p>使用这些操作时要注意策略，根据不同容器的不同数据结构的特性来使用。</p>
+<p>emplace操作构造而不是拷贝元素，将参数传递给元素类型的构造函数，直接构造元素。</p>
+<h4 id="访问元素">访问元素</h4>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">c.back()		<span class="comment">//返回c中尾元素的引用，若c为空，则函数行为未定义。</span></span><br><span class="line">c.front()		<span class="comment">//范围c中首元素的引用</span></span><br><span class="line">c[n]			<span class="comment">//返回c中下标为n的元素的引用，n是一个无符号整数</span></span><br><span class="line">c.at(n)			<span class="comment">//返回下标为n的元素的引用，若下标越界，则返回out_of_range异常</span></span><br></pre></td></tr></table></figure>
+<p>at和下标操作只适用于string、vector、array和deque</p>
+<p>back不适用于forward_list</p>
+<h3 id="vector对象的增长">vector对象的增长</h3>
+<h3 id="额外的string操作">额外的string操作</h3>
+<h3 id="容器适配器">容器适配器</h3>
+<h2 id="泛型算法">泛型算法</h2>
+<p>用来操纵容器。</p>
+<h3 id="概述-1">概述</h3>
+<h3 id="基本算法">基本算法</h3>
+<h4 id="只读算法">只读算法</h4>
+<h4 id="写容器元素算法">写容器元素算法</h4>
+<h4 id="重排容器元素算法">重排容器元素算法</h4>
+<h3 id="定制操作">定制操作</h3>
+<h4 id="向算法传递函数">向算法传递函数</h4>
+<h4 id="lambda表达式">lambda表达式</h4>
+<h4 id="lambda捕获和返回">lambda捕获和返回</h4>
+<h4 id="参数绑定">参数绑定</h4>
+<h3 id="再探迭代器">再探迭代器</h3>
+<h4 id="插入迭代器">插入迭代器</h4>
+<h4 id="iostream迭代器">iostream迭代器</h4>
+<h4 id="反向迭代器">反向迭代器</h4>
+<h3 id="泛型算法结构">泛型算法结构</h3>
+<p>输入、输出、前向、双向、随机访问迭代器</p>
+<h3 id="特定容器算法">特定容器算法</h3>
+<h2 id="关联容器">关联容器</h2>
+<p>键值对。</p>
+<h2 id="动态内存">动态内存</h2>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/C/" rel="tag"># C++</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/04/30/Altium-Designer%E7%94%BB%E5%9B%BE%E6%B5%81%E7%A8%8B%E8%AE%B0%E5%BD%95-%E7%AE%80%E7%95%A5/" rel="prev" title="Altium Designer画图流程记录(简略)">
+      <i class="fa fa-chevron-left"></i> Altium Designer画图流程记录(简略)
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#io%E5%BA%93"><span class="nav-number">1.</span> <span class="nav-text">IO库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#io%E7%B1%BB"><span class="nav-number">1.1.</span> <span class="nav-text">IO类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#io%E5%AF%B9%E8%B1%A1%E6%97%A0%E6%8B%B7%E8%B4%9D%E6%88%96%E8%B5%8B%E5%80%BC"><span class="nav-number">1.1.1.</span> <span class="nav-text">IO对象无拷贝或赋值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9D%A1%E4%BB%B6%E7%8A%B6%E6%80%81"><span class="nav-number">1.1.2.</span> <span class="nav-text">条件状态</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AE%A1%E7%90%86%E8%BE%93%E5%87%BA%E7%BC%93%E5%86%B2"><span class="nav-number">1.1.3.</span> <span class="nav-text">管理输出缓冲</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA"><span class="nav-number">1.2.</span> <span class="nav-text">文件输入输出</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%96%87%E4%BB%B6%E6%B5%81%E5%AF%B9%E8%B1%A1"><span class="nav-number">1.2.1.</span> <span class="nav-text">使用文件流对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.2.2.</span> <span class="nav-text">文件模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%A5out%E6%A8%A1%E5%BC%8F%E6%89%93%E5%BC%80%E6%96%87%E4%BB%B6%E4%BC%9A%E4%B8%A2%E5%BC%83%E5%B7%B2%E6%9C%89%E6%95%B0%E6%8D%AE"><span class="nav-number">1.2.3.</span> <span class="nav-text">以out模式打开文件会丢弃已有数据</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#string%E6%B5%81"><span class="nav-number">1.3.</span> <span class="nav-text">string流</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A1%BA%E5%BA%8F%E5%AE%B9%E5%99%A8"><span class="nav-number">2.</span> <span class="nav-text">顺序容器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-number">2.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%B9%E5%99%A8%E5%BA%93%E6%A6%82%E8%A7%88"><span class="nav-number">2.2.</span> <span class="nav-text">容器库概览</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%B9%E5%99%A8%E6%93%8D%E4%BD%9C"><span class="nav-number">2.2.1.</span> <span class="nav-text">容器操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%AD%E4%BB%A3%E5%99%A8"><span class="nav-number">2.2.2.</span> <span class="nav-text">迭代器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%B9%E5%99%A8%E7%B1%BB%E5%9E%8B%E6%88%90%E5%91%98"><span class="nav-number">2.2.3.</span> <span class="nav-text">容器类型成员</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#begin%E5%92%8Cend%E6%88%90%E5%91%98"><span class="nav-number">2.2.4.</span> <span class="nav-text">begin和end成员</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%B9%E5%99%A8%E5%AE%9A%E4%B9%89%E5%92%8C%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">2.2.5.</span> <span class="nav-text">容器定义和初始化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B5%8B%E5%80%BC%E5%92%8Cswap"><span class="nav-number">2.2.6.</span> <span class="nav-text">赋值和swap</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%B9%E5%99%A8%E5%A4%A7%E5%B0%8F%E6%93%8D%E4%BD%9C"><span class="nav-number">2.2.7.</span> <span class="nav-text">容器大小操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%B3%E7%B3%BB%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">2.2.8.</span> <span class="nav-text">关系运算符</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A1%BA%E5%BA%8F%E5%AE%B9%E5%99%A8%E6%93%8D%E4%BD%9C"><span class="nav-number">2.3.</span> <span class="nav-text">顺序容器操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%91%E9%A1%BA%E5%BA%8F%E5%AE%B9%E5%99%A8%E6%B7%BB%E5%8A%A0%E5%85%83%E7%B4%A0"><span class="nav-number">2.3.1.</span> <span class="nav-text">向顺序容器添加元素</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%BF%E9%97%AE%E5%85%83%E7%B4%A0"><span class="nav-number">2.3.2.</span> <span class="nav-text">访问元素</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vector%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%A2%9E%E9%95%BF"><span class="nav-number">2.4.</span> <span class="nav-text">vector对象的增长</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%9D%E5%A4%96%E7%9A%84string%E6%93%8D%E4%BD%9C"><span class="nav-number">2.5.</span> <span class="nav-text">额外的string操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%B9%E5%99%A8%E9%80%82%E9%85%8D%E5%99%A8"><span class="nav-number">2.6.</span> <span class="nav-text">容器适配器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B3%9B%E5%9E%8B%E7%AE%97%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">泛型算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0-1"><span class="nav-number">3.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E7%AE%97%E6%B3%95"><span class="nav-number">3.2.</span> <span class="nav-text">基本算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%AA%E8%AF%BB%E7%AE%97%E6%B3%95"><span class="nav-number">3.2.1.</span> <span class="nav-text">只读算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%86%99%E5%AE%B9%E5%99%A8%E5%85%83%E7%B4%A0%E7%AE%97%E6%B3%95"><span class="nav-number">3.2.2.</span> <span class="nav-text">写容器元素算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%87%8D%E6%8E%92%E5%AE%B9%E5%99%A8%E5%85%83%E7%B4%A0%E7%AE%97%E6%B3%95"><span class="nav-number">3.2.3.</span> <span class="nav-text">重排容器元素算法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E5%88%B6%E6%93%8D%E4%BD%9C"><span class="nav-number">3.3.</span> <span class="nav-text">定制操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%91%E7%AE%97%E6%B3%95%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0"><span class="nav-number">3.3.1.</span> <span class="nav-text">向算法传递函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">3.3.2.</span> <span class="nav-text">lambda表达式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#lambda%E6%8D%95%E8%8E%B7%E5%92%8C%E8%BF%94%E5%9B%9E"><span class="nav-number">3.3.3.</span> <span class="nav-text">lambda捕获和返回</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%82%E6%95%B0%E7%BB%91%E5%AE%9A"><span class="nav-number">3.3.4.</span> <span class="nav-text">参数绑定</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%8D%E6%8E%A2%E8%BF%AD%E4%BB%A3%E5%99%A8"><span class="nav-number">3.4.</span> <span class="nav-text">再探迭代器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8F%92%E5%85%A5%E8%BF%AD%E4%BB%A3%E5%99%A8"><span class="nav-number">3.4.1.</span> <span class="nav-text">插入迭代器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#iostream%E8%BF%AD%E4%BB%A3%E5%99%A8"><span class="nav-number">3.4.2.</span> <span class="nav-text">iostream迭代器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%8D%E5%90%91%E8%BF%AD%E4%BB%A3%E5%99%A8"><span class="nav-number">3.4.3.</span> <span class="nav-text">反向迭代器</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%9B%E5%9E%8B%E7%AE%97%E6%B3%95%E7%BB%93%E6%9E%84"><span class="nav-number">3.5.</span> <span class="nav-text">泛型算法结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%89%B9%E5%AE%9A%E5%AE%B9%E5%99%A8%E7%AE%97%E6%B3%95"><span class="nav-number">3.6.</span> <span class="nav-text">特定容器算法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E8%81%94%E5%AE%B9%E5%99%A8"><span class="nav-number">4.</span> <span class="nav-text">关联容器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98"><span class="nav-number">5.</span> <span class="nav-text">动态内存</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Eternity"
+      src="http://blog.eternityqjl.top/avator_next.jpg">
+  <p class="site-author-name" itemprop="name">Eternity</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/eternityqjl" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;eternityqjl" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/2679311595" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;2679311595" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://instagram.com/eternityqjl" title="Instagram → https:&#x2F;&#x2F;instagram.com&#x2F;eternityqjl" rel="noopener" target="_blank"><i class="fab fa-instagram fa-fw"></i>Instagram</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">蜀ICP备 19037280号 </a>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Eternity</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
