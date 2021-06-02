@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.3.0">
+<meta name="generator" content="Hexo 5.4.0">
   <link rel="apple-touch-icon" sizes="180x180" href="http://blog.eternityqjl.top/faviconJ.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="http://blog.eternityqjl.top/faviconJ.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="http://blog.eternityqjl.top/faviconJ.ico">
@@ -226,7 +226,7 @@
       
         <p>GitBook作为一个非常好用的基于Node.js的命令行工具，可以输出HTML、PDF、eBook等多种格式的电子书，这里就不再详细讲述GitBook的构建以及发布到Github托管的过程，网络上有非常多的教程，可以自行Google查看。</p>
 <p>刚开始在每次更新内容的时候都需要一系列的git命令将原始内容仓库和构建的网页仓库同步到Github上，大概需要10条命令，如果你的更新频率很高的话，发布内容将会是有个痛苦的过程，但这里我们可以通过一个shell脚本只使用<code>$ sh deploy.sh</code>一条命令完成同步内容和构建网页的所有过程。</p>
-<a id="more"></a>
+<span id="more"></span>
 <p>首先，在你的GitBook内容根目录下建一个<code>deploy.sh</code>文件，使用文本编辑器打开，然后输入以下内容：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!bin/sh</span></span><br><span class="line">git checkout master</span><br><span class="line"><span class="comment"># 切换到master分支，及内容所在的仓库</span></span><br><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">&quot;Update&quot;</span></span><br><span class="line">git push -u origin master</span><br><span class="line"><span class="comment"># 添加、提交到Git仓库，然后push到Github上</span></span><br><span class="line">gitbook build</span><br><span class="line"><span class="comment"># 构建Gitbook</span></span><br><span class="line"></span><br><span class="line">git checkout gh-pages</span><br><span class="line"><span class="comment"># 切换到gh-pages分支，即生成的HTML网页的仓库</span></span><br><span class="line">cp -r _book/* . </span><br><span class="line"><span class="comment"># 复制前面构建的内容</span></span><br><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">&quot;Update&quot;</span></span><br><span class="line">git push -u origin gh-pages</span><br><span class="line"><span class="comment"># 添加、提交到Git仓库，然后push到Github上</span></span><br><span class="line">git checkout master</span><br><span class="line"><span class="comment"># 返回master主分支</span></span><br></pre></td></tr></table></figure>
 <p>然后打开命令行，为这个脚本授权：</p>
@@ -330,20 +330,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-count">25</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-count">12</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-count">21</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

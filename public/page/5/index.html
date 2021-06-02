@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.3.0">
+<meta name="generator" content="Hexo 5.4.0">
   <link rel="apple-touch-icon" sizes="180x180" href="http://blog.eternityqjl.top/faviconJ.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="http://blog.eternityqjl.top/faviconJ.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="http://blog.eternityqjl.top/faviconJ.ico">
@@ -161,6 +161,258 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2019/09/28/%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BE%93%E5%85%A5%E3%80%81%E8%BE%93%E5%87%BA%E5%92%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%87%BD%E6%95%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="http://blog.eternityqjl.top/avator_next.jpg">
+      <meta itemprop="name" content="Eternity">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jialong's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/09/28/%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BE%93%E5%85%A5%E3%80%81%E8%BE%93%E5%87%BA%E5%92%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%87%BD%E6%95%B0/" class="post-title-link" itemprop="url">字符串输入、输出和字符串函数</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-09-28 12:15:42" itemprop="dateCreated datePublished" datetime="2019-09-28T12:15:42+08:00">2019-09-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-04-23 17:20:42" itemprop="dateModified" datetime="2021-04-23T17:20:42+08:00">2021-04-23</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">C语言</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="字符串输入">字符串输入</h2>
+<p>1.<code>gets()</code>函数</p>
+<ul>
+<li>使用方法：读取整行输入，直到遇到<strong>换行符</strong>，然后<strong>丢弃换行符</strong>，储存其余的字符，并在字符末尾添加一个<strong>空字符</strong>使之成为一个C字符串。</li>
+<li>使用中存在的问题：<code>gets(words)</code>（char words[STLEN]）的唯一参数为words，该函数无法检查数组是否装得下输入行。数组名会被转化成该数组首元素的地址，该函数只知道数组的开始处，并不知道数组在何处结束。</li>
+<li>如果输入过长，会导致<strong>缓存区溢出</strong>，详情见书上内容。</li>
+</ul>
+<p>2.<code>gets()</code>的替代品：<code>fgets()</code>函数</p>
+<ul>
+<li><code>fgets()</code>函数通过第二个参数来限制读入的<strong>字符数</strong>来解决溢出问题。</li>
+<li>相较于<code>gets()</code>的区别：
+<ul>
+<li>第二个参数指明了读入字符的最大数量，若该值为n，那么将读入n-1个字符，或遇到第一个<strong>换行符</strong>为止。</li>
+<li>第三个参数指明了要读入的文件，如果要从键盘输入，则参数设置为stdin标识符。</li>
+<li>如果读到一个换行符，<code>fgets()</code>会将其<strong>储存在数组中</strong>，而不是将其丢弃。</li>
+</ul></li>
+</ul>
+<p>3.<code>gets_s()</code>函数</p>
+<ul>
+<li><p>于<code>fgets()</code>的区别</p>
+<ul>
+<li><p>该函数只从标准输入中读取，所以无需第三个参数。</p></li>
+<li><p>读到<strong>换行符会将其丢弃</strong>。</p></li>
+<li><p>如果读到最大字符数都没有读到换行符，会进行以下操作：</p>
+<blockquote>
+<p>首先设置目标数组的首字符为空字符</p>
+<p>读取并丢弃随后的输入直至读到换行符或文件结尾</p>
+<p>返回空指针</p>
+<p>然后调用依赖实现的“处理函数”</p>
+</blockquote></li>
+</ul></li>
+</ul>
+<p>4.<code>s_gets()</code>函数</p>
+<ul>
+<li>读取整行输入并<strong>用空字符替代换行符</strong>，或者(在字符串未结束就遇到了空字符)读取一部分输入，并丢弃其余的部分。</li>
+</ul>
+<p>该函数的代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">char</span> * <span class="title">s_gets</span><span class="params">(<span class="keyword">char</span> * st, <span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> *ret_val;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    ret_val = fgets(st, n, <span class="built_in">stdin</span>);</span><br><span class="line">    <span class="keyword">if</span> (ret_val)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">while</span> (st[i] != <span class="string">&#x27;\n&#x27;</span> &amp;&amp; st[i] != <span class="string">&#x27;\0&#x27;</span>)</span><br><span class="line">            i++;</span><br><span class="line">        <span class="keyword">if</span> (st[i] == <span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line">            st[i] = <span class="string">&#x27;\0&#x27;</span>;</span><br><span class="line">        <span class="keyword">else</span> </span><br><span class="line">            <span class="keyword">while</span> (getchar() != <span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ret_val;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>5.<code>scanf()</code>函数</p>
+<ul>
+<li>以第一个非空白字符座位读取的开始，以第一个空白字符(空行、空格、制表符、换行符)座位字符串的结束。</li>
+<li>其他内容略。</li>
+</ul>
+<h2 id="字符串输出">字符串输出</h2>
+<p>1.<code>puts()</code>函数</p>
+<ul>
+<li>该函数显示字符串时会在末尾添加一个<strong>换行符</strong>。</li>
+<li>该函数的参数为地址，且用双引号括起来的字符串常量作为参数时，参数被视为该字符串的地址。</li>
+<li>当参数为数组中某个项的地址时，如<code>str[5]</code>,会从这个位置开始依次输出。</li>
+<li>结束条件为<strong>空字符</strong>。</li>
+</ul>
+<p>2.<code>fputs()</code>函数</p>
+<ul>
+<li>第二个参数要指明写入数据的文件，若要打印在显示器上，则用stdout作为参数。</li>
+<li>该函数<strong>不会在字符串末尾添加换行符</strong>。</li>
+</ul>
+<p>3.<code>printf()</code></p>
+<ul>
+<li>省略</li>
+</ul>
+<h2 id="字符串函数">字符串函数</h2>
+<p>0.这里只写出书上详细介绍的5组字符串函数：<code>strlen()</code> | <code>strcat()/strncat()</code> | <code>strcmp()/strncmp()</code> | <code>strcpy()/strncpy()</code> | <code>sprintf()</code></p>
+<p>1.<code>strlen</code>函数</p>
+<ul>
+<li>该函数用于统计字符串的长度，函数返回值为字符串的长度。</li>
+</ul>
+<hr />
+<p>2.<code>strcat()</code>函数</p>
+<ul>
+<li>基本定义
+<ul>
+<li>该函数用于<strong>拼接字符串</strong></li>
+<li>接受两个字符串作为参数</li>
+<li>把第二个字符串的备份附在第一个字符串的末尾，并把拼接后形成的新字符串作为第一个字符串，第二个字符串不变。</li>
+<li>该函数的函数类型是<code>char *</code>,即指向<code>char</code>的指针。</li>
+<li>所以该函数返回第一个参数，即拼接第二个字符串后的第一个字符串的<strong>地址</strong>。</li>
+</ul></li>
+<li>存在的问题
+<ul>
+<li>无法检查第一个数组是否能容纳第二个字符串。</li>
+</ul></li>
+</ul>
+<p>3.<code>strncat()</code>函数</p>
+<ul>
+<li>该函数的第三个参数指定了最大添加字符数</li>
+<li>例如<code>strncat(bugs, addon, 13)</code>会把addon字符串的聂荣附加给bugs，加到第13个字符或者遇到空字符的时候停止</li>
+<li>所以，算上空字符(必须要添加空字符，否则就不是字符串了)，bugs数组应该足够大，以容纳原始字符串(不包含空字符)、添加在后面的13个字符、末尾的空字符。</li>
+</ul>
+<hr />
+<p>4.<code>strcmp()</code>函数</p>
+<ul>
+<li>用来把用户的响应于已储存的字符串作比较(比较<strong>两个字符串的内容</strong>)</li>
+<li>比较的是字符串的内容而不是字符串的地址，例如
+<ul>
+<li>定义：
+<ul>
+<li><code>#define ANSWER "Grant"</code></li>
+<li><code>#define SIZE 40</code></li>
+<li><code>char try[SIZE]</code></li>
+<li><code>s_gets(try, SIZE)</code>\</li>
+<li>如果使用<code>while (try == ANSWER)</code>,则永远得不到两者相等的结果，因为while比较的是指针，即地址，二者的地址肯定不相同</li>
+<li>但使用<code>strcmp(try, ANSWER)</code>则能够得到两者内容相等的结果。</li>
+</ul></li>
+<li>注：该函数只会比较try中第一个空字符前面的部分，所以该函数可以比较储存在不同大小数组中的字符串。</li>
+</ul></li>
+<li>该函数的返回值：
+<ul>
+<li>返回实例：
+<ul>
+<li>比较“A"和本身，返回0</li>
+<li>比较”A"和"B"，返回-1</li>
+<li>比较“B"和”A“，返回1</li>
+</ul></li>
+<li>结论：
+<ul>
+<li>二者相等返回0</li>
+<li>第一个的ASCII码比第二个大就返回负数，比第二个大就返回整数</li>
+<li>返回的整数和负数即为二者的ASCII码之差</li>
+</ul></li>
+<li>注：
+<ul>
+<li>返回值的具体数值并不重要，重要的是它是0还是非0</li>
+<li>该函数比较的是<strong>字符串而不是字符</strong></li>
+</ul></li>
+</ul></li>
+<li>局限：
+<ul>
+<li>该函数比较字符串中的字符，直到发现不同的字符为止，这个过程可能会持续到字符串末尾。</li>
+</ul></li>
+</ul>
+<p>5.<code>strncmp()</code>函数</p>
+<ul>
+<li><p>该函数可以比较字符不同的地方，也可以只比较第三个参数指定的字符数</p></li>
+<li><p>例如书中的实例：可以限定函数只查找这几个字符。</p></li>
+</ul>
+<hr />
+<p>6.<code>strcpy()</code>函数</p>
+<ul>
+<li>该函数是用来拷贝整个字符串的内容，即相当于字符串赋值运算符
+<ul>
+<li>例如：
+<ul>
+<li>str1和str2都是指向字符串的指针</li>
+<li><code>str2 = str1;</code>这个语句拷贝的指针的地址而不是具体内容</li>
+<li>所以要想拷贝整个字符串就要用到该函数</li>
+</ul></li>
+<li>注意：
+<ul>
+<li>接受两个字符串指针作为参数，可以把第二个指针声明为指针、数组或者字符串常量</li>
+<li>第一个指针应该指向一个数据对象如数组，且该字符串有足够的空间存储源字符串的副本。</li>
+</ul></li>
+<li>其他属性：
+<ul>
+<li>该函数的返回类型是<code>char *</code>,返回的是第一个参数的值，即一个字符的地址。</li>
+<li>第一个参数不必指向数组的开始，该属性可用于拷贝数组的一部分，详情见书上的程序。</li>
+</ul></li>
+</ul></li>
+<li>局限：
+<ul>
+<li>与<code>strcat()</code>一样，不能检查目标空间是否能容纳的下源字符串的副本。</li>
+</ul></li>
+</ul>
+<p>7.<code>strncpy()</code>函数</p>
+<ul>
+<li>该函数的第三个参数指明了可拷贝的最大字符数
+<ul>
+<li>如果要拷贝的字符超过了指定的参数n，当拷贝了n个字符后就会停止，并且也不会在后面添加空字符，容易出现错误，所以要非常注意。</li>
+</ul></li>
+</ul>
+<hr />
+<p>8.<code>sprintf()</code>函数</p>
+<ul>
+<li><p>该函数与<code>printf()</code>函数类似，但这个是把数据写入字符串，而不是打印在显示器上。</p></li>
+<li><p>该函数的第一个参数是目标字符串的地址，其余的与<code>printf()</code>类似。</p>
+<ul>
+<li>示例：</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> first[MAX];</span><br><span class="line"><span class="keyword">char</span> last[MAX];</span><br><span class="line"><span class="keyword">char</span> formal[<span class="number">2</span> * MAX + <span class="number">10</span>];</span><br><span class="line"><span class="comment">//给以上前面两个数组赋值后就可以进行如下的操作</span></span><br><span class="line"><span class="built_in">sprintf</span>(formal, <span class="string">&quot;%s, %-19s\n&quot;</span>, last, first);</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -809,20 +1061,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-count">25</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-count">12</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-count">21</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.3.0">
+<meta name="generator" content="Hexo 5.4.0">
   <link rel="apple-touch-icon" sizes="180x180" href="http://blog.eternityqjl.top/faviconJ.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="http://blog.eternityqjl.top/faviconJ.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="http://blog.eternityqjl.top/faviconJ.ico">
@@ -232,7 +232,7 @@
 <li>忽略左括号</li>
 <li>遇到右括号时，弹出一个运算符，弹出需要数量的操作数进行运算，然后将得到的结果再压入操作数栈。</li>
 </ul>
-<a id="more"></a>
+<span id="more"></span>
 <h2 id="代码实现">代码实现</h2>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> edu.princeton.cs.algs4;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Evaluate</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		Stack&lt;String&gt; ops = <span class="keyword">new</span> Stack&lt;String&gt;();</span><br><span class="line">		Stack&lt;Double&gt; vals = <span class="keyword">new</span> Stack&lt;Double&gt;();</span><br><span class="line">		<span class="keyword">while</span> (!StdIn.isEmpty())</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="comment">//读取字符，如果是运算符则压入运算符栈ops</span></span><br><span class="line">			String s = StdIn.readString();</span><br><span class="line">			<span class="keyword">if</span> (s.equals(<span class="string">&quot;(&quot;</span>));</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span> (s.equals(<span class="string">&quot;+&quot;</span>))    ops.push(s);</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span> (s.equals(<span class="string">&quot;-&quot;</span>))    ops.push(s);</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span> (s.equals(<span class="string">&quot;*&quot;</span>))    ops.push(s);</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span> (s.equals(<span class="string">&quot;/&quot;</span>))    ops.push(s);</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span> (s.equals(<span class="string">&quot;sqrt&quot;</span>))    ops.push(s);</span><br><span class="line">			</span><br><span class="line">			<span class="comment">//如果字符为)，则弹出运算符和操作数，计算结果并压入操作数栈vals</span></span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span> (s.equals(<span class="string">&quot;)&quot;</span>))</span><br><span class="line">			&#123;</span><br><span class="line">				String op = ops.pop();</span><br><span class="line">				<span class="keyword">double</span> v = vals.pop();</span><br><span class="line">				<span class="keyword">if</span> (op.equals(<span class="string">&quot;+&quot;</span>))    v = vals.pop() + v;</span><br><span class="line">				<span class="keyword">else</span> <span class="keyword">if</span> (op.equals(<span class="string">&quot;-&quot;</span>))    v = vals.pop() - v;</span><br><span class="line">				<span class="keyword">else</span> <span class="keyword">if</span> (op.equals(<span class="string">&quot;*&quot;</span>))    v = vals.pop() * v;</span><br><span class="line">				<span class="keyword">else</span> <span class="keyword">if</span> (op.equals(<span class="string">&quot;/&quot;</span>))    v = vals.pop() / v;</span><br><span class="line">				<span class="keyword">else</span> <span class="keyword">if</span> (op.equals(<span class="string">&quot;sqrt&quot;</span>))    v = Math.sqrt(v);</span><br><span class="line">				</span><br><span class="line">				vals.push(v);</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="comment">//如果字符既非运算符又非括号，将其作为double值压入操作数栈vals</span></span><br><span class="line">			<span class="keyword">else</span> vals.push(Double.parseDouble(s));</span><br><span class="line">		&#125;</span><br><span class="line">		StdOut.println(vals.pop());</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -331,20 +331,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-count">25</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-count">12</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-count">21</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

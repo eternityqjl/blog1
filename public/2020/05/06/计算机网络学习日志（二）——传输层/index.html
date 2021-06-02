@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.3.0">
+<meta name="generator" content="Hexo 5.4.0">
   <link rel="apple-touch-icon" sizes="180x180" href="http://blog.eternityqjl.top/faviconJ.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="http://blog.eternityqjl.top/faviconJ.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="http://blog.eternityqjl.top/faviconJ.ico">
@@ -241,7 +241,7 @@
         <h2 id="概述和运输层服务">概述和运输层服务</h2>
 <p>运输层协议在不同主机上的应用进程之间提供了<strong>逻辑通信</strong>，这并非物理上的实际通信。在发送端，运输层将从应用程序接收到的报文转换成运输层分组，该分组称为<strong>运输层报文段</strong>，实现方法是将应用报文划分为一个个小的块，为每个块加上运输层首部生成运输层报文段，然后在端系统中传递给网络层，网络层将其封装成网络层分组，向目的地发送。</p>
 <p>因特网由TCP和UDP两种运输层协议。</p>
-<a id="more"></a>
+<span id="more"></span>
 <h3 id="运输层和网络层的关系">运输层和网络层的关系</h3>
 <p>网络层提供了<strong>主机</strong>之间的逻辑通信，而运输层为运行在不同主机上的<strong>进程</strong>之间提供了逻辑通信。</p>
 <p>运输层协议至工作在端系统中，同时网络中的路由器既不处理也不识别运输层加在应用层报文的任何信息。运输层协议能提供的服务常常受制于底层网络层协议，例如，如果网络层协议无法为主机之间发送的运输层报文段提供时延和带宽保证，运输层协议可就无法为<strong>进程之间</strong>发送的应用程序报文提供时延和带宽保证。</p>
@@ -625,20 +625,20 @@ rwnd = RcvBuffer - [LastByteRcvd - LastByteRead]
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-count">25</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-count">12</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-count">21</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
