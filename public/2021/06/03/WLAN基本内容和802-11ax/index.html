@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="http://blog.eternityqjl.top/faviconJ.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="http://blog.eternityqjl.top/faviconJ.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="http://blog.eternityqjl.top/faviconJ.ico">
+  <link rel="mask-icon" href="http://blog.eternityqjl.top/faviconJ.ico" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="WLAN基础内容 计算机网络概念 在学习基本无线网络通信的过程中顺便可以来复习以下计算机网络的相关内容。 在家庭中我们通常使用路由器联通家中的局域网和外部的广域网，路由器为网络层设备，通过IP和路由表来寻找目的地和转发数据，即为路由功能。 交换机是数据链路层设备，通过用于在局域网内传输数据，通过MAC地址寻找目的地，数据转发通过硬件来实现，传输速度相较于上一层网络层有很大的性能提升。每个物">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WLAN基本内容和802.11ax">
+<meta property="og:url" content="http://example.com/2021/06/03/WLAN%E5%9F%BA%E6%9C%AC%E5%86%85%E5%AE%B9%E5%92%8C802-11ax/index.html">
+<meta property="og:site_name" content="Jialong&#39;s Blog">
+<meta property="og:description" content="WLAN基础内容 计算机网络概念 在学习基本无线网络通信的过程中顺便可以来复习以下计算机网络的相关内容。 在家庭中我们通常使用路由器联通家中的局域网和外部的广域网，路由器为网络层设备，通过IP和路由表来寻找目的地和转发数据，即为路由功能。 交换机是数据链路层设备，通过用于在局域网内传输数据，通过MAC地址寻找目的地，数据转发通过硬件来实现，传输速度相较于上一层网络层有很大的性能提升。每个物">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-06-03T10:09:38.000Z">
+<meta property="article:modified_time" content="2021-06-03T10:10:41.245Z">
+<meta property="article:author" content="Eternity">
+<meta property="article:tag" content="802.11ax">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2021/06/03/WLAN%E5%9F%BA%E6%9C%AC%E5%86%85%E5%AE%B9%E5%92%8C802-11ax/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>WLAN基本内容和802.11ax | Jialong's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Jialong's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Do things I love, and seek happiness.</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/03/WLAN%E5%9F%BA%E6%9C%AC%E5%86%85%E5%AE%B9%E5%92%8C802-11ax/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="http://blog.eternityqjl.top/avator_next.jpg">
+      <meta itemprop="name" content="Eternity">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jialong's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          WLAN基本内容和802.11ax
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-06-03 18:09:38 / 修改时间：18:10:41" itemprop="dateCreated datePublished" datetime="2021-06-03T18:09:38+08:00">2021-06-03</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/" itemprop="url" rel="index"><span itemprop="name">计算机网络相关</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="wlan基础内容">WLAN基础内容</h2>
+<h3 id="计算机网络概念">计算机网络概念</h3>
+<p>在学习基本无线网络通信的过程中顺便可以来复习以下计算机网络的相关内容。</p>
+<p>在家庭中我们通常使用路由器联通家中的局域网和外部的广域网，路由器为网络层设备，通过IP和路由表来寻找目的地和转发数据，即为路由功能。</p>
+<p>交换机是数据链路层设备，通过用于在局域网内传输数据，通过MAC地址寻找目的地，数据转发通过硬件来实现，传输速度相较于上一层网络层有很大的性能提升。每个物理设备都具有一个唯一的MAC地址。</p>
+<p>路由器和交换机的不同在于，一个工作在网络层，另一个工作在数据链路层，交换机连接的网络必须使用相同的数据链路层协议，一般即为<strong>802.3(以太网)或802.11(无线局域网)</strong>。路由器工作在网络层，因此路由器连接的网络必须使用相同的网路层协议，一般为<strong>ip协议</strong>，但路由器可以连接不同的数据链路层，比如eth2和pppoe，eth2和802.11。</p>
+<p>我们常用的每台终端都有一个MAC地址（即网卡地址），在连接网络后路由器会为其分配一个IP；而一个路由器也拥有一个MAC地址和一个IP。交换机中只有MAC地址表，通过设备的MAC地址来确定数据的目的地。</p>
+<span id="more"></span>
+<h3 id="无线局域网">无线局域网</h3>
+<p>WLAN即为Wireless LAN，无线局域网。无线局域网通用的标准是IEEE定义的802.11系列标准，目前共有六代（2021年），为802.11a/b/g/n/ac/ax，分别从第一代到第六代。</p>
+<p>Wi-Fi称为无线网络，是Wi-Fi联盟的商标，是基于802.11标准实现的无线局域网技术。</p>
+<p><strong>IEEE 802.11标准</strong>定义了一个媒体访问控制(MAC，即<strong>数据链路层</strong>协议)和几个<strong>物理层</strong>规范，为局域内的终端提供无线连接，同时还为监管机构提供了一种标准化方法，对局域网通信的一个或多个<strong>频带</strong>进行管理。</p>
+<h3 id="ghz和5ghz">2.4GHz和5GHz</h3>
+<p>2.4GHz频道列表：</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">频道</th>
+<th style="text-align: center;">频率 (MHz)</th>
+<th style="text-align: center;">大部分国家</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">2412</td>
+<td style="text-align: center;">是</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">2417</td>
+<td style="text-align: center;">是</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">2422</td>
+<td style="text-align: center;">是</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">2427</td>
+<td style="text-align: center;">是</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">2432</td>
+<td style="text-align: center;">是</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">2437</td>
+<td style="text-align: center;">是</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">2442</td>
+<td style="text-align: center;">是</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">2447</td>
+<td style="text-align: center;">是</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">9</td>
+<td style="text-align: center;">2452</td>
+<td style="text-align: center;">是</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">2457</td>
+<td style="text-align: center;">是</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">11</td>
+<td style="text-align: center;">2462</td>
+<td style="text-align: center;">是</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">12</td>
+<td style="text-align: center;">2467</td>
+<td style="text-align: center;">是</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">13</td>
+<td style="text-align: center;">2472</td>
+<td style="text-align: center;">是</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">14</td>
+<td style="text-align: center;">2484</td>
+<td style="text-align: center;">否</td>
+</tr>
+</tbody>
+</table>
+<p>5GHz频道列表：</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">频道</th>
+<th style="text-align: center;">频率 (MHz)</th>
+<th style="text-align: center;">中国</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">40/20 MHz[<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/WLAN信道列表#cite_note-15">15]</a></td>
+<td style="text-align: center;">40/20 MHz</td>
+<td style="text-align: center;">20 MHz[<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/WLAN信道列表#cite_note-israel-19">19]</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">183</td>
+<td style="text-align: center;">4915</td>
+<td style="text-align: center;">否</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">184</td>
+<td style="text-align: center;">4920</td>
+<td style="text-align: center;">否</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">185</td>
+<td style="text-align: center;">4925</td>
+<td style="text-align: center;">否</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">187</td>
+<td style="text-align: center;">4935</td>
+<td style="text-align: center;">否</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">188</td>
+<td style="text-align: center;">4940</td>
+<td style="text-align: center;">否</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">189</td>
+<td style="text-align: center;">4945</td>
+<td style="text-align: center;">否</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">192</td>
+<td style="text-align: center;">4960</td>
+<td style="text-align: center;">否</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">196</td>
+<td style="text-align: center;">4980</td>
+<td style="text-align: center;">否</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">5035</td>
+<td style="text-align: center;">否</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">5040</td>
+<td style="text-align: center;">否</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">9</td>
+<td style="text-align: center;">5045</td>
+<td style="text-align: center;">否</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">11</td>
+<td style="text-align: center;">5055</td>
+<td style="text-align: center;">否</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">12</td>
+<td style="text-align: center;">5060</td>
+<td style="text-align: center;">否</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">16</td>
+<td style="text-align: center;">5080</td>
+<td style="text-align: center;">否</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">34</td>
+<td style="text-align: center;">5170</td>
+<td style="text-align: center;">是</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">36</td>
+<td style="text-align: center;">5180</td>
+<td style="text-align: center;">是</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">38</td>
+<td style="text-align: center;">5190</td>
+<td style="text-align: center;">是</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">40</td>
+<td style="text-align: center;">5200</td>
+<td style="text-align: center;">是</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">42</td>
+<td style="text-align: center;">5210</td>
+<td style="text-align: center;">是</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">44</td>
+<td style="text-align: center;">5220</td>
+<td style="text-align: center;">是</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">46</td>
+<td style="text-align: center;">5230</td>
+<td style="text-align: center;">是</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">48</td>
+<td style="text-align: center;">5240</td>
+<td style="text-align: center;">是</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">52</td>
+<td style="text-align: center;">5260</td>
+<td style="text-align: center;">是</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">56</td>
+<td style="text-align: center;">5280</td>
+<td style="text-align: center;">是</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">60</td>
+<td style="text-align: center;">5300</td>
+<td style="text-align: center;">是</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">64</td>
+<td style="text-align: center;">5320</td>
+<td style="text-align: center;">是</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">100</td>
+<td style="text-align: center;">5500</td>
+<td style="text-align: center;">否</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">104</td>
+<td style="text-align: center;">5520</td>
+<td style="text-align: center;">否</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">108</td>
+<td style="text-align: center;">5540</td>
+<td style="text-align: center;">否</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">112</td>
+<td style="text-align: center;">5560</td>
+<td style="text-align: center;">否</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">116</td>
+<td style="text-align: center;">5580</td>
+<td style="text-align: center;">否</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">120</td>
+<td style="text-align: center;">5600</td>
+<td style="text-align: center;">否</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">124</td>
+<td style="text-align: center;">5620</td>
+<td style="text-align: center;">否</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">128</td>
+<td style="text-align: center;">5640</td>
+<td style="text-align: center;">否</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">132</td>
+<td style="text-align: center;">5660</td>
+<td style="text-align: center;">否</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">136</td>
+<td style="text-align: center;">5680</td>
+<td style="text-align: center;">否</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">140</td>
+<td style="text-align: center;">5700</td>
+<td style="text-align: center;">否</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">149</td>
+<td style="text-align: center;">5745</td>
+<td style="text-align: center;">是</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">153</td>
+<td style="text-align: center;">5765</td>
+<td style="text-align: center;">是</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">157</td>
+<td style="text-align: center;">5785</td>
+<td style="text-align: center;">是</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">161</td>
+<td style="text-align: center;">5805</td>
+<td style="text-align: center;">是</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">165</td>
+<td style="text-align: center;">5825</td>
+<td style="text-align: center;">是</td>
+</tr>
+</tbody>
+</table>
+<h2 id="wifi-6802.11ax">WiFi 6——802.11ax</h2>
+<p>IEEE 802.11ax为无线局域网标准，Wi-Fi联盟称之为Wi-Fi 6。其支持从1GHz到6GHz的所有ISM频段，包括目前使用的2.4GHz和5GHz频段，向下兼容前代的a/b/g/n/ac。</p>
+<p>主要有以下的先进功能：</p>
+<ul>
+<li>正交频分多址（OFDMA）</li>
+<li>多用户多输入多输出（MU-MIMO）</li>
+<li>160MHz信道（这并不是802.11ax才出现的，在5GHz下即可实现160MHz的带宽）</li>
+<li>1024正交幅度调制（1024-QAM）</li>
+<li>目标唤醒时间（TWT）</li>
+<li>WPA3安全标准</li>
+</ul>
+<p>下面通过整机终端的传输速率来理解这些特性。</p>
+<h3 id="整机速率空间流数-1symbolgi-编码方式-码率-有效子载波数">整机速率=空间流数 * (1/Symbol+GI) * 编码方式 * 码率 * 有效子载波数</h3>
+<ul>
+<li>空间流数：AP的天线数</li>
+<li>Symbol与GI：时域上每一帧需要的时间以及空隙</li>
+<li>编码方式：调制技术，即1个Symbol能承载的bit数量。</li>
+<li>码率：排除纠错码后世纪真实传输数据码占理论值的比值</li>
+<li>有效子载波数量：频域上的Symbol，一个子载波承载余个Symbol，例如频宽为HT80时，有效子载波数量为980个；频宽为HT160时，有效子载波数为980*2个。</li>
+</ul>
+<h3 id="ofdma频分复用技术">OFDMA频分复用技术：</h3>
+<p>将子载波分配给不同用户，并在OFDM中添加多址的方法来实现多用户复用信道资源。</p>
+<h3 id="dlul-mu-mimo技术">DL/UL MU-MIMO技术：</h3>
+<p>多天线技术，能提高用户容量，每个用户速率更快。</p>
+<h4 id="dl-mu-mimo">DL MU-MIMO</h4>
+<p>DL MU-MIMO在802.11ac就已经引入，但只支持DL 4*4 MU-MIMO（下行）。在802.11ax种进一步增加了MU-MIMO数量，支持DL 8x8 MU-MIMO，借助 DL OFDMA技术（下行），可同时进行 MU-MIMO 传输和分配不同 RU 进行多用户多址传输，既增加了系统并发接入量，又均衡了吞吐量。</p>
+<h4 id="ul-mu-mimo">UL MU-MIMO</h4>
+<p>UL MU-MIMO（上行）是802.11ax引入的一个重要特性，与下载的SU-MIMO概念类型，都是通过发射机和接收机的多天线技术使用相同信道资源在多个空间流上同时传输数据，唯一的差别点在于 UL MU-MIMO 的多个数据流是来自多个用户。</p>
+<p>802.11ac 及之前的 802.11 标准都是 UL SU-MIMO，即只能接受一个用户发来的数据，多用户并发场景效率较低，802.11ax 支持 UL MU-MIMO 后，借助 UL OFDMA 技术 （上行），可同时进行 MU-MIMO 传输和分配不同 RU 进行多用户多址传输，提升多用户并发场景效率，大大降低了应用时延。</p>
+<h3 id="更高阶的调制技术1024-qam">更高阶的调制技术(1024-QAM)：</h3>
+<p>802.11ac 采用的 256-QAM 正交幅度调制，每个符号传输 8bit 数据（2^8=256），802.11ax 将采用 1024-QAM 正交幅度调制，每个符号位传输 10bit 数据（2^10=1024）。</p>
+<p>需要注意的是 802.11ax 中成功使用 1024-QAM 调制取决于信道条件，更密的星座点距离需要更强大的 EVM（误差矢量幅度，用于量化无线电接收器或发射器在调制精度方面的性能）和接受灵敏度功能，并且信道质量要求高于其他调制类型。</p>
+<h3 id="空分复用技术srbss-coloring着色机制">空分复用技术（SR）&amp;BSS Coloring着色机制</h3>
+<h4 id="空分复用技术sr">空分复用技术（SR）</h4>
+<p>Wi-Fi 射频的传输原理是在任何指定时间内，一个信道上只允许一个用户传输数据，如果 Wi-Fi AP 和客户端在同一信道上侦听到有其他 802.11 无线电传输，则会自动进行冲突避免，推迟传输，因此每个用户都必须轮流使用。所以说信道是无线网络中非常宝贵的资源， 特别在高密场景下，信道的合理划分和利用将对整个无线网络的容量和稳定性带来较大的影响。</p>
+<p>802.11ac 及之前的标准，通常采用动态调整 CCA 门限的机制来改善同频信道间的干扰，通过识别同频干扰强度，动态调整 CCA 门限，忽略同频弱干扰信号实现同频并发传输， 提升系统吞吐容量。</p>
+<p>802.11ax 中引入了一种新的同频传输识别机制，叫 BSS Coloring 着色机制，在 PHY 报文头中添加 BSS color 字段对来自不同BSS 的数据进行“染色”，为每个通道分配一种颜色，该颜色标识一组不应干扰的基本服务集（BSS），接收端可以及早识别同频传输干扰信号并停止接收，避免浪费收发机时间。如果颜色相同，则认为是同一 BSS 内的干扰信号， 发送将推迟；如果颜色不同，则认为两者之间无干扰，两个 Wi-Fi 设备可同信道同频并行传输。以这种方式设计的网络，那些具有相同颜色的信道彼此相距很远，此时我们再利用动态CCA 机制将这种信号设置为不敏感，事实上它们之间也不太可能会相互干扰。</p>
+<h4 id="bss-coloring着色机制">BSS Coloring着色机制</h4>
+<p>802.11ax 中引入了一种新的同频传输识别机制，叫 BSS Coloring 着色机制，在 PHY 报文头中添加 BSS color 字段对来自不同BSS 的数据进行“染色”，为每个通道分配一种颜色，该颜色标识一组不应干扰的基本服务集（BSS），接收端可以及早识别同频传输干扰信号并停止接收，避免浪费收发机时间。如果颜色相同，则认为是同一 BSS 内的干扰信号， 发送将推迟；如果颜色不同，则认为两者之间无干扰，两个 Wi-Fi 设备可同信道同频并行传输。以这种方式设计的网络，那些具有相同颜色的信道彼此相距很远，此时我们再利用动态CCA 机制将这种信号设置为不敏感，事实上它们之间也不太可能会相互干扰。</p>
+<h3 id="扩展覆盖范围er">扩展覆盖范围（ER）</h3>
+<p>由于 802.11ax 标准采用的是Long OFDM symbol 发送机制，每次数据发送持续时间从原来的 3.2us 提升到 12.8us，更长的发送时间可降低终端丢包率；另外 802.11ax 最小可仅使用 2MHz 频宽进行窄带传输，有效降低频段噪声干扰，提升了终端接受灵敏度，增加了覆盖距离。</p>
+<h3 id="其他特性">其他特性</h3>
+<h4 id="支持2.4ghz">支持2.4GHz</h4>
+<p>2.4GHz 频宽窄，且仅有 3 个 20MHz 的互不干扰信道（1,6 和 11），但是有一点不可否认的是 2.4GHz 仍然是一个可用的 Wi-Fi 频段，在很多场景下依然被广泛使用，主要有以下优势：</p>
+<ul>
+<li><strong>覆盖范围广</strong>：信号频率越低， 波长越长，绕射能力越强，穿透能力越差，信号损失衰减越小，传输距离越远。虽然 5GHz 频段可带来更高的传播速度，但信号衰减也越大，所以传输距离比 2.4GHz 要短。</li>
+<li>低成本</li>
+</ul>
+<h4 id="目标唤醒时间-twttarget-wakeup-time">目标唤醒时间 TWT（Target Wakeup Time）</h4>
+<p>802.11ax AP 可以和 STA 协调目标唤醒时间(TWT)功能的使用，AP 和 STA 会互相交换信息，当中将包含预计的活动持续时间，以定义让 STA 访问介质的特定时间或一组时间， 这样就可以避开多个不同 STA 之间的竞争和重叠情况。另外，支持 802.11ax 标准的 STA 可以使用 TWT 来降低能量损耗，在自身的 TWT 来临之前进入睡眠状态。AP 还可另外设定 TWT编排计划并将 TWT 值提供给 STA，这样双方之间就不需要存在个别的 TWT 协议，此操作称为“广播 TWT 操作”。</p>
+<h2 id="家庭无线网络配置">家庭无线网络配置</h2>
+<h3 id="acap">AC+AP</h3>
+<h3 id="mesh组网">MESH组网</h3>
+<h2 id="参考">参考</h2>
+<ol type="1">
+<li><p><a target="_blank" rel="noopener" href="https://e.huawei.com/cn/material/networking/wlan/b3f46485597c4d72b43a6a27c6480646">华为Wi-Fi 6(802.11ax)技术白皮书</a></p></li>
+<li><p><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/IEEE_802.11ax">wikipedia IEEE 802.11ax</a></p></li>
+<li><p><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/WLAN%E4%BF%A1%E9%81%93%E5%88%97%E8%A1%A8#5_GHz_(802.11a/h/j/n/ac/ax)%5B11%5D">wikipedia WLAN信道列表</a></p></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/802-11ax/" rel="tag"># 802.11ax</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/06/02/%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%EF%BC%9AUnicode-UTF-8/" rel="prev" title="字符编码：Unicode, UTF-8">
+      <i class="fa fa-chevron-left"></i> 字符编码：Unicode, UTF-8
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#wlan%E5%9F%BA%E7%A1%80%E5%86%85%E5%AE%B9"><span class="nav-number">1.</span> <span class="nav-text">WLAN基础内容</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%A6%82%E5%BF%B5"><span class="nav-number">1.1.</span> <span class="nav-text">计算机网络概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%A0%E7%BA%BF%E5%B1%80%E5%9F%9F%E7%BD%91"><span class="nav-number">1.2.</span> <span class="nav-text">无线局域网</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ghz%E5%92%8C5ghz"><span class="nav-number">1.3.</span> <span class="nav-text">2.4GHz和5GHz</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#wifi-6802.11ax"><span class="nav-number">2.</span> <span class="nav-text">WiFi 6——802.11ax</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B4%E6%9C%BA%E9%80%9F%E7%8E%87%E7%A9%BA%E9%97%B4%E6%B5%81%E6%95%B0-1symbolgi-%E7%BC%96%E7%A0%81%E6%96%B9%E5%BC%8F-%E7%A0%81%E7%8E%87-%E6%9C%89%E6%95%88%E5%AD%90%E8%BD%BD%E6%B3%A2%E6%95%B0"><span class="nav-number">2.1.</span> <span class="nav-text">整机速率&#x3D;空间流数 * (1&#x2F;Symbol+GI) * 编码方式 * 码率 * 有效子载波数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ofdma%E9%A2%91%E5%88%86%E5%A4%8D%E7%94%A8%E6%8A%80%E6%9C%AF"><span class="nav-number">2.2.</span> <span class="nav-text">OFDMA频分复用技术：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dlul-mu-mimo%E6%8A%80%E6%9C%AF"><span class="nav-number">2.3.</span> <span class="nav-text">DL&#x2F;UL MU-MIMO技术：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#dl-mu-mimo"><span class="nav-number">2.3.1.</span> <span class="nav-text">DL MU-MIMO</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ul-mu-mimo"><span class="nav-number">2.3.2.</span> <span class="nav-text">UL MU-MIMO</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9B%B4%E9%AB%98%E9%98%B6%E7%9A%84%E8%B0%83%E5%88%B6%E6%8A%80%E6%9C%AF1024-qam"><span class="nav-number">2.4.</span> <span class="nav-text">更高阶的调制技术(1024-QAM)：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A9%BA%E5%88%86%E5%A4%8D%E7%94%A8%E6%8A%80%E6%9C%AFsrbss-coloring%E7%9D%80%E8%89%B2%E6%9C%BA%E5%88%B6"><span class="nav-number">2.5.</span> <span class="nav-text">空分复用技术（SR）&amp;BSS Coloring着色机制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A9%BA%E5%88%86%E5%A4%8D%E7%94%A8%E6%8A%80%E6%9C%AFsr"><span class="nav-number">2.5.1.</span> <span class="nav-text">空分复用技术（SR）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bss-coloring%E7%9D%80%E8%89%B2%E6%9C%BA%E5%88%B6"><span class="nav-number">2.5.2.</span> <span class="nav-text">BSS Coloring着色机制</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%A9%E5%B1%95%E8%A6%86%E7%9B%96%E8%8C%83%E5%9B%B4er"><span class="nav-number">2.6.</span> <span class="nav-text">扩展覆盖范围（ER）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E7%89%B9%E6%80%A7"><span class="nav-number">2.7.</span> <span class="nav-text">其他特性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%94%AF%E6%8C%812.4ghz"><span class="nav-number">2.7.1.</span> <span class="nav-text">支持2.4GHz</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9B%AE%E6%A0%87%E5%94%A4%E9%86%92%E6%97%B6%E9%97%B4-twttarget-wakeup-time"><span class="nav-number">2.7.2.</span> <span class="nav-text">目标唤醒时间 TWT（Target Wakeup Time）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%B6%E5%BA%AD%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE"><span class="nav-number">3.</span> <span class="nav-text">家庭无线网络配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#acap"><span class="nav-number">3.1.</span> <span class="nav-text">AC+AP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mesh%E7%BB%84%E7%BD%91"><span class="nav-number">3.2.</span> <span class="nav-text">MESH组网</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Eternity"
+      src="http://blog.eternityqjl.top/avator_next.jpg">
+  <p class="site-author-name" itemprop="name">Eternity</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">22</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/eternityqjl" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;eternityqjl" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/2679311595" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;2679311595" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://instagram.com/eternityqjl" title="Instagram → https:&#x2F;&#x2F;instagram.com&#x2F;eternityqjl" rel="noopener" target="_blank"><i class="fab fa-instagram fa-fw"></i>Instagram</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">蜀ICP备 19037280号 </a>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Eternity</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

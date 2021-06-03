@@ -165,6 +165,115 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2019/10/15/%E7%BB%93%E6%9E%84/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="http://blog.eternityqjl.top/avator_next.jpg">
+      <meta itemprop="name" content="Eternity">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jialong's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/10/15/%E7%BB%93%E6%9E%84/" class="post-title-link" itemprop="url">结构</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-10-15 20:03:54" itemprop="dateCreated datePublished" datetime="2019-10-15T20:03:54+08:00">2019-10-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-04-22 18:00:42" itemprop="dateModified" datetime="2021-04-22T18:00:42+08:00">2021-04-22</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">C语言</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>1.建立结构变量</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">book</span> &#123;</span></span><br><span class="line">    <span class="keyword">char</span> title[MAXTITL];</span><br><span class="line">    <span class="keyword">char</span> author[MAXAUTL];</span><br><span class="line">    <span class="keyword">float</span> value;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>该结构描述了由两个字符数组和一个float类型变量组成的结构。</li>
+</ul>
+<p>2.定义结构变量</p>
+<p><code>struct book library;</code></p>
+<ul>
+<li><p>把library声明为一个使用book结构类型的结构变量。</p></li>
+<li><p>所以struct book 相当于过去的int、double等类型。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">book</span> &#123;</span></span><br><span class="line">    <span class="keyword">char</span> title[MAXTITL];</span><br><span class="line">    <span class="keyword">char</span> author[MAXAUTL];</span><br><span class="line">    <span class="keyword">float</span> value;</span><br><span class="line">&#125; library;</span><br></pre></td></tr></table></figure>
+<p>该程序为上面声明的完整版。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> &#123;</span> <span class="comment">//无结构标记</span></span><br><span class="line">    <span class="keyword">char</span> title[MAXTITL];</span><br><span class="line">    <span class="keyword">char</span> author[MAXAUTL];</span><br><span class="line">    <span class="keyword">float</span> value;</span><br><span class="line">&#125; library;</span><br></pre></td></tr></table></figure>
+<p>声明结构和定义结构可以一步完成，如上所示。</p></li>
+</ul>
+<p>3.初始化结构</p>
+<p>4.访问结构成员(点运算符)</p>
+<p>5.结构初始化器</p>
+<p>6.结构数组</p>
+<p><code>struct book library[MAXBKS];</code></p>
+<p>7.指向结构的指针</p>
+<p><code>struct guy * him;</code></p>
+<ul>
+<li>指针可以指向任何现有的guy类型如barney、fellow[0]（一个结构数组的一项即为一个结构变量）。</li>
+</ul>
+<p><code>him = &amp;barney</code> or <code>him = &amp;fellow[0];</code></p>
+<p>8.用指针访问成员</p>
+<p>若<code>him == &amp;barney</code>，那么<code>him-&gt;income</code>即是<code>barney.income</code>.</p>
+<p>同时，<code>*him</code>即为指针指向的结构类型。所以，</p>
+<p><code>barney.income == (*him).income == him-&gt;income</code></p>
+<p>9.向函数传递结构的成员、地址、结构本身</p>
+<p>10.其他特性：</p>
+<ul>
+<li>使用指针传递信息(作为函数参数)：是使用原始结构进行计算的。</li>
+<li>使用结构作为函数参数：是使用副本进行计算。</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2019/09/28/%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BE%93%E5%85%A5%E3%80%81%E8%BE%93%E5%87%BA%E5%92%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%87%BD%E6%95%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -810,190 +919,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2019/09/19/C%E8%AF%AD%E8%A8%80%E6%8C%87%E9%92%88/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="http://blog.eternityqjl.top/avator_next.jpg">
-      <meta itemprop="name" content="Eternity">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jialong's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/09/19/C%E8%AF%AD%E8%A8%80%E6%8C%87%E9%92%88/" class="post-title-link" itemprop="url">C语言指针</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-09-19 13:10:25" itemprop="dateCreated datePublished" datetime="2019-09-19T13:10:25+08:00">2019-09-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-04-22 18:00:42" itemprop="dateModified" datetime="2021-04-22T18:00:42+08:00">2021-04-22</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">C语言</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="一指针的一些概念">一、指针的一些概念</h2>
-<h3 id="指针的类型">1. 指针的类型</h3>
-<ul>
-<li>把指针声明语句中的指针名字去掉，剩下的就是<strong>指针本身</strong>的类型</li>
-</ul>
-<h3 id="指针所指向的类型">2. 指针所指向的类型</h3>
-<ul>
-<li>把指针声明语句中的指针名字和名字前的指针声明符号*去掉，剩下的就是<strong>指针指向的类型</strong></li>
-</ul>
-<h3 id="指针的值指针所指向的内存区或地址">3. 指针的值——指针所指向的内存区或地址</h3>
-<ul>
-<li>指针的值是指针本身<strong>存储的数值</strong>，该值被编译器当作一个地址（在32位程序中，所有类型的指针的值都是一个32位的整数，因为32位程序的内存地址都是32位长。）</li>
-<li>指针所指的<strong>内存区</strong>就是从指针的值所代表的内存地址开始，长度为<code>sizeof(指针指向的类型)</code>的一篇内存区。</li>
-<li>我们说<strong>一个指针的值是XX</strong>，就相当于说<strong>该指针指向了以XX为首地址的一片内存区</strong>。</li>
-<li>同理，我们说<strong>一个指针指向了某个内存区</strong>，相当于说<strong>该指针的值是该内存区域的首地址</strong>。</li>
-</ul>
-<h3 id="指针本身所占据的内存区">4. 指针本身所占据的内存区</h3>
-<ul>
-<li>用<code>sizeof(指针的类型)</code>测试一下就知道了</li>
-</ul>
-<h2 id="二指针的算术运算">二、指针的算术运算</h2>
-<p><strong>0.</strong>指针可以加上或者减去一个整数，这种运算的意义并不是平常的数值的加减。</p>
-<ul>
-<li>example 1</li>
-</ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> a[<span class="number">20</span>] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line"><span class="keyword">int</span> *ptr = (<span class="keyword">int</span> *)a;</span><br><span class="line">ptr++;</span><br></pre></td></tr></table></figure>
-<p>指针ptr的类型为int*，它指向的类型为int，被初始化为指向整型变量a。</p>
-<p>在第三句中，指针ptr被加上了1，编译器是这样进行处理的：</p>
-<blockquote>
-<p>把指针ptr的值加上<code>sizeof(int)</code>，在32位程序中是被加上了4，因为32位程序中<code>int</code>占4字节。</p>
-<p>由于地址是用字节作为单位，所以ptr指向的地址由原来的a的地址向高的地方增加了4个地址。</p>
-<p>char类型的长度是一个字节，所以原来的ptr是指向数组a从第0个单元开始的4个字节，现在指向了从第4个单元开始的4个字节</p>
-</blockquote>
-<ul>
-<li>example 2</li>
-</ul>
-<p><strong>1.</strong>可以使用<strong>一个循环</strong>和<strong>一个指针</strong>遍历一个数组。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> <span class="built_in">array</span>[<span class="number">20</span>] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line"><span class="keyword">int</span> *ptr = <span class="built_in">array</span>;</span><br><span class="line"><span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">20</span>; i++)</span><br><span class="line">&#123;</span><br><span class="line">    (*ptr)++;</span><br><span class="line">    ptr++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>该例子中将整形数组中各个单元的值都加1。同时每次循环都将指针加1个单元，所以每次循环都能访问数组的下一个单元。</p>
-<ul>
-<li>example 4</li>
-</ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> a[<span class="number">20</span>] = <span class="string">&quot;You_are_a_girl&quot;</span>;</span><br><span class="line"><span class="keyword">int</span> *ptr = (<span class="keyword">int</span>  *) a;</span><br><span class="line">ptr += <span class="number">5</span>;</span><br></pre></td></tr></table></figure>
-<p>该例子中，指针ptr被加上了5个单元，编译器这样处理：</p>
-<blockquote>
-<p>将char的值加上<code>sizeof(int) * 5</code>,在32位程序中即乘了4*5=20。</p>
-<p>指针的值代表了该指针以这个值为地址指向了某个内存区，所以指针ptr所指向的地址向高地址的方向移动了20个字节</p>
-<p>然而ptr加上5(即地址增加20个字节后)已经指向了数组a的合法范围之外，虽然应用时会出现问题，但在语法上没有问题。</p>
-</blockquote>
-<hr />
-<p><strong>2.</strong>总结</p>
-<blockquote>
-<p>一个指针ptrold加或减一个整数n后，结果是一个新的指针ptrnew，两个指针的类型相同，指向的类型也相同。</p>
-<p>ptrnew的值比ptrold的值增加或者减少了<code>n * sizeof(int)</code>个字节，即ptrnew指向的内存区比ptrold指向的内存区向高或低地址的方向移动了<code>n * sizeof(int)</code>个字节。</p>
-<p>指针进行加减：两个指针不能进行加法操作，这是非法操作，结果毫无意义。两个类型相同的指针可以进行减法运算，一般在数组上应用。</p>
-</blockquote>
-<h2 id="三运算符和">三、运算符&amp;和*</h2>
-<p><strong>0.</strong> &amp;是取地址运算符，*是间接运算符。</p>
-<p>&amp;a 运算的结果是一个指针，指针的类型是 *a，指针指向的类型是a的类型，指针指向的地址是a的地址。</p>
-<p>*p的类型是p指向的类型，所占用的地址是p指向的地址。</p>
-<h2 id="四指针表达式">四、指针表达式</h2>
-<p><strong>0.</strong> 一个表达式的结果如果叫指针，那么这个表达式就叫指针表达式。</p>
-<ul>
-<li>example</li>
-</ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a, b;</span><br><span class="line"><span class="keyword">int</span> <span class="built_in">array</span>[<span class="number">10</span>];</span><br><span class="line"><span class="keyword">int</span> *pa;</span><br><span class="line">pa = &amp;a;<span class="comment">// &amp;a是指针表达式</span></span><br><span class="line"><span class="keyword">int</span> **ptr = &amp;pa;</span><br><span class="line">*ptr = &amp;b;</span><br><span class="line">pa = <span class="built_in">array</span>;</span><br><span class="line">pa++;</span><br></pre></td></tr></table></figure>
-<p><strong>1.</strong> 指针表达式的结果是一个指针，所以也具有指针的4个要素：</p>
-<blockquote>
-<p>指针的类型</p>
-<p>指针指向的类型</p>
-<p>指针指向的内存区</p>
-<p>指针自身占据的内存</p>
-</blockquote>
-<p><strong>2.</strong> 一个指针表达式的结果指针已经具有了自身占据的内存的时候，这个指针表达式就是一个左值，否则就不是一个左值。</p>
-<h2 id="五指针和数组的关系">五、指针和数组的关系</h2>
-<p><strong>0.</strong> 数组的数组名可以看作是一个指针</p>
-<p>example</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> <span class="built_in">array</span>[<span class="number">10</span>] = &#123;<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>&#125;, value;</span><br><span class="line">value = <span class="built_in">array</span>[<span class="number">0</span>]; <span class="comment">//or: value = *array;</span></span><br><span class="line">value = <span class="built_in">array</span>[<span class="number">3</span>]; <span class="comment">//or: value = *(array + 3);</span></span><br></pre></td></tr></table></figure>
-<hr />
-<p>总结：</p>
-<p>声明一个数组TYPE array[n]，则这个数组名有两重含义：</p>
-<blockquote>
-<p>代表整个数组，类型是TYPE[n]。</p>
-<p>是一个常量指针，类型是TYPE*，该指针指向的类型是TYPE，该指针的内存区就是数组的第0号单元，且该指针自己占有单独的内存区，且该指针的值不能修改，array++是错误的写法，这不代表array[1]。</p>
-</blockquote>
-<h2 id="六指针和结构类型的关系">六、指针和结构类型的关系</h2>
-<p><em>结构类型还未学习，之后补充</em></p>
-<h2 id="七指针和函数的关系">七、指针和函数的关系</h2>
-<p><strong>0.</strong> 可以把一个指针声明成一个指向函数的指针。</p>
-<ul>
-<li>example</li>
-</ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fun1</span> <span class="params">(<span class="keyword">char</span>*, <span class="keyword">int</span>)</span></span>;</span><br><span class="line"><span class="keyword">int</span> (*pfun1)(<span class="keyword">char</span>*, <span class="keyword">int</span>);</span><br><span class="line">pfun1 = fun1;</span><br><span class="line"><span class="keyword">int</span> a = (*pfun1)(<span class="string">&quot;abcdefg&quot;</span>, <span class="number">7</span>);<span class="comment">//通过函数指针调用函数</span></span><br></pre></td></tr></table></figure>
-<p>可以把指针作为函数的形参。在函数表达式中，可以用指针表达式来作为实参。</p>
-<h2 id="八指针类型转换">八、指针类型转换</h2>
-<p>初始化一个指针或者给一个指针赋值时，赋值号左边时一个指针，右边是一个指针表达式。绝大多数情况下，指针的类型和指针表达式的类型是一样的，指针所指向的类型和表达式所指向的类型是一样的。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">float</span> f = <span class="number">12.3</span>;</span><br><span class="line"><span class="keyword">float</span> *fptr = &amp;f;</span><br><span class="line"><span class="keyword">int</span> *p;</span><br></pre></td></tr></table></figure>
-<p>如果我们想让指针p指向实数f，我们应该怎样操作？</p>
-<p>是“ p = &amp;f; ”吗？</p>
-<p>不对，因为左右两侧的指针和指针所指向的类型不同。所以直接赋值不行。</p>
-<p>为了实现这个目的，需要使用强制类型转换：</p>
-<p><code>p = (int*) &amp;f;</code></p>
-<blockquote>
-<p>如果一个指针p，需要把它指向的类型改为"TYPE"，语法格式为：<code>(TYPE*)p;</code>。</p>
-<p>这样的类型转换得到一个新指针，类型为TYPE*，指向的地址就是原指针指向的地址。原来p的一切属性都没有被修改。</p>
-</blockquote>
-<h2 id="九指针的安全问题">九、指针的安全问题</h2>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span>
+    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1061,7 +990,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-count">26</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1074,7 +1003,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-count">22</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
