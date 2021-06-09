@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="http://blog.eternityqjl.top/faviconJ.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="http://blog.eternityqjl.top/faviconJ.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="http://blog.eternityqjl.top/faviconJ.ico">
+  <link rel="mask-icon" href="http://blog.eternityqjl.top/faviconJ.ico" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="图像分类规范化步骤：  输入：输入带有不同标签的图像作为训练集 学习：使用训练集学习每种类别的抽象特征 评估：通过测试集评估分类器的质量。  Nearest Neighbor Classifier CIFAR-10 dataset:  10 classes (airplane, automobile, bird, etc) 60,000 tiny images that are">
+<meta property="og:type" content="article">
+<meta property="og:title" content="cs231n——1.Nearest Neighbor Classifier">
+<meta property="og:url" content="http://example.com/2021/06/09/cs231n%E2%80%94%E2%80%941-Nearest-Neighbor-Classifier/index.html">
+<meta property="og:site_name" content="Jialong&#39;s Blog">
+<meta property="og:description" content="图像分类规范化步骤：  输入：输入带有不同标签的图像作为训练集 学习：使用训练集学习每种类别的抽象特征 评估：通过测试集评估分类器的质量。  Nearest Neighbor Classifier CIFAR-10 dataset:  10 classes (airplane, automobile, bird, etc) 60,000 tiny images that are">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-06-09T09:41:44.000Z">
+<meta property="article:modified_time" content="2021-06-09T09:44:12.863Z">
+<meta property="article:author" content="Eternity">
+<meta property="article:tag" content="机器学习">
+<meta property="article:tag" content="k-NN">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2021/06/09/cs231n%E2%80%94%E2%80%941-Nearest-Neighbor-Classifier/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>cs231n——1.Nearest Neighbor Classifier | Jialong's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Jialong's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Do things I love, and seek happiness.</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/09/cs231n%E2%80%94%E2%80%941-Nearest-Neighbor-Classifier/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="http://blog.eternityqjl.top/avator_next.jpg">
+      <meta itemprop="name" content="Eternity">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jialong's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          cs231n——1.Nearest Neighbor Classifier
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-06-09 17:41:44 / 修改时间：17:44:12" itemprop="dateCreated datePublished" datetime="2021-06-09T17:41:44+08:00">2021-06-09</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>图像分类规范化步骤：</p>
+<ul>
+<li>输入：输入带有不同标签的图像作为训练集</li>
+<li>学习：使用训练集学习每种类别的抽象特征</li>
+<li>评估：通过测试集评估分类器的质量。</li>
+</ul>
+<h2 id="nearest-neighbor-classifier">Nearest Neighbor Classifier</h2>
+<p>CIFAR-10 dataset:</p>
+<ul>
+<li>10 classes (airplane, automobile, bird, etc)</li>
+<li>60,000 tiny images that are 32 pixels high and wide</li>
+</ul>
+<p>k-NN通过将一张测试集图片与所有的训练集图片进行比较，预测结果。</p>
+<span id="more"></span>
+<h3 id="l1-distance">L1 distance:</h3>
+<p><span class="math display">\[
+d_{1}\left(I_{1}, I_{2}\right)=\sum_{p}\left|I_{1}^{p}-I_{2}^{p}\right|
+\]</span></p>
+<p>将两张图片分别表示为<span class="math inline">\(I_1, I_2\)</span>两个向量，使用L1距离来比较两张图片。</p>
+<p>通常使用准确率来评估分类器</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Xtr, Ytr, Xte, Yte = load_CIFAR10(<span class="string">&#x27;data/cifar10/&#x27;</span>) <span class="comment"># a magic function we provide</span></span><br><span class="line"><span class="comment"># flatten out all images to be one-dimensional</span></span><br><span class="line">Xtr_rows = Xtr.reshape(Xtr.shape[<span class="number">0</span>], <span class="number">32</span> * <span class="number">32</span> * <span class="number">3</span>) <span class="comment"># Xtr_rows becomes 50000 x 3072</span></span><br><span class="line">Xte_rows = Xte.reshape(Xte.shape[<span class="number">0</span>], <span class="number">32</span> * <span class="number">32</span> * <span class="number">3</span>) <span class="comment"># Xte_rows becomes 10000 x 3072</span></span><br><span class="line"></span><br><span class="line">nn = NearestNeighbor() <span class="comment"># create a Nearest Neighbor classifier class</span></span><br><span class="line">nn.train(Xtr_rows, Ytr) <span class="comment"># train the classifier on the training images and labels</span></span><br><span class="line">Yte_predict = nn.predict(Xte_rows) <span class="comment"># predict labels on the test images</span></span><br><span class="line"><span class="comment"># and now print the classification accuracy, which is the average number</span></span><br><span class="line"><span class="comment"># of examples that are correctly predicted (i.e. label matches)</span></span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;accuracy: %f&#x27;</span> % ( np.mean(Yte_predict == Yte) )</span><br></pre></td></tr></table></figure>
+<p>Here is an implementation of a simple Nearest Neighbor classifier with the L1 distance that satisfies this template:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NearestNeighbor</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">train</span>(<span class="params">self, X, y</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot; X is N x D where each row is an example. Y is 1-dimension of size N &quot;&quot;&quot;</span></span><br><span class="line">    <span class="comment"># the nearest neighbor classifier simply remembers all the training data</span></span><br><span class="line">    self.Xtr = X</span><br><span class="line">    self.ytr = y</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">predict</span>(<span class="params">self, X</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot; X is N x D where each row is an example we wish to predict label for &quot;&quot;&quot;</span></span><br><span class="line">    num_test = X.shape[<span class="number">0</span>]	<span class="comment">#训练样本数量</span></span><br><span class="line">    <span class="comment"># lets make sure that the output type matches the input type</span></span><br><span class="line">    Ypred = np.zeros(num_test, dtype = self.ytr.dtype)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># loop over all test rows</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(num_test):</span><br><span class="line">      <span class="comment"># find the nearest training image to the i&#x27;th test image</span></span><br><span class="line">      <span class="comment"># using the L1 distance (sum of absolute value differences)</span></span><br><span class="line">      distances = np.<span class="built_in">sum</span>(np.<span class="built_in">abs</span>(self.Xtr - X[i,:]), axis = <span class="number">1</span>)</span><br><span class="line">      min_index = np.argmin(distances) <span class="comment"># get the index with smallest distance</span></span><br><span class="line">      Ypred[i] = self.ytr[min_index] <span class="comment"># predict the label of the nearest example</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> Ypred</span><br></pre></td></tr></table></figure>
+<p>使用L1距离测试的准确率只有38.6%.</p>
+<h3 id="l2-distance">L2 distance</h3>
+<p><span class="math display">\[
+d_{2}\left(I_{1}, I_{2}\right)=\sqrt{\sum_{p}\left(I_{1}^{p}-I_{2}^{p}\right)^{2}}
+\]</span></p>
+<p>only replace a single line of code above:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">distances = np.sqrt(np.<span class="built_in">sum</span>(np.square(self.Xtr - X[i,:]), axis = <span class="number">1</span>))</span><br></pre></td></tr></table></figure>
+<h2 id="k---nearest-neighbor-classifier">k - Nearest Neighbor Classifier</h2>
+<p>找到距离最近的k个图片，k个图片中数量最多的一个标签即为测试图片所分的类别。</p>
+<h2 id="validation-sets-for-hyperparameter-tuning">Validation sets for Hyperparameter tuning</h2>
+<p>有很多我们可以选择的距离函数，例如L1 norm, L2 norm等，这些选择称为</p>
+<p>Hyperparameter 。通常不能使用test set来调整Hyperparameter。Evaluate on the test set only a single time, at the very end.</p>
+<p>将训练集划分为一个小一些的训练集和一个验证集(validation set)。例如使用CIFAR-10数据集时将训练集分为49,000个训练集和1,000个验证集。</p>
+<p>验证集本质上是一个假的测试集，是用来调整Hyperparameter的。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># assume we have Xtr_rows, Ytr, Xte_rows, Yte as before</span></span><br><span class="line"><span class="comment"># recall Xtr_rows is 50,000 x 3072 matrix</span></span><br><span class="line">Xval_rows = Xtr_rows[:<span class="number">1000</span>, :] <span class="comment"># take first 1000 for validation</span></span><br><span class="line">Yval = Ytr[:<span class="number">1000</span>]</span><br><span class="line">Xtr_rows = Xtr_rows[<span class="number">1000</span>:, :] <span class="comment"># keep last 49,000 for train</span></span><br><span class="line">Ytr = Ytr[<span class="number">1000</span>:]</span><br><span class="line"></span><br><span class="line"><span class="comment"># find hyperparameters that work best on the validation set</span></span><br><span class="line">validation_accuracies = []</span><br><span class="line"><span class="keyword">for</span> k <span class="keyword">in</span> [<span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">10</span>, <span class="number">20</span>, <span class="number">50</span>, <span class="number">100</span>]:</span><br><span class="line"></span><br><span class="line">  <span class="comment"># use a particular value of k and evaluation on validation data</span></span><br><span class="line">  nn = NearestNeighbor()</span><br><span class="line">  nn.train(Xtr_rows, Ytr)</span><br><span class="line">  <span class="comment"># here we assume a modified NearestNeighbor class that can take a k as input</span></span><br><span class="line">  Yval_predict = nn.predict(Xval_rows, k = k)</span><br><span class="line">  acc = np.mean(Yval_predict == Yval)</span><br><span class="line">  <span class="built_in">print</span> <span class="string">&#x27;accuracy: %f&#x27;</span> % (acc,)</span><br><span class="line"></span><br><span class="line">  <span class="comment"># keep track of what works on the validation set</span></span><br><span class="line">  validation_accuracies.append((k, acc))</span><br></pre></td></tr></table></figure>
+<h3 id="cross-validation">Cross-validation</h3>
+<p>当训练集数量较少时，使用更为复杂的交叉验证来调整hyperparameter。我们通过迭代不同的验证集并平均计算这些验证集的结果来确定k。例如在5次迭代的交叉验证中，将训练集分为5份，使用4份训练，1份验证，然后改变验证集，迭代5次，最终使用5次的平均结果确定k。</p>
+<h2 id="nearest-neighbor-classifier的优缺点">Nearest Neighbor classifier的优缺点</h2>
+<p>验证时的时间成本较高，每个验证样本都要与每一个测试集样本进行比较，效率较低。</p>
+<p>Nearest Neighbor classifier在低维度训练中较为常用，但在图像分类中很少用，因为图像是高维对象，高维对象之间的距离计算式违反直觉的。</p>
+<h2 id="summery">Summery</h2>
+<ol type="1">
+<li>如果数据的维数很高，可以使用降维技术，例如PCA(主成分分析), NCA(邻域成分分析) or Random Projections(随机投影).</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag"># 机器学习</a>
+              <a href="/tags/k-NN/" rel="tag"># k-NN</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/06/06/Python%E5%9F%BA%E7%A1%80%E5%92%8Cnumpy/" rel="prev" title="Python基础和numpy">
+      <i class="fa fa-chevron-left"></i> Python基础和numpy
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#nearest-neighbor-classifier"><span class="nav-number">1.</span> <span class="nav-text">Nearest Neighbor Classifier</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#l1-distance"><span class="nav-number">1.1.</span> <span class="nav-text">L1 distance:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#l2-distance"><span class="nav-number">1.2.</span> <span class="nav-text">L2 distance</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#k---nearest-neighbor-classifier"><span class="nav-number">2.</span> <span class="nav-text">k - Nearest Neighbor Classifier</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#validation-sets-for-hyperparameter-tuning"><span class="nav-number">3.</span> <span class="nav-text">Validation sets for Hyperparameter tuning</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#cross-validation"><span class="nav-number">3.1.</span> <span class="nav-text">Cross-validation</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nearest-neighbor-classifier%E7%9A%84%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="nav-number">4.</span> <span class="nav-text">Nearest Neighbor classifier的优缺点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#summery"><span class="nav-number">5.</span> <span class="nav-text">Summery</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Eternity"
+      src="http://blog.eternityqjl.top/avator_next.jpg">
+  <p class="site-author-name" itemprop="name">Eternity</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/eternityqjl" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;eternityqjl" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/2679311595" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;2679311595" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://instagram.com/eternityqjl" title="Instagram → https:&#x2F;&#x2F;instagram.com&#x2F;eternityqjl" rel="noopener" target="_blank"><i class="fab fa-instagram fa-fw"></i>Instagram</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">蜀ICP备 19037280号 </a>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Eternity</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
