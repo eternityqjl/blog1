@@ -20,20 +20,22 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="一、抽象数据类型的实现 123456789101112131415161718192021222324252627282930313233343536&#x2F;&#x2F;数据类型的实现public class Counter&amp;#123;    &#x2F;&#x2F;实例变量    private final String name;    private int count;        &#x2F;&#x2F;构造函数    public vo">
+  <meta name="description" content="计算机存储器只要分为内存和外存。内存是CPU直接寻址的存储空间，访问频率快，而外存访问慢。 易失性存储器（随机存取存储器，RAM） Random Access Memory，存储在其中的资料会在电力切断后消失，所以属于易失性存储器。 动态随机存取存储器（DRAM） Dynamic Random Access Memory，主要的作用原理是利用电容内存储电荷的多寡来代表一个二进制比特（bit">
 <meta property="og:type" content="article">
-<meta property="og:title" content="抽象数据类型">
-<meta property="og:url" content="http://example.com/2019/09/24/%E6%8A%BD%E8%B1%A1%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/index.html">
+<meta property="og:title" content="存储器详解">
+<meta property="og:url" content="http://example.com/2021/07/04/%E5%AD%98%E5%82%A8%E5%99%A8%E8%AF%A6%E8%A7%A3/index.html">
 <meta property="og:site_name" content="Jialong&#39;s Blog">
-<meta property="og:description" content="一、抽象数据类型的实现 123456789101112131415161718192021222324252627282930313233343536&#x2F;&#x2F;数据类型的实现public class Counter&amp;#123;    &#x2F;&#x2F;实例变量    private final String name;    private int count;        &#x2F;&#x2F;构造函数    public vo">
+<meta property="og:description" content="计算机存储器只要分为内存和外存。内存是CPU直接寻址的存储空间，访问频率快，而外存访问慢。 易失性存储器（随机存取存储器，RAM） Random Access Memory，存储在其中的资料会在电力切断后消失，所以属于易失性存储器。 动态随机存取存储器（DRAM） Dynamic Random Access Memory，主要的作用原理是利用电容内存储电荷的多寡来代表一个二进制比特（bit">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2019-09-24T13:33:07.000Z">
-<meta property="article:modified_time" content="2021-04-22T10:00:42.782Z">
+<meta property="og:image" content="http://blog.eternityqjl.top/SRAM_Cell_%286_Transistors%29.svg">
+<meta property="article:published_time" content="2021-07-04T08:09:50.000Z">
+<meta property="article:modified_time" content="2021-07-04T08:13:52.622Z">
 <meta property="article:author" content="Eternity">
-<meta property="article:tag" content="抽象数据类型">
+<meta property="article:tag" content="计算机存储器">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://blog.eternityqjl.top/SRAM_Cell_%286_Transistors%29.svg">
 
-<link rel="canonical" href="http://example.com/2019/09/24/%E6%8A%BD%E8%B1%A1%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">
+<link rel="canonical" href="http://example.com/2021/07/04/%E5%AD%98%E5%82%A8%E5%99%A8%E8%AF%A6%E8%A7%A3/">
 
 
 <script id="page-configurations">
@@ -46,7 +48,7 @@
   };
 </script>
 
-  <title>抽象数据类型 | Jialong's Blog</title>
+  <title>存储器详解 | Jialong's Blog</title>
   
 
 
@@ -171,7 +173,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2019/09/24/%E6%8A%BD%E8%B1%A1%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/04/%E5%AD%98%E5%82%A8%E5%99%A8%E8%AF%A6%E8%A7%A3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="http://blog.eternityqjl.top/avator_next.jpg">
@@ -184,7 +186,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          抽象数据类型
+          存储器详解
         </h1>
 
         <div class="post-meta">
@@ -193,23 +195,17 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2019-09-24 21:33:07" itemprop="dateCreated datePublished" datetime="2019-09-24T21:33:07+08:00">2019-09-24</time>
+              <time title="创建时间：2021-07-04 16:09:50 / 修改时间：16:13:52" itemprop="dateCreated datePublished" datetime="2021-07-04T16:09:50+08:00">2021-07-04</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-04-22 18:00:42" itemprop="dateModified" datetime="2021-04-22T18:00:42+08:00">2021-04-22</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">数据结构与算法</span></a>
+                  <a href="/categories/%E7%A1%AC%E4%BB%B6/" itemprop="url" rel="index"><span itemprop="name">硬件</span></a>
                 </span>
             </span>
 
@@ -224,32 +220,36 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="一抽象数据类型的实现">一、抽象数据类型的实现</h2>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//数据类型的实现</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Counter</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="comment">//实例变量</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> String name;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> count;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//构造函数</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Counter</span><span class="params">(String id)</span></span></span><br><span class="line"><span class="function">    </span>&#123; name = id; &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//实例方法</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">increment</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123; count++; &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">tally</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123; <span class="keyword">return</span> count; &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123; <span class="keyword">return</span> count + <span class="string">&quot; &quot;</span> + name; &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//测试该数据类型的用例</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//创建并初始化对象</span></span><br><span class="line">    Counter heads = <span class="keyword">new</span> Counter(<span class="string">&quot;heads&quot;</span>);</span><br><span class="line">    Counter tails = <span class="keyword">new</span> Counter(<span class="string">&quot;tails&quot;</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//调用实例方法</span></span><br><span class="line">    heads.incerment();</span><br><span class="line">    heads.increment();</span><br><span class="line">    tails.increment();</span><br><span class="line">    </span><br><span class="line">    StdOut.println(heads + <span class="string">&quot; &quot;</span> + tails);</span><br><span class="line">    StdOut.println(heads.tally + tails.tally() ;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>相关概念</strong></p>
-<ul>
-<li>实例变量：
-<ul>
-<li>一个实例变量对应了无数的值，因为数据类型的每个实例对象都有有个。</li>
-</ul></li>
-<li>构造函数：
-<ul>
-<li>构造函数是用来创建一个对象的表示，即来初始化实例变量。</li>
-<li>它由<strong>可见性修饰符、构造函数名称(即数据类型的名称)、参数变量</strong>以及初始化实例变量的代码构成。</li>
-<li>上一条加粗的三个组成了签名，例如<code>public Counter (String id)</code>即为一个签名。</li>
-</ul></li>
-<li>实例方法：
-<ul>
-<li>是每个对象的具体行为，即实现数据类型的实例方法。</li>
-<li>与静态方法的唯一区别是它能够访问并操作实力变量。</li>
-</ul></li>
-<li>作用域
-<ul>
-<li>参数变量：作用域为整个方法。</li>
-<li>局部变量：定义后的所有语句(一个花括号内)。</li>
-<li><strong>实例变量</strong>：整个类。</li>
-</ul></li>
-</ul>
+        <p>计算机存储器只要分为内存和外存。内存是CPU直接寻址的存储空间，访问频率快，而外存访问慢。</p>
+<h2 id="易失性存储器随机存取存储器ram">易失性存储器（随机存取存储器，RAM）</h2>
+<p>Random Access Memory，存储在其中的资料会在电力切断后消失，所以属于易失性存储器。</p>
+<h3 id="动态随机存取存储器dram">动态随机存取存储器（DRAM）</h3>
+<p>Dynamic Random Access Memory，主要的作用原理是利用电容内<strong>存储电荷的多寡</strong>来代表一个二进制比特（bit）是1还是0。由于在现实中晶体管会有漏电电流的现象，导致电容上所存储的电荷数量并不足以正确的判别资料，而导致资料毁损。因此对于DRAM来说，周期性地充电是一个不可避免的条件。由于这种需要<strong>定时刷新</strong>的特性，因此被称为“动态”存储器。</p>
+<span id="more"></span>
+<h3 id="静态随机存取存储器sram">静态随机存取存储器（SRAM）</h3>
+<p>Static Random Access Memory，所谓的“静态”，是指这种存储器只要保持通电，里面储存的数据就可以恒常保持。相对之下，动态随机存取存储器（DRAM）里面所储存的数据就需要周期性地更新。然而，当电力供应停止时，SRAM储存的数据还是会消失。</p>
+<p>SRAM由存储矩阵、地址译码器和读/写控制电路组成，容量的扩展有两个方面：位数的扩展用芯片的并联，字数的扩展可用外加译码器控制芯片的片选输入端[2]。SRAM中的每一bit储存在由4个场效应管（M1, M2, M3, M4）构成两个交叉耦合的反相器中。另外两个场效应管（M5, M6）是储存基本单元到用于读写的位线（Bit Line）的控制开关。</p>
+<figure>
+<img src="http://blog.eternityqjl.top/SRAM_Cell_%286_Transistors%29.svg" alt="SRAM" /><figcaption aria-hidden="true">SRAM</figcaption>
+</figure>
+<h2 id="非易失性存储器主要为只读存储器rom">非易失性存储器（主要为只读存储器，ROM）</h2>
+<p>Read-Only Memory，一旦存储资料就无法再将之改变或删除，且内容不会因为电源关闭而消失。</p>
+<h3 id="可编程式只读存储器prom">可编程式只读存储器（PROM）</h3>
+<p>Programmable read-only memory，每个比特都由熔丝或反熔丝的状态决定资料内容。这种存储器用作永久存放程序之用。常用于电子游戏机、电子词典等预存固定资料或程序的各式电子产品之上。PROM与狭义的ROM（Mask ROM）的差别在于前者可在IC制造完成后才依需要写入资料，后者的资料需在制造IC时一并制作在里面。</p>
+<p>一个典型的PROM一开始时每个比特都会是1，编程中如将该比特的熔丝（fuse）烧断则成为0，这一过程是不可逆的（即刻录后不能再改变），断电后也不会消失记忆，所以这种存储器是一种只读存储器。</p>
+<h3 id="可擦除可编程式只读存储器eprom">可擦除可编程式只读存储器（EPROM）</h3>
+<p>Erasable Programmable Read Only Memory，它是一组浮栅晶体管，被一个提供比电子电路中常用电压更高电压的电子器件分别编程。一旦编程完成后，EPROM只能用强紫外线照射来擦除。通过封装顶部能看见硅片的透明窗口，很容易识别EPROM，这个窗口同时用来进行紫外线擦除。</p>
+<h3 id="电子抹除式可复写只读存储器eeprom">电子抹除式可复写只读存储器（EEPROM）</h3>
+<p>Electrically-Erasable Programmable Read-Only Memory，是一种可以通过电子方式多次复写的半导体存储设备。相比EPROM， EEPROM 不需要用紫外线照射，也不需取下，就可以用特定的电压，来抹除芯片上的信息，以便写入新的数据， EEPROM 属于SPD（串行存在检测）技术的一种延伸。</p>
+<p>在民用的DDR SDRAM及其主流后续产品中，一般 EEPROM 主要用于保存内存的开发者信息、生产时间、内存信息、通信协议、既定内存频率、供电电压、供电电流、物理信息以及内存XMP等信息，并且电脑会在开机自检（Power-On Self-Test；POST）时会读取这些信息以保持电脑的正常开机。</p>
+<h3 id="闪存flash-memory">闪存（Flash Memory）</h3>
+<p>闪存是一种特殊的、以宏块抹写的EEPROM。</p>
+<p>NOR和NAND两种类型</p>
+<h4 id="nand-flash">NAND Flash</h4>
+<p>SLC(单阶存储单元)、MLC(多阶存储单元，一般指2)、TLC(三阶存储单元)、QLC</p>
+<p>现在消费级产品都是TLC</p>
+<h4 id="移动端使用的闪存协议变化">移动端使用的闪存协议变化</h4>
+<p>eMMC-UFS</p>
 
     </div>
 
@@ -259,7 +259,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/%E6%8A%BD%E8%B1%A1%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" rel="tag"># 抽象数据类型</a>
+              <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%AD%98%E5%82%A8%E5%99%A8/" rel="tag"># 计算机存储器</a>
           </div>
 
         
@@ -268,13 +268,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2019/09/20/%E6%B5%8B%E8%AF%95GitBook%E6%A0%BC%E5%BC%8F/" rel="prev" title="测试GitBook格式">
-      <i class="fa fa-chevron-left"></i> 测试GitBook格式
+    <a href="/2021/06/11/csapp-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%BC%AB%E6%B8%B8/" rel="prev" title="csapp: 1.计算机系统漫游">
+      <i class="fa fa-chevron-left"></i> csapp: 1.计算机系统漫游
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2019/09/28/%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BE%93%E5%85%A5%E3%80%81%E8%BE%93%E5%87%BA%E5%92%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%87%BD%E6%95%B0/" rel="next" title="字符串输入、输出和字符串函数">
-      字符串输入、输出和字符串函数 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -333,7 +330,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E6%8A%BD%E8%B1%A1%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.</span> <span class="nav-text">一、抽象数据类型的实现</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%98%93%E5%A4%B1%E6%80%A7%E5%AD%98%E5%82%A8%E5%99%A8%E9%9A%8F%E6%9C%BA%E5%AD%98%E5%8F%96%E5%AD%98%E5%82%A8%E5%99%A8ram"><span class="nav-number">1.</span> <span class="nav-text">易失性存储器（随机存取存储器，RAM）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E9%9A%8F%E6%9C%BA%E5%AD%98%E5%8F%96%E5%AD%98%E5%82%A8%E5%99%A8dram"><span class="nav-number">1.1.</span> <span class="nav-text">动态随机存取存储器（DRAM）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E9%9A%8F%E6%9C%BA%E5%AD%98%E5%8F%96%E5%AD%98%E5%82%A8%E5%99%A8sram"><span class="nav-number">1.2.</span> <span class="nav-text">静态随机存取存储器（SRAM）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%9E%E6%98%93%E5%A4%B1%E6%80%A7%E5%AD%98%E5%82%A8%E5%99%A8%E4%B8%BB%E8%A6%81%E4%B8%BA%E5%8F%AA%E8%AF%BB%E5%AD%98%E5%82%A8%E5%99%A8rom"><span class="nav-number">2.</span> <span class="nav-text">非易失性存储器（主要为只读存储器，ROM）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E7%BC%96%E7%A8%8B%E5%BC%8F%E5%8F%AA%E8%AF%BB%E5%AD%98%E5%82%A8%E5%99%A8prom"><span class="nav-number">2.1.</span> <span class="nav-text">可编程式只读存储器（PROM）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E6%93%A6%E9%99%A4%E5%8F%AF%E7%BC%96%E7%A8%8B%E5%BC%8F%E5%8F%AA%E8%AF%BB%E5%AD%98%E5%82%A8%E5%99%A8eprom"><span class="nav-number">2.2.</span> <span class="nav-text">可擦除可编程式只读存储器（EPROM）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%B5%E5%AD%90%E6%8A%B9%E9%99%A4%E5%BC%8F%E5%8F%AF%E5%A4%8D%E5%86%99%E5%8F%AA%E8%AF%BB%E5%AD%98%E5%82%A8%E5%99%A8eeprom"><span class="nav-number">2.3.</span> <span class="nav-text">电子抹除式可复写只读存储器（EEPROM）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%AA%E5%AD%98flash-memory"><span class="nav-number">2.4.</span> <span class="nav-text">闪存（Flash Memory）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#nand-flash"><span class="nav-number">2.4.1.</span> <span class="nav-text">NAND Flash</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A7%BB%E5%8A%A8%E7%AB%AF%E4%BD%BF%E7%94%A8%E7%9A%84%E9%97%AA%E5%AD%98%E5%8D%8F%E8%AE%AE%E5%8F%98%E5%8C%96"><span class="nav-number">2.4.2.</span> <span class="nav-text">移动端使用的闪存协议变化</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
